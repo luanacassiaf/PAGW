@@ -6,12 +6,15 @@
   <link rel="stylesheet" href="vendor/mdb/css/bootstrap.min.css">
   <link rel="stylesheet" href="vendor/mdb/css/mdb.min.css">
   <link rel="stylesheet" href="assets/css/styles.css">
- <!-- Script -->
+  <!-- Script -->
   <script type="text/javascript" src="vendor/mdb/js/jquery-3.3.1.min.js"></script>
   <script type="text/javascript" src="vendor/mdb/js/popper.min.js"></script>
   <script defer type="text/javascript" src="vendor/mdb/js/bootstrap.min.js"></script>
   <script defer type="text/javascript" src="vendor/mdb/js/mdb.min.js"></script>
   <script type="text/javascript" src="vendor/vis.js/vis.js"></script>
   <script type="text/javascript" src="vendor/vis.js/vis-network.min.js"></script>
-  <script type="text/javascript" src="js/grafo.js"></script>
+  <script type="text/javascript" src="assets/js/EventEmitter.js"></script>
+  <script type="text/javascript" src="assets/js/grafo/grafo.js"></script>
+  <script type="text/javascript" src="assets/js/grafo/basico.js"></script>
+  <script type="text/javascript" src="assets/js/grafo/dfs.js"></script>
 </head>

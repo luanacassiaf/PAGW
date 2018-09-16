@@ -30,21 +30,7 @@
 <main>
   <div class="container-fluid mt-5">
 
-    <div class="row">
-      <div class="col-md-12">
-
-        <h2>Busca em Profundidade (DFS, Deep-First Search)</h2>
-
-        <p class="text-center">
-          Mussum Ipsum, cacilds vidis litro abertis. Interagi no mé, cursus quis, vehicula ac nisi. Todo mundo vê os porris que eu tomo, mas ninguém vê os tombis que eu levo! Posuere libero varius. Nullam a nisl ut ante blandit hendrerit. Aenean sit amet nisi.
-          A ordem dos tratores não altera o pão duris.
-        </p>
-      </div>
-    </div>
-
-    <div class="row">
-
-    </div>
+    <?php include_once "./algoritmos/dfs.php"; ?>
 
   </div>
 </main>
