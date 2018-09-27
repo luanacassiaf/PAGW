@@ -38,6 +38,7 @@
                     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Matriz</button>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" onclick="exibirMatrizDeAdjacencia()" href="#">Matriz de Adjacência</a>
+                        <a class="dropdown-item" onclick="exibirListaDeAdjacencia()" href="#">Lista de Adjacência</a>
                     </div>
                 </div>
             </div>
@@ -64,6 +65,26 @@
             </div>
             <div class="modal-body">
                 <pre id="textoDaMatrizDeAdjacencia">
+                    
+                </pre>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="listaDeAdjacenciaModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Lista de Adjacência</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <pre id="textoDaListaDeAdjacencia">
                     
                 </pre>
             </div>
@@ -117,5 +138,10 @@
     function exibirMatrizDeAdjacencia() {
         $("#textoDaMatrizDeAdjacencia").text(grafo.obterMatrizDeAdjacencia('\r\n'));
         $("#matrizDeAdjacenciaModal").modal("show");
+    }
+    
+    function exibirListaDeAdjacencia() {
+        $("#textoDaListaDeAdjacencia").text(grafo.obterListaDeAdjacencia('\r\n'));
+        $("#listaDeAdjacenciaModal").modal("show");
     }
 </script>

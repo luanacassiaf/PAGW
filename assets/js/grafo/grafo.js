@@ -70,10 +70,10 @@ class Grafo {
 
     }
 
-    obterMatrizDeAdjacencia(newLine) {
+    criarListaDeAdjacencia() {
         let matrix = ''; //string com a matriz de adjacencia.
         let arrayDeVertices = []; //guarda os vertices pra obter sua posição (0, ...)
-        let listaDeAdjacencia = new Map(); //guarda as relecoes entre vertices.
+        let listaDeAdjacencia = new Map(); //guarda as relacoes entre vertices.
         //Guarda os vertices.
         this.vertices.forEach((item, id) => {
             arrayDeVertices.push(id);
@@ -100,24 +100,52 @@ class Grafo {
                 listaDeAdjacencia.get(posTo).push(posFrom);
             }
         });
+        return listaDeAdjacencia;
+    }
+
+    obterMatrizDeAdjacencia(newLine) {
+        let matriz = ''; //string com a matriz de adjacencia.
+        let listaDeAdjacencia = this.criarListaDeAdjacencia();
         //Monta a matriz.
-        for (let y = 0; y < arrayDeVertices.length; y++) {
+        for (let y = 0; y < this.vertices.length; y++) {
             let row = '';
-            for (let x = 0; x < arrayDeVertices.length; x++) {
-                if(x > 0) row += ',';
-                
-                if(listaDeAdjacencia.get(x) !== undefined &&
-                  listaDeAdjacencia.get(x).indexOf(y) !== -1) {
+            for (let x = 0; x < this.vertices.length; x++) {
+
+                if (x > 0) row += ',';
+
+                if (listaDeAdjacencia.get(x) !== undefined &&
+                    listaDeAdjacencia.get(x).indexOf(y) !== -1) {
                     row += '1';
                 } else {
                     row += '0';
                 }
             }
-            
-            matrix += row + (newLine || '</br>');
+
+            matriz += row + (newLine || '</br>');
         }
 
-        return matrix;
+        return matriz;
+    }
+
+    obterListaDeAdjacencia(newLine) {
+        let matriz = ''; //string com a matriz de adjacencia.
+        let listaDeAdjacencia = this.criarListaDeAdjacencia();
+        //Monta a matriz.
+        for (let y = 0; y < this.vertices.length; y++) {
+            let row = '';
+
+            for (let x = 0; x < this.vertices.length; x++) {
+                if (listaDeAdjacencia.get(x) !== undefined &&
+                    listaDeAdjacencia.get(x).indexOf(y) !== -1) {
+                    if (row != '') row += ',';
+                    row += x;
+                }
+            }
+
+            matriz += row + (newLine || '</br>');
+        }
+
+        return matriz;
     }
 
     plotar() {
