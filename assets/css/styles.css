@@ -1,22 +1,26 @@
 [type=radio]:checked,
 [type=radio]:not(:checked) {
-  position: absolute;
-  opacity: 0;
-  pointer-events: none;
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
 }
+
 .btn-outline-primary:not([disabled]):not(.disabled).active {
-  background: #4285f4 !important;
-  color: #FFFFFF !important;
+    background: #4285f4 !important;
+    color: #FFFFFF !important;
 }
+
 .btn-outline-success:not([disabled]):not(.disabled).active {
-  background: #00c851 !important;
-  color: #FFFFFF !important;
+    background: #00c851 !important;
+    color: #FFFFFF !important;
 }
+
 .btn-outline-amber:not([disabled]):not(.disabled).active {
-  background: #ffa000 !important;
-  color: #FFFFFF !important;
+    background: #ffa000 !important;
+    color: #FFFFFF !important;
 }
+
 .btn-outline-red:not([disabled]):not(.disabled).active {
-  background: #d32f2f !important;
-  color: #FFFFFF !important;
+    background: #d32f2f !important;
+    color: #FFFFFF !important;
 }

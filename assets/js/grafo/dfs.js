@@ -1,6 +1,6 @@
 class Dfs extends GrafoBasico {
-  
-  constructor(container) {
-    super(container);
-  }
+
+    constructor(container) {
+        super(container);
+    }
 }

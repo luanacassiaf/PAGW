@@ -1,22 +1,22 @@
 class GrafoBasico extends Grafo {
 
-  constructor(container) {
-    super(container);
-    //eventos.
-    this.onCriarNovaAresta = null; // (from ,to)
+    constructor(container) {
+        super(container);
+        //eventos.
+        this.onCriarNovaAresta = null; // (from ,to)
 
-    this.primeiroVertice = null; //id do primeiro vertice selecionado a ser conectado.
+        this.primeiroVertice = null; //id do primeiro vertice selecionado a ser conectado.
 
-    this.on('vertice', (id, params) => {
-      //Primeiro...
-      if (this.primeiroVertice === null) {
-        this.primeiroVertice = id;
-      }
-      //Segunda...
-      else {
-        this.observable.emit('novaaresta', this.primeiroVertice, id);
-        this.primeiroVertice = null;
-      }
-    });
-  }
+        this.on('vertice', (id, params) => {
+            //Primeiro...
+            if (this.primeiroVertice === null) {
+                this.primeiroVertice = id;
+            }
+            //Segunda...
+            else {
+                this.observable.emit('novaaresta', this.primeiroVertice, id);
+                this.primeiroVertice = null;
+            }
+        });
+    }
 }
