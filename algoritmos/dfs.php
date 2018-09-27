@@ -32,6 +32,14 @@
                         <input class="form-check-input" type="radio" name="acao" id="acao-excluir" autocomplete="off"><i class="fa fa-trash"></i> Excluir
                     </label>
                 </div>
+
+                <!-- Basic dropdown -->
+                <div class="btn-group">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Matriz</button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" onclick="exibirMatrizDeAdjacencia()" href="#">Matriz de Adjacência</a>
+                    </div>
+                </div>
             </div>
 
 
@@ -40,6 +48,28 @@
                 <div id="grafo" style="background: #FAFAFA; width: 100%; height: 100%"> </div>
             </div>
 
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="matrizDeAdjacenciaModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Matriz de Adjacência</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <pre id="textoDaMatrizDeAdjacencia">
+                    
+                </pre>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+            </div>
         </div>
     </div>
 </div>
@@ -81,8 +111,11 @@
             });
         }
     });
-    grafo.gerar(3);
+
     grafo.plotar();
 
-</script>
+    function exibirMatrizDeAdjacencia() {
+        $("#textoDaMatrizDeAdjacencia").text(grafo.obterMatrizDeAdjacencia('\r\n'));
+        $("#matrizDeAdjacenciaModal").modal("show");
+    }
 </script>

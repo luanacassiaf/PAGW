@@ -70,6 +70,56 @@ class Grafo {
 
     }
 
+    obterMatrizDeAdjacencia(newLine) {
+        let matrix = ''; //string com a matriz de adjacencia.
+        let arrayDeVertices = []; //guarda os vertices pra obter sua posição (0, ...)
+        let listaDeAdjacencia = new Map(); //guarda as relecoes entre vertices.
+        //Guarda os vertices.
+        this.vertices.forEach((item, id) => {
+            arrayDeVertices.push(id);
+        });
+        //Monta os pares de vertices da aresta na lista de adjacencia.
+        this.arestas.forEach((item, id) => {
+            let from = item.from;
+            let to = item.to;
+            let posFrom = arrayDeVertices.indexOf(from);
+            let posTo = arrayDeVertices.indexOf(to);
+
+            if (posFrom !== -1 && posTo !== -1) {
+                //Verifica se o vertice não existe no mapa e adiciona-o;
+                if (listaDeAdjacencia.get(posFrom) === undefined) {
+                    listaDeAdjacencia.set(posFrom, []);
+                }
+                //Grafo direcionado.
+                listaDeAdjacencia.get(posFrom).push(posTo);
+                //TODO DIFENCIAR ISSO.
+                //Grafo não direcionado.
+                if (listaDeAdjacencia.get(posTo) === undefined) {
+                    listaDeAdjacencia.set(posTo, []);
+                }
+                listaDeAdjacencia.get(posTo).push(posFrom);
+            }
+        });
+        //Monta a matriz.
+        for (let y = 0; y < arrayDeVertices.length; y++) {
+            let row = '';
+            for (let x = 0; x < arrayDeVertices.length; x++) {
+                if(x > 0) row += ',';
+                
+                if(listaDeAdjacencia.get(x) !== undefined &&
+                  listaDeAdjacencia.get(x).indexOf(y) !== -1) {
+                    row += '1';
+                } else {
+                    row += '0';
+                }
+            }
+            
+            matrix += row + (newLine || '</br>');
+        }
+
+        return matrix;
+    }
+
     plotar() {
         //container do grafo.
         let elm = document.getElementById(this.container);

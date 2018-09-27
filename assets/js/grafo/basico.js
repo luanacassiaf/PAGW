@@ -2,9 +2,7 @@ class GrafoBasico extends Grafo {
 
     constructor(container) {
         super(container);
-        //eventos.
-        this.onCriarNovaAresta = null; // (from ,to)
-
+        
         this.primeiroVertice = null; //id do primeiro vertice selecionado a ser conectado.
 
         this.on('vertice', (id, params) => {
