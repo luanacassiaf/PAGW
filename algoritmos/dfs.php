@@ -13,42 +13,35 @@
 <div class="row">
     <div class="col-md-12 mb-5">
 
-        <!-- Card Narrower -->
-        <div class="card card-cascade narrower" style="height: 95vh">
+        <div>
+            <div class="grafo-wrapper view view-cascade overlay" style="height: 95vh">
+                <div>
+                    <div class="btn-group mt-1 ml-1" data-toggle="buttons">
+                        <label class="btn btn-outline-primary form-check-label active" onclick="operacao = 0;">
+                            <input class="form-check-input" type="radio" name="acao" id="acao-selecionar" autocomplete="off" checked><i class="fa fa-mouse-pointer"></i> Selecionar
+                        </label>
+                        <label class="btn btn-outline-success form-check-label" onclick="operacao = 1;">
+                            <input class="form-check-input" type="radio" name="acao" id="acao-adicionar" autocomplete="off"><i class="fa fa-plus"></i> Adicionar
+                        </label>
+                        <label class="btn btn-outline-amber form-check-label" onclick="operacao = 2;">
+                            <input class="form-check-input" type="radio" name="acao" id="acao-conectar" autocomplete="off"><i class="fa fa-code-fork"></i> Conectar
+                        </label>
+                        <label class="btn btn-outline-red form-check-label" onclick="operacao = 3;">
+                            <input class="form-check-input" type="radio" name="acao" id="acao-excluir" autocomplete="off"><i class="fa fa-trash"></i> Excluir
+                        </label>
+                    </div>
 
-            <!-- Card content -->
-            <div class="card-body card-body-cascade">
-                <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-outline-primary form-check-label active" onclick="operacao = 0;">
-                        <input class="form-check-input" type="radio" name="acao" id="acao-selecionar" autocomplete="off" checked><i class="fa fa-mouse-pointer"></i> Selecionar
-                    </label>
-                    <label class="btn btn-outline-success form-check-label" onclick="operacao = 1;">
-                        <input class="form-check-input" type="radio" name="acao" id="acao-adicionar" autocomplete="off"><i class="fa fa-plus"></i> Adicionar
-                    </label>
-                    <label class="btn btn-outline-amber form-check-label" onclick="operacao = 2;">
-                        <input class="form-check-input" type="radio" name="acao" id="acao-conectar" autocomplete="off"><i class="fa fa-code-fork"></i> Conectar
-                    </label>
-                    <label class="btn btn-outline-red form-check-label" onclick="operacao = 3;">
-                        <input class="form-check-input" type="radio" name="acao" id="acao-excluir" autocomplete="off"><i class="fa fa-trash"></i> Excluir
-                    </label>
-                </div>
-
-                <!-- Basic dropdown -->
-                <div class="btn-group">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Matriz</button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" onclick="exibirMatrizDeAdjacencia()" href="#">Matriz de Adjacência</a>
-                        <a class="dropdown-item" onclick="exibirListaDeAdjacencia()" href="#">Lista de Adjacência</a>
+                    <div class="btn-group">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Exportar</button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" onclick="exibirMatrizDeAdjacencia()" href="#">Matriz de Adjacência</a>
+                            <a class="dropdown-item" onclick="exibirListaDeAdjacencia()" href="#">Lista de Adjacência</a>
+                        </div>
                     </div>
                 </div>
+
+                <div id="grafo"> </div>
             </div>
-
-
-            <!-- Card image -->
-            <div class="view view-cascade overlay" style="height: 100%">
-                <div id="grafo" style="background: #FAFAFA; width: 100%; height: 100%"> </div>
-            </div>
-
         </div>
     </div>
 </div>
@@ -65,7 +58,9 @@
             </div>
             <div class="modal-body">
                 <pre id="textoDaMatrizDeAdjacencia">
-                    
+
+
+
                 </pre>
             </div>
             <div class="modal-footer">
@@ -85,7 +80,9 @@
             </div>
             <div class="modal-body">
                 <pre id="textoDaListaDeAdjacencia">
-                    
+
+
+
                 </pre>
             </div>
             <div class="modal-footer">
@@ -139,9 +136,10 @@
         $("#textoDaMatrizDeAdjacencia").text(grafo.obterMatrizDeAdjacencia('\r\n'));
         $("#matrizDeAdjacenciaModal").modal("show");
     }
-    
+
     function exibirListaDeAdjacencia() {
         $("#textoDaListaDeAdjacencia").text(grafo.obterListaDeAdjacencia('\r\n'));
         $("#listaDeAdjacenciaModal").modal("show");
     }
+
 </script>
