@@ -1,5 +1,5 @@
 body {
-  background: #343436;
+    background: #343436;
 }
 [type=radio]:checked,
 [type=radio]:not(:checked) {
@@ -8,63 +8,63 @@ body {
     pointer-events: none;
 }
 .nav-item.active {
-  background: #40464c;
-  border-radius: 5px;
+    background: #40464c;
+    border-radius: 5px;
 }
 #main {
-  height: calc(100vh - 72px);
+    height: calc(100vh - 72px);
 }
 
 .description-panel {
-  border-radius: 20px;
-  border: 1px solid #4e4b4d;
-  padding: 10px;
-  position: absolute;
-  right: 5px;
-  left: 5px;
-  width: calc(100% - 10px);
-  z-index: 2;
+    border-radius: 20px;
+    border: 1px solid #4e4b4d;
+    padding: 10px;
+    position: absolute;
+    right: 5px;
+    left: 5px;
+    width: calc(100% - 10px);
+    z-index: 2;
 }
 .description-panel .title {
-  font: 26px/1.5 normal normal;
-  font-family: "Segoe UI";
-  font-weight: 400;
-  color: #efdab9;
-  font-size: 20px;
-  text-align: center;
+    font: 26px/1.5 normal normal;
+    font-family: "Segoe UI";
+    font-weight: 400;
+    color: #efdab9;
+    font-size: 20px;
+    text-align: center;
 }
 .description-panel .content {
-  color: #efdab9;
-  text-shadow: 1px 1px 12px #111;
-  font-size: 13px;
+    color: #efdab9;
+    text-shadow: 1px 1px 12px #111;
+    font-size: 13px;
 }
 .grafo-panel {
-  position: absolute;
-  right: 5px;
-  left: 5px;
-  width: calc(100% - 10px);
-  height: 100%;
-  z-index: 1;
+    position: absolute;
+    right: 5px;
+    left: 5px;
+    width: calc(100% - 10px);
+    height: 100%;
+    z-index: 1;
 }
 .algoritmo-panel {
-  position: absolute;
-  bottom: 0px;
-  width: 95%;
-  display: flex;
-  justify-content: center;
-  z-index: 2;
+    position: absolute;
+    bottom: 0px;
+    width: 95%;
+    display: flex;
+    justify-content: center;
+    z-index: 2;
 }
 
 /* Buttons Group */
 .btn-primary:not(:disabled):not(.disabled).active {
-  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.5);
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.5);
 }
 .btn-success:not(:disabled):not(.disabled).active {
-  box-shadow: 0 0 0 0.2rem rgba(40,167,69,.5);
+    box-shadow: 0 0 0 0.2rem rgba(40,167,69,.5);
 }
 .btn-warning:not(:disabled):not(.disabled).active {
-  box-shadow: 0 0 0 0.2rem rgba(255,193,7,.5);
+    box-shadow: 0 0 0 0.2rem rgba(255,193,7,.5);
 }
 .btn-danger:not(:disabled):not(.disabled).active {
-  box-shadow: 0 0 0 0.2rem rgba(220,53,69,.5);
+    box-shadow: 0 0 0 0.2rem rgba(220,53,69,.5);
 }

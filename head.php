@@ -20,6 +20,6 @@
     <!-- Local -->
     <script type="text/javascript" src="assets/js/grafo/common.js"></script>
     <script type="text/javascript" src="assets/js/grafo/grafo.js"></script>
-    <script type="text/javascript" src="assets/js/grafo/base.js"></script>
+    <script type="text/javascript" src="assets/js/grafo/basico.js"></script>
     <script type="text/javascript" src="assets/js/grafo/dfs.js"></script>
 </head>
