@@ -3,6 +3,7 @@ $algoritmo = isset($_GET['algo']) ? $_GET['algo'] : 'dfs';
 
 $titulo = "";
 $descricao = "";
+$show = true;
 
 switch ($algoritmo) {
     case 'dfs':
@@ -11,7 +12,7 @@ switch ($algoritmo) {
         break;
 
     default:
-        die;
+        $show = false;
         break;
 }
 ?>
@@ -33,11 +34,22 @@ switch ($algoritmo) {
                 <li class="nav-item active">
                     <a class="nav-link" href="#"><i class="fas fa-home"></i> Home</a>
                 </li>
+                <li class="nav-item">
+                    <div class="btn-group">
+                        <button class="btn dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-puzzle-piece"></i> Algoritmos</button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="?algo=dfs"><i class="fas fa-project-diagram"></i> Busca em Profundidade</a>
+                            <a class="dropdown-item" href="?algo=bfs"><i class="fas fa-project-diagram"></i> Busca em Largura</a>
+                        </div>
+                    </div>
+                </li>
             </ul>
         </div>
     </nav>
 </header>
 
 <div id="main" class="container-fluid mt-1">
+    <?php if($show): ?>
     <?php include_once "./algoritmos/grafo.php"; ?>
+    <?php endif; ?>
 </div>

@@ -7,10 +7,53 @@ body {
     opacity: 0;
     pointer-events: none;
 }
+
+.nav-item {
+    margin: 1px;
+}
+
 .nav-item.active {
     background: #40464c;
     border-radius: 5px;
 }
+
+.nav-item .btn {
+    background-color: #007bff;
+    color: white;
+    line-height: 1.6;
+    border: 1px solid #007bff;
+    margin-left: 15px !important;
+}
+
+.nav-pills .nav-link {
+    border-radius: .25rem;
+    border: 1px solid #007bff;
+}
+
+.nav-pills .nav-link.active.danger {
+    color: #fff;
+    background-color: #dc3545;
+    border: 1px solid #dc3545;
+}
+
+.nav-pills .nav-link.active.warning {
+    color: #212529;
+    background-color: #ffc107;
+    border: 1px solid #ffc107;
+}
+
+.nav-pills .nav-link.active.success {
+    color: #fff;
+    background-color: #28a745;
+    border: 1px solid #28a745;
+}
+
+.nav-pills .nav-link.active.primary {
+    color: #fff;
+    background-color: #007bff;
+    border: 1px solid #007bff;
+}
+
 #main {
     height: calc(100vh - 72px);
 }
@@ -29,12 +72,12 @@ body {
     font: 26px/1.5 normal normal;
     font-family: "Segoe UI";
     font-weight: 400;
-    color: #efdab9;
+    color: #eee;
     font-size: 20px;
     text-align: center;
 }
 .description-panel .content {
-    color: #efdab9;
+    color: #fff4;
     text-shadow: 1px 1px 12px #111;
     font-size: 13px;
 }

@@ -256,7 +256,8 @@ class Grafo {
             id: id,
             color: {
                 color: cor,
-                highlight: cor
+                highlight: cor,
+                hover: cor
             }
         });
     }

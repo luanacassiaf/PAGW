@@ -4,21 +4,20 @@
         <h2 class="title"><?= $titulo ?></h2>
         <p class="text-center content"><?= $descricao ?></p>
         <div style="display: flex; align-items: center; justify-content: center;">
-            <div class="btn-group" data-toggle="buttons">
-                <label id="selecionar-btn" class="btn btn-primary form-check-label active" onclick="onSelecionarClick()">
-                    <input class="form-check-input" type="radio" name="acao" id="selecionar-input" autocomplete="off" checked><i class="fas fa-mouse-pointer"></i> <span>Selecionar</span>
-                </label>
-                <label id="adicionar-btn" balloon="Clique em um espaço vazio para adicionar um vértice" balloon-pos="down" class="btn btn-success form-check-label" onclick="onAdicionarVerticeClick()">
-                    <input class="form-check-input" type="radio" name="acao" id="adicionar-input" autocomplete="off"><i class="fas fa-plus"></i> <span>Adicionar</span>
-                </label>
-                <label id="conectar-btn" balloon="Selecione dois vértices para criar uma aresta" balloon-pos="down" class="btn btn-warning form-check-label" onclick="onConectarVerticesClick()">
-                    <input class="form-check-input" type="radio" name="acao" id="conectar-input" autocomplete="off"><i class="fas fa-plug"></i> <span>Conectar</span>
-                </label>
-                <label id="remover-btn" balloon="Clique sobre um vértice ou aresta para removê-lo" balloon-pos="down" class="btn btn-danger form-check-label" onclick="onRemoverClick()">
-                    <input class="form-check-input" type="radio" name="acao" id="excluir-input" autocomplete="off"><i class="fas fa-trash"></i> <span>Remover</span>
-                </label>
-            </div>
-
+            <ul class="nav nav-pills" role="tablist">
+                <li class="nav-item">
+                    <a id="selecionar-btn" class="nav-link active primary" data-toggle="tab" href="#" role="tab" onclick="onSelecionarClick()"><i class="fas fa-mouse-pointer mr-1"></i> Selecionar</a>
+                </li>
+                <li class="nav-item" balloon="Clique em um espaço vazio para adicionar um vértice" balloon-pos="down">
+                    <a id="adicionar-btn" class="nav-link success" data-toggle="tab" href="#" role="tab" onclick="onAdicionarVerticeClick()"><i class="fas fa-plus mr-1"></i> Adicionar</a>
+                </li>
+                <li class="nav-item" balloon="Selecione dois vértices para criar uma aresta" balloon-pos="down">
+                    <a id="conectar-btn" class="nav-link warning" data-toggle="tab" href="#" role="tab" onclick="onConectarVerticesClick()"><i class="fas fa-plug mr-1"></i> Conectar</a>
+                </li>
+                <li class="nav-item" balloon="Clique sobre um vértice ou aresta para removê-lo" balloon-pos="down">
+                    <a id="remover-btn" class="nav-link danger" data-toggle="tab" href="#" role="tab" onclick="onRemoverClick()"><i class="fas fa-trash mr-1"></i> Remover</a>
+                </li>
+            </ul>
             <div class="ml-1">
                 <div class="btn-group">
                     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-upload"></i> Exportar</button>

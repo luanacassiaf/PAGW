@@ -12,7 +12,7 @@
         <input id="vertice-final-input" type="number" class="form-control" min="0" value="1"/>
     </div>
     <div class="btn-group">
-        <button id="executar-dfs-btn" class="btn btn-primary" type="button" onclick="onExecutarDfsClick()"><i class="fa fa-play"></i> Executar</button>
+        <button id="executar-dfs-btn" class="btn btn-success" type="button" onclick="onExecutarDfsClick()"><i class="fa fa-play"></i> Executar</button>
     </div>
 </div>
 <script>
