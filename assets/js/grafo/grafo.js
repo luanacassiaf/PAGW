@@ -68,7 +68,7 @@ class Grafo {
 
     //Obtém o id do vertice numa determinada posição.
     obterIdDoVerticeNaPosicao(pos) {
-        console.log(`obterIdDoVerticeNaPosicao(${pos})`);
+        //console.log(`obterIdDoVerticeNaPosicao(${pos})`);
         let vertices = this.vertices.get();
         for (let i = 0; i < vertices.length; i++) {
             if (i == pos) {
@@ -80,7 +80,7 @@ class Grafo {
 
     //Obtém a posição do vertice com determinado id.
     obterPosicaoDoVerticeComId(id) {
-        console.log(`obterPosicaoDoVerticeComId(${id})`);
+        //console.log(`obterPosicaoDoVerticeComId(${id})`);
         let vertices = this.vertices.get();
         for (let i = 0; i < vertices.length; i++) {
             if (vertices[i].id == id) {
@@ -99,7 +99,7 @@ class Grafo {
 
     //Obtém a aresta entre os vertices nas posições a e b.
     obterArestasEntreOsVerticesNasPosicoes(posa, posb) {
-        console.log(`obterArestaEntreOsVerticesNasPosicoes(${posa}, ${posb})`);
+        //console.log(`obterArestaEntreOsVerticesNasPosicoes(${posa}, ${posb})`);
         let ida = this.obterIdDoVerticeNaPosicao(posa);
         let idb = this.obterIdDoVerticeNaPosicao(posb);
         let arestas = this.arestas.get({
@@ -137,7 +137,7 @@ class Grafo {
         v.label = `${pos}`;
         this.vertices.add(v);
         this.verticeArray[pos] = v.id;
-        console.log(`criarVertice(${JSON.stringify(v)})`);
+        //console.log(`criarVertice(${JSON.stringify(v)})`);
     }
 
     //Cria um novo aresta a partir do id de 2 vértices e chama um callback passando seu dados.
@@ -153,7 +153,7 @@ class Grafo {
     //Cria uma nova aresta entre 2 vertices com determinado id e chama um callback passando seus dados.
     criarArestaEntreVertices(from, to, action) {
         let a = this.criarAresta(from, to, action);
-        console.log(`criarArestaEntreVertices(${JSON.stringify(a)})`);
+        //console.log(`criarArestaEntreVertices(${JSON.stringify(a)})`);
     }
 
     //Cria uma nova aresta entre 2 vertices com determinada posição e chama um callback passando seus dados.
@@ -161,18 +161,18 @@ class Grafo {
         let ida = this.obterIdDoVerticeNaPosicao(from);
         let idb = this.obterIdDoVerticeNaPosicao(to);
         let a = this.criarAresta(ida, idb, action);
-        console.log(`criarArestaEntreVerticesNasPosicoes(${JSON.stringify(a)})`);
+        //console.log(`criarArestaEntreVerticesNasPosicoes(${JSON.stringify(a)})`);
     }
 
     //Remove vértice com determinado id.
     removerVertice(id) {
-        console.log(`removerVertice(${id})`);
+        //console.log(`removerVertice(${id})`);
         this.vertices.remove(id);
     }
 
     //Remove um vertice com determinada posição.
     removerVerticeNaPosicao(pos) {
-        console.log(`removerVerticeNaPosicao(${pos})`);
+        //console.log(`removerVerticeNaPosicao(${pos})`);
         let id = this.obterIdDoVerticeNaPosicao(pos);
         this.vertices.remove(id);
     }
@@ -182,7 +182,7 @@ class Grafo {
         let a = this.obterAresta(id);
         if (a) {
             this.arestas.remove(id);
-            console.log(`removerAresta(${JSON.stringify(a)})`);
+            //console.log(`removerAresta(${JSON.stringify(a)})`);
         }
     }
 
@@ -203,14 +203,14 @@ class Grafo {
 
     //Colore o vertice com uma determinada cor.
     colorirVerticeNaPosicao(pos, cor) {
-        console.log(`colorirVerticeNaPosicao(${pos})`);
+        //console.log(`colorirVerticeNaPosicao(${pos})`);
         let id = this.obterIdDoVerticeNaPosicao(pos);
         this.colorirVertice(id, cor);
     }
 
     //Colore o vertice com uma determinada cor.
     colorirVertice(id, cor) {
-        console.log(`colorirVertice(${id})`);
+        //console.log(`colorirVertice(${id})`);
         this.vertices.update({
             id: id,
             color: cor
@@ -219,14 +219,14 @@ class Grafo {
 
     //Colore o vertice com a cor padrão.
     descolorirVerticeNaPosicao(pos) {
-        console.log(`descolorirVerticeNaPosicao(${pos})`);
+        //console.log(`descolorirVerticeNaPosicao(${pos})`);
         let id = this.obterIdDoVerticeNaPosicao(pos);
         this.descolorirVertice(id);
     }
 
     //Colore o vertice com a cor padrão.
     descolorirVertice(id) {
-        console.log(`descolorirVertice(${id})`);
+        //console.log(`descolorirVertice(${id})`);
         this.vertices.update({
             id: id,
             color: '#9E9E9E'
@@ -242,7 +242,7 @@ class Grafo {
 
     //Colore a aresta entre dois vertices nas posições a e b com uma cor.
     colorirArestaEntreOsVerticesNasPosicoes(posa, posb, cor) {
-        console.log(`colorirArestaEntreOsVerticesNasPosicoes(${posa}, ${posb}, ${cor})`);
+        //console.log(`colorirArestaEntreOsVerticesNasPosicoes(${posa}, ${posb}, ${cor})`);
         let aresta = this.obterArestasEntreOsVerticesNasPosicoes(posa, posb)[0];
         if (aresta) {
             this.colorirAresta(aresta.id, cor);
@@ -251,7 +251,7 @@ class Grafo {
 
     //Colore a aresta com determinado id com uma cor.
     colorirAresta(id, cor) {
-        console.log(`colorirAresta(${id}, ${cor})`);
+        //console.log(`colorirAresta(${id}, ${cor})`);
         this.arestas.update({
             id: id,
             color: {
@@ -264,7 +264,7 @@ class Grafo {
 
     //Colore a aresta entre os vértices nas posições a e b com uma cor.
     descolorirArestaEntreOsVerticesNasPosicoes(posa, posb) {
-        console.log(`descolorirArestaEntreOsVerticesNasPosicoes(${posa}, ${posb})`);
+        //console.log(`descolorirArestaEntreOsVerticesNasPosicoes(${posa}, ${posb})`);
         let aresta = this.obterArestasEntreOsVerticesNasPosicoes(posa, posb)[0];
         if (aresta) {
             this.descolorirAresta(aresta.id);
@@ -273,7 +273,7 @@ class Grafo {
 
     //Colore a aresta com determinado id.
     descolorirAresta(id) {
-        console.log(`descolorirAresta(${id})`);
+        //console.log(`descolorirAresta(${id})`);
         this.arestas.update({
             id: id,
             color: {
