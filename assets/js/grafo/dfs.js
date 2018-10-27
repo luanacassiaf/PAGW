@@ -25,7 +25,7 @@ class Dfs extends GrafoBasico {
             for (let i = 0; i < n; i++) {
                 if (matriz[v][i] === true && visitado[i] === false) {
                     //Adiciona o vertice visitado no caminho.
-                    caminho[v] = i; //inverter v por i -> inverte o caminho.
+                    caminho[i] = v;
                     //Chegou no final, para! Precisa será??
                     if (verticeFinal === i) {
                         break;
@@ -40,7 +40,7 @@ class Dfs extends GrafoBasico {
         this.colorirCaminhoEncontrado(verticeInicial, verticeFinal, caminho);
     }
 
-    async colorirCaminhoEncontrado(verticeInicial, verticeFinal, caminho) {
+    colorirCaminhoEncontrado(verticeInicial, verticeFinal, caminho) {
         //Descolore tudo.
         this.descolorirTodasAsArestas();
         this.descolorirTodosOsVertices();
@@ -48,20 +48,20 @@ class Dfs extends GrafoBasico {
         this.colorirVerticeNaPosicao(verticeInicial, '#4CAF50');
         this.colorirVerticeNaPosicao(verticeFinal, '#f44336');
         //Vamos percorrer o caminho de trás pra frente.
-        let vertice = verticeInicial;
+        let vertice = verticeFinal;
+
+        console.log(caminho);
 
         while (caminho[vertice] !== false) {
             let a = vertice;
             let b = caminho[vertice];
+            //Colore uma aresta.
+            this.colorirArestaEntreOsVerticesNasPosicoes(a, b, 'orange');
             //Colore um vértice.
             if (vertice !== verticeFinal &&
                     vertice !== verticeInicial) {
                 this.colorirVerticeNaPosicao(vertice, '#FF9800');
-                await this.esperar(250);
             }
-            //Colore uma aresta.
-            this.colorirArestaEntreOsVerticesNasPosicoes(a, b, 'orange');
-            await this.esperar(250);
             vertice = b;
         }
     }
