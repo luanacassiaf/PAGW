@@ -21,3 +21,7 @@
         <button id="btn-executar" class="btn btn-success" type="button" onclick="executarAlgoritmoDfs()"><i class="fa fa-play"></i> Executar</button>
     </div>
 </div>
+
+<script>
+var grafo = new Dfs('grafo');
+</script>

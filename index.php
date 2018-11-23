@@ -26,11 +26,11 @@ if($algoritmo === "dfs") {
         <link rel="stylesheet" href="css/balloon.css">
         <link rel="stylesheet" href="css/theme.css">
         <!-- JS -->
-        <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script type="text/javascript" src="js/cytoscape.min.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-        <script defer type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="js/grafo.js"></script>
+    	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+		<script defer type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    	<script type="text/javascript" src="js/grafo.js"></script>
 
         <title>PAGW - Plataforma de Aprendizagem de Grafos via Web</title>
     </head>
@@ -43,7 +43,7 @@ if($algoritmo === "dfs") {
                 <nav class="navbar">
 					<!-- Botão do Menu Lateral -->
 					<div class="col-md-1">
-						<i class="fas fa-bars btn-collapse ripple ripple-circle" onclick="exibirSidebar()"></i>
+						<i class="fas fa-bars btn-collapse ripple ripple-circle" onclick="exibirOuOcultarMenuLateral()"></i>
 					</div>
                     <!-- Logo e Título -->
                     <div class="col-md-5">
@@ -53,10 +53,10 @@ if($algoritmo === "dfs") {
 						</a>
 					</div>
 					<div class="col-md-6 actionbar">
-						<span balloon="Selecionar" balloon-pos="down"><i actionbar-group="grafo" class="actionbar-item fas fa-mouse-pointer ripple ripple-circle active"></i></span>
-						<span balloon="Clique em um espaço vazio para adicionar um vértice" balloon-pos="down"><i actionbar-group="grafo" class="actionbar-item fas fa-plus ripple ripple-circle"></i></span>
-						<span balloon="Selecione dois vértices para criar uma aresta" balloon-pos="down"><i actionbar-group="grafo" class="actionbar-item fas fa-plug ripple ripple-circle"></i></span>
-						<span balloon="Clique sobre um vértice ou aresta para removê-los" balloon-pos="down"><i actionbar-group="grafo" class="actionbar-item fas fa-trash ripple ripple-circle"></i></span>
+						<span balloon="Selecionar" balloon-pos="down" onclick="grafo.habilitarModoSelecionar();"><i actionbar-group="grafo" class="actionbar-item fas fa-mouse-pointer ripple ripple-circle active"></i></span>
+						<span balloon="Clique em um espaço vazio para adicionar um vértice" balloon-pos="down" onclick="grafo.habilitarModoInserir();"><i actionbar-group="grafo" class="actionbar-item fas fa-plus ripple ripple-circle"></i></span>
+						<span balloon="Selecione dois vértices para criar uma aresta" balloon-pos="down" onclick="grafo.habilitarModoConectar();"><i actionbar-group="grafo" class="actionbar-item fas fa-plug ripple ripple-circle"></i></span>
+						<span balloon="Clique sobre um vértice ou aresta para removê-los" balloon-pos="down" onclick="grafo.habilitarModoRemover();"><i actionbar-group="grafo" class="actionbar-item fas fa-trash ripple ripple-circle"></i></span>
 
 						<span balloon="Abrir de um arquivo" balloon-pos="down"><i class="actionbar-item fas fa-folder ripple ripple-circle"></i></span>
 						<span balloon="Salvar para um arquivo" balloon-pos="down"><i class="actionbar-item fas fa-save ripple ripple-circle"></i></span>
@@ -86,7 +86,49 @@ if($algoritmo === "dfs") {
                 <?php include_once "./grafo.php"; ?>
                 <?php endif; ?>
             </section>
-        </div>
+		</div>
+
+		<!-- Modal -->
+		<div class="modal fade" id="exportarModal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Exportar Como</h5>
+						<button type="button" class="close" data-dismiss="modal">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<nav>
+							<div class="nav nav-tabs" id="nav-tab" role="tablist">
+								<a class="nav-item nav-link active" id="nav-matriz-adjacencia-tab" data-toggle="tab" href="#nav-matriz-adjacencia" role="tab">Matriz de Adjacência</a>
+								<a class="nav-item nav-link" id="nav-lista-adjacencia-tab" data-toggle="tab" href="#nav-lista-adjacencia" role="tab">Lista de Adjacência</a>
+							</div>
+						</nav>
+						<div class="tab-content">
+							<div class="tab-pane fade show active" id="nav-matriz-adjacencia" role="tabpanel">
+								<pre id="text-matriz-adjacencia">
+
+
+
+								</pre>
+							</div>
+							<div class="tab-pane fade" id="nav-lista-adjacencia" role="tabpanel">
+								<pre id="text-lista-adjacencia">
+
+
+
+								</pre>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<!-- Github Corner -->
         <a href="https://github.com/tiagohm/PAGW" target="_blank" class="github-corner" aria-label="View source on GitHub">
             <svg viewBox="0 0 250 250" style="fill:#28a745; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true">
@@ -99,13 +141,13 @@ if($algoritmo === "dfs") {
 	</body>
 
 	<script>
-		function exibirSidebar() {
+		function exibirOuOcultarMenuLateral() {
 			let elm = $("#sidebar1");
 			elm.hasClass("reveal") && elm.removeClass("reveal") || elm.addClass("reveal");
 		}
 
 		$(document).ready(function() {
-
+			//Ativar/Desativar itens de um determinado grupo.
 			$("i[actionbar-group]").click(function() {
 				let group = $(this).attr("actionbar-group");
 				$(`i[actionbar-group=${group}]`).each(function(i) {
