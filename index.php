@@ -32,7 +32,20 @@ if($algoritmo === "dfs") {
     	<script type="text/javascript" src="js/cytoscape.min.js"></script>
     	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 		<script defer type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
-    	<script type="text/javascript" src="js/grafo.js"></script>
+		<script type="text/javascript" src="js/grafo.js"></script>
+
+		<?php if(strtolower($_SERVER['SERVER_NAME']) != "localhost"): ?>
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-102583596-4"></script>
+		<script>
+			if(window.location.hostname.toLowerCase() != "localhost") {
+				window.dataLayer = window.dataLayer || [];
+				function gtag(){ dataLayer.push(arguments); }
+				gtag('js', new Date());
+				gtag('config', 'UA-102583596-4');
+			}
+		</script>
+		<?php endif; ?>
 
         <title>PAGW - Plataforma de Aprendizagem de Grafos via Web</title>
     </head>
