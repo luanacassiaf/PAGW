@@ -93,7 +93,8 @@ if($algoritmo === "dfs") {
                         <li class="sidebar-item <?= isActive('bfs'); ?>">
                         <a href="?algo=bfs">Busca em Largura</a>
                         </li>
-                    </ul>
+					</ul>
+					<p class="text-center"><img class="badge-img" src="https://img.shields.io/github/release/tiagohm/PAWG.svg?label=versão"></p>
                 </div>
 
                 <?php if($exibir): ?>
