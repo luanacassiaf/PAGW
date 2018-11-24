@@ -44,16 +44,20 @@ if($algoritmo === "dfs") {
                 <!-- Toolbar -->
                 <nav class="navbar">
 					<!-- Botão do Menu Lateral -->
-					<div class="col-md-1">
+					<div class="col-md-1 col-sm-1 col-2">
 						<i class="fas fa-bars btn-collapse ripple ripple-circle" onclick="exibirOuOcultarMenuLateral()"></i>
 					</div>
                     <!-- Logo e Título -->
-                    <div class="col-md-5">
+                    <div class="col-md-5 col-sm-11 col-10">
 						<a class="navbar-brand" href="#">
 							<img class="logo" src="img/pagw-logo.png">
-							<span class="title">Plataforma de Aprendizagem de Grafos via Web</span>
+							<span>
+								<div class="title">PAGW</div>
+								<div class="subtitle">Plataforma de Aprendizagem de Grafos via Web</div>
+							</span>
 						</a>
 					</div>
+					<!-- Barra de Ações -->
 					<div class="col-md-6 actionbar">
 						<span balloon="Selecionar" balloon-pos="down" onclick="grafo.habilitarModoSelecionar();"><i actionbar-group="grafo" class="actionbar-item fas fa-mouse-pointer ripple ripple-circle active"></i></span>
 						<span balloon="Clique em um espaço vazio para adicionar um vértice" balloon-pos="down" onclick="grafo.habilitarModoInserir();"><i actionbar-group="grafo" class="actionbar-item fas fa-plus ripple ripple-circle"></i></span>

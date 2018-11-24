@@ -65,6 +65,11 @@ header.shadow {
 	color: #fff;
 }
 
+.navbar .subtitle {
+	font-size: 12px;
+	color: #fffa;
+}
+
 .navbar .btn-collapse {
 	color: #fff;
 }
@@ -74,13 +79,14 @@ header.shadow {
 	filter: brightness(100);
 	margin-left: 10px;
 	margin-right: 10px;
+	float: left;
 }
 
 /* ActionBar */
 
 .actionbar {
 	display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
     padding-right: 86px;
 }
@@ -172,6 +178,8 @@ header.shadow {
 	margin: 0;
 	padding: 0;
 	list-style: none;
+	max-height: calc(100vh - 180px);
+	overflow-y: auto;
 	flex-grow: 1;
 }
 
