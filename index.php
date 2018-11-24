@@ -94,7 +94,7 @@ if($algoritmo === "dfs") {
                         <a href="?algo=bfs">Busca em Largura</a>
                         </li>
 					</ul>
-					<p class="text-center"><img class="badge-img" src="https://img.shields.io/github/release/tiagohm/PAWG.svg?label=versão"></p>
+					<p class="text-center"><img class="badge-img" src="https://img.shields.io/github/release/tiagohm/PAGW.svg?label=versão"></p>
                 </div>
 
                 <?php if($exibir): ?>
