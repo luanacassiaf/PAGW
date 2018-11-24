@@ -20,6 +20,7 @@ if($algoritmo === "dfs") {
 ?>
 <html>
     <head>
+		<link rel="shortcut icon" type="image/png" href="img/favicon.png"/>
         <!-- CSS -->
         <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
@@ -27,7 +28,8 @@ if($algoritmo === "dfs") {
         <link rel="stylesheet" href="css/theme.css">
         <!-- JS -->
 		<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-        <script type="text/javascript" src="js/cytoscape.min.js"></script>
+        <script type="text/javascript" src="js/filesaver.min.js"></script>
+    	<script type="text/javascript" src="js/cytoscape.min.js"></script>
     	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 		<script defer type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
     	<script type="text/javascript" src="js/grafo.js"></script>
@@ -58,9 +60,21 @@ if($algoritmo === "dfs") {
 						<span balloon="Selecione dois vértices para criar uma aresta" balloon-pos="down" onclick="grafo.habilitarModoConectar();"><i actionbar-group="grafo" class="actionbar-item fas fa-plug ripple ripple-circle"></i></span>
 						<span balloon="Clique sobre um vértice ou aresta para removê-los" balloon-pos="down" onclick="grafo.habilitarModoRemover();"><i actionbar-group="grafo" class="actionbar-item fas fa-trash ripple ripple-circle"></i></span>
 
-						<span balloon="Abrir de um arquivo" balloon-pos="down"><i class="actionbar-item fas fa-folder ripple ripple-circle"></i></span>
-						<span balloon="Salvar para um arquivo" balloon-pos="down"><i class="actionbar-item fas fa-save ripple ripple-circle"></i></span>
-						<span balloon="Exportar como..." balloon-pos="down" data-toggle="modal" data-target="#exportarModal"><i class="actionbar-item fas fa-download ripple ripple-circle"></i></span>
+						<span balloon="Abrir de um arquivo" balloon-pos="down" onclick="importarJsonComoGrafo(true)"><i class="actionbar-item fas fa-folder ripple ripple-circle"></i></span>
+						<span balloon="Salvar para um arquivo" balloon-pos="down" onclick="salvarGrafoComoJson()"><i class="actionbar-item fas fa-save ripple ripple-circle"></i></span>
+						<span balloon="Exportar como..." balloon-pos="down" data-toggle="modal" data-target="#exportarModal" onclick="exibirExportarModal()"><i class="actionbar-item fas fa-download ripple ripple-circle"></i></span>
+
+						<input type="file" id="file-input-json" accept="application/json" style="display: none" onchange="importarJsonComoGrafo(false)">
+
+						<span>
+							<div class="dropdown">
+								<i class="actionbar-item fas fa-ellipsis-v ripple ripple-circle active" data-toggle="dropdown"></i>
+								<div class="dropdown-menu dropdown-menu-right">
+									<a class="dropdown-item" onclick="exportarComoImagem('png')">Exportar Como PNG</a>
+									<a class="dropdown-item" onclick="exportarComoImagem('jpg')">Exportar Como JPG</a>
+								</div>
+							</div>
+						</span>
 					</div>
                 </nav>
             </header>
@@ -144,6 +158,50 @@ if($algoritmo === "dfs") {
 		function exibirOuOcultarMenuLateral() {
 			let elm = $("#sidebar1");
 			elm.hasClass("reveal") && elm.removeClass("reveal") || elm.addClass("reveal");
+		}
+
+		function exibirExportarModal() {
+			$("#text-matriz-adjacencia").text(grafo.obterMatrizDeAdjacenciaFormatada());
+			$("#text-lista-adjacencia").text(grafo.obterListaDeAdjacenciaFormatada());
+		}
+
+		function salvarGrafoComoJson() {
+			let file = new File([grafo.toJson()], "<?= $algoritmo ?>.json", {type: "application/json;charset=utf-8"});
+			saveAs(file);
+		}
+
+		function importarJsonComoGrafo(performClick) {
+			if(performClick) {
+				$("#file-input-json").click();
+			} else {
+				let file = $("#file-input-json")[0].files[0];
+				if(file) {
+					let reader = new FileReader();
+					reader.onload = (e) => {
+						let content = e.target.result;
+						grafo.fromJson(JSON.parse(content));
+					};
+					reader.readAsText(file, "UTF-8");
+				}
+			}
+		}
+
+		function exportarComoImagem(type) {
+			if(type == 'png') {
+				exportarComoImagemPng(grafo.toPng());
+			} else {
+				exportarComoImagemJpg(grafo.toJpg());
+			}
+		}
+
+		function exportarComoImagemPng(blob) {
+			let file = new File([blob], "<?= $algoritmo ?>.png", {type: "image/png"});
+			saveAs(file);
+		}
+
+		function exportarComoImagemJpg(blob) {
+			let file = new File([blob], "<?= $algoritmo ?>.jpg", {type: "image/jpeg"});
+			saveAs(file);
 		}
 
 		$(document).ready(function() {

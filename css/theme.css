@@ -127,8 +127,8 @@ header.shadow {
 }
 
 .github-corner > svg {
-	width: 84px;
-	height: 84px;
+	width: 54px;
+	height: 54px;
 }
 
 /* Sidebar */
@@ -228,7 +228,115 @@ header.shadow {
 
 .grafo-panel {
 	width: 100%;
-	height: calc(100% - 110px);
+	height: calc(100% - 150px);
 	border: 1px solid var(--colorPrimary);
 	border-radius: 5px;
+}
+
+.grafo-toolbar {
+	padding: 10px 0px;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+/* Switch Button */
+
+.switchbox {
+    position: relative;
+    display: inline-block;
+    width: 52px;
+	height: 25px;
+	margin-bottom: 0px;
+	margin: 0px 10px;
+}
+
+.switchbox input {
+    display: none;
+}
+
+.switchbox input:checked+.slider {
+    background-color: var(--colorPrimary);
+}
+
+.switchbox .slider.round {
+    -webkit-border-radius: 34px;
+    border-radius: 34px;
+}
+
+.switchbox .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    -o-transition: .4s;
+    transition: .4s;
+}
+
+.switchbox input:checked+.slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+.switchbox .slider.round:before {
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
+
+.switchbox .slider:before {
+    position: absolute;
+    content: "";
+    height: 17px;
+    width: 17px;
+    left: 4px;
+    bottom: 4px;
+    background-color: #fff;
+    -webkit-transition: .4s;
+    -o-transition: .4s;
+    transition: .4s;
+}
+
+/* Slider */
+.sliderbar {
+	margin-bottom: 0px;
+	margin: 0px 10px;
+}
+
+.sliderbar .slider {
+    -webkit-appearance: none;
+    width: attr(max);
+    height: 12px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    border-radius: 16px;
+}
+
+.sliderbar .slider:hover {
+    opacity: 1;
+}
+
+.sliderbar .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: var(--colorPrimary);
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.sliderbar .slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: var(--colorPrimary);
+    cursor: pointer;
+    border-radius: 50%;
 }

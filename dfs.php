@@ -14,7 +14,7 @@
         <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">Fim</span>
         </div>
-        <input id="input-vertice-final" type="number" class="form-control" min="0" value="1"/>
+        <input id="input-vertice-final" type="number" class="form-control" min="-1" value="1"/>
 	</div>
 
     <div class="btn-group">
@@ -24,4 +24,11 @@
 
 <script>
 var grafo = new Dfs('grafo');
+
+function executarAlgoritmoDfs() {
+	let verticeInicial = $("#input-vertice-inicial").val();
+	let verticeFinal = $("#input-vertice-final").val();
+	//Executa o algoritmo.
+	grafo.executar(parseInt(verticeInicial), parseInt(verticeFinal));
+}
 </script>

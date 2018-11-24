@@ -4,7 +4,17 @@
 
 		<div class="col-md-8 p-2">
 			<div class="grafo-toolbar">
-
+				<!-- Slider -->
+				<small class="text mr-2">VELOCIDADE: </small>
+				<label class="sliderbar">
+					<input type="range" min="1" max="100" value="50" class="slider" onchange="grafo.definirVelocidadeDaAnimacao(this.value)">
+				</label>
+				<!-- Switch Button -->
+				<small class="text">DIRECIONADO: </small>
+				<label class="switchbox">
+					<input type="checkbox" onclick="grafo.aplicarDirecaoDasArestas(this.checked);">
+					<span class="slider round"></span>
+				</label>
 			</div>
 
 			<div id="grafo" class="grafo-panel">
