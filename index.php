@@ -196,11 +196,13 @@ if($algoritmo === "dfs") {
 		}
 
 		function exportarComoImagemPng(blob) {
+			if(!blob || blob.size == 0) return;
 			let file = new File([blob], "<?= $algoritmo ?>.png", {type: "image/png"});
 			saveAs(file);
 		}
 
 		function exportarComoImagemJpg(blob) {
+			if(!blob || blob.size == 0) return;
 			let file = new File([blob], "<?= $algoritmo ?>.jpg", {type: "image/jpeg"});
 			saveAs(file);
 		}
