@@ -25,11 +25,13 @@ if($algoritmo === "dfs") {
         <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
         <link rel="stylesheet" href="css/balloon.css">
+        <link rel="stylesheet" href="css/cytoscape-context-menus.css">
         <link rel="stylesheet" href="css/theme.css">
         <!-- JS -->
 		<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script type="text/javascript" src="js/filesaver.min.js"></script>
     	<script type="text/javascript" src="js/cytoscape.min.js"></script>
+    	<script type="text/javascript" src="js/cytoscape-context-menus.js"></script>
     	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 		<script defer type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="js/grafo.js"></script>
@@ -108,7 +110,10 @@ if($algoritmo === "dfs") {
                             <a href="?algo=dfs">Busca em Profundidade</a>
                         </li>
                         <li class="sidebar-item <?= isActive('bfs'); ?>">
-                        <a href="?algo=bfs">Busca em Largura</a>
+                        	<a href="?algo=bfs">Busca em Largura</a>
+                        </li>
+						<li class="sidebar-item <?= isActive('dijkstra'); ?>">
+                        	<a href="?algo=dijkstra">Dijkstra</a>
                         </li>
 					</ul>
 					<p class="text-center"><img class="badge-img" src="https://img.shields.io/github/release/tiagohm/PAGW.svg?label=versão"></p>

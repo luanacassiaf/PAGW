@@ -26,6 +26,7 @@ class Grafo {
 				{
 					selector: "edge",
 					style: {
+						label: function (ele) { return ele.data('peso') },
 						"edge-text-rotation": "autorotate",
 						'curve-style': 'bezier',
 						'target-arrow-shape': function (ele) { return ele.data('direcionado') ? 'triangle' : 'none' },
@@ -62,7 +63,9 @@ class Grafo {
 
 		//Evento de clique.
 		this.grafo.on('tap', (event) => {
-			console.log(event.target);
+			const isNode = event.target && event.target.length !== undefined && event.target.isNode();
+			const isEdge = event.target && event.target.length !== undefined && event.target.isEdge();
+			this.onTap(event, event.target, isNode, isEdge);
 			//Modo Inserir.
 			if (this.modo == 1) {
 				//Evita sobrepor novos vertices e permite sua seleção.
@@ -87,7 +90,7 @@ class Grafo {
 			}
 			//Modo Remover.
 			else if (this.modo == 3) {
-				//Um vertice foi selecionado.
+				//Algo foi selecionado.
 				if (event.target && event.target.length) {
 					if (event.target.isNode()) {
 						this.onRemoverVertice(event.target);
@@ -99,6 +102,19 @@ class Grafo {
 				}
 			}
 		});
+
+		this.grafo.contextMenus({
+			menuItems: this.obtainContextMenuItems()
+		});
+	}
+
+	onTap(event, target, isNode, isEdge) {
+		event.stopPropagation();
+		// nada.
+	}
+
+	obtainContextMenuItems() {
+		return [];
 	}
 
 	toJson() {
@@ -204,10 +220,10 @@ class Grafo {
 
 	obterMatrizDeAdjacencia() {
 		//criar uma lista de vértices.
-		let vertices = this.grafo.nodes().map((node) => node.id());
+		const vertices = this.grafo.nodes().map((node) => node.id());
 		//Cria a matriz.
 		const n = vertices.length;
-		let matriz = Array(n).fill(false).map(() => Array(n).fill(false));
+		const matriz = Array(n).fill(false).map(() => Array(n).fill(false));
 		//pegar todas as arestas.
 		this.grafo.edges().forEach((edge, i) => {
 			//Preenche a matriz.
@@ -225,10 +241,10 @@ class Grafo {
 
 	obterListaDeAdjacencia() {
 		//criar uma lista de vértices.
-		let vertices = this.grafo.nodes().map((node) => node.id());
+		const vertices = this.grafo.nodes().map((node) => node.id());
 		//Cria a matriz.
 		const n = vertices.length;
-		let matriz = Array(n).fill(false).map(() => Array(0));
+		const matriz = Array(n).fill(false).map(() => Array(0));
 		//pegar todas as arestas.
 		this.grafo.edges().forEach((edge, i) => {
 			//Preenche a matriz.
@@ -247,7 +263,7 @@ class Grafo {
 	}
 
 	obterMatrizDeAdjacenciaFormatada() {
-		let matriz = this.obterMatrizDeAdjacencia();
+		const matriz = this.obterMatrizDeAdjacencia();
 		let res = '';
 		for (let y = 0; y < matriz.length; y++) {
 			if (y > 0) res += '\r\n';
@@ -261,7 +277,7 @@ class Grafo {
 	}
 
 	obterListaDeAdjacenciaFormatada() {
-		let lista = this.obterListaDeAdjacencia();
+		const lista = this.obterListaDeAdjacencia();
 		let res = '';
 		for (let y = 0; y < lista.length; y++) {
 			if (y > 0) res += '\r\n';
@@ -474,6 +490,147 @@ class Bfs extends Grafo {
 		bfs(verticeInicial);
 
 		console.log(dist);
+	}
+}
+
+// Dijkstra.
+class Dijkstra extends Grafo {
+
+	constructor(containerId) {
+		super(containerId);
+	}
+
+	onInserirNovoVertice(event) {
+		this.inserirNovoVertice(event.position.x, event.position.y);
+	}
+
+	onConectarDoisVertices(vertice1, vertice2) {
+		this.inserirNovaAresta(vertice1.id(), vertice2.id(), this.direcionado, 1);
+	}
+
+	onRemoverVertice(vertice) {
+		this.removerVerticeOuAresta(vertice);
+	}
+
+	onRemoverAresta(aresta) {
+		this.removerVerticeOuAresta(aresta);
+	}
+
+	inserirNovoVertice(x, y) {
+		super.inserirNovoVertice({ data: {}, x: x, y: y })
+	}
+
+	inserirNovaAresta(verticeId1, verticeId2, direcionado, peso) {
+		super.inserirNovaAresta({ data: { peso: peso, direcionado: direcionado, source: verticeId1, target: verticeId2 } })
+	}
+
+	removerVerticeOuAresta(verticeOuAresta) {
+		super.removerVerticeOuAresta(verticeOuAresta);
+	}
+
+	obtainContextMenuItems() {
+		return [
+			{
+				id: 'alterar-peso',
+				content: 'Alterar o peso da aresta',
+				selector: 'edge',
+				onClickFunction: function (event) {
+					const target = event.target || event.cyTarget;
+					const peso = parseInt(prompt("Insira o peso da aresta", target.data("peso")));
+					if (peso) {
+						target.data("peso", peso);
+					}
+				},
+				hasTrailingDivider: false
+			},
+		];
+	}
+
+	executar(verticeInicial, verticeFinal) {
+		//Matriz.
+		const matriz = this.obterMatrizDeAdjacencia();
+		const n = matriz.length;
+		//Verificar os valores.
+		if (verticeInicial < 0 ||
+			verticeInicial >= n ||
+			verticeFinal < 0 ||
+			verticeFinal >= n) {
+			return false;
+		}
+
+		const dist = Array(n).fill(0xFFFFFFFF);
+		const visitado = Array(n).fill(false);
+		const caminho = [];
+
+		function dijkstra(s, t) {
+			dist[s] = 0;
+
+			let noAnterior = false;
+
+			while (true) {
+				let no = false; // vértice com o caminho mais curto.
+				for (let i = 0; i < n; i++) {
+					if (visitado[i] === false && (no === false || dist[i] < dist[no])) {
+						no = i;
+					}
+				}
+
+				if (no === false) break;
+
+				if (noAnterior !== false) {
+					caminho.push(matriz[noAnterior][no]);
+				}
+
+				noAnterior = no;
+
+				visitado[no] = true;
+
+				for (let i = 0; i < n; i++) {
+					const aresta = matriz[no][i];
+					if (aresta) {
+						const peso = aresta.edge.data("peso");
+						if ((dist[no] + peso) < dist[i]) {
+							dist[i] = dist[no] + peso;
+						}
+					}
+				}
+
+				if (no === verticeFinal) {
+					break;
+				}
+			}
+
+			console.log(`distancia de ${s} até ${t}: ${dist[t]}`);
+		}
+
+		//Limpa os estilos.
+		this.limparEstiloDoGrafo();
+
+		dijkstra(verticeInicial, verticeFinal);
+
+		const stepper = new Stepper(caminho, 3, this.velocidadeDaAnimacao);
+		stepper.executar((m, i, k) => {
+			if (k == 0) {
+				//Pinta o primeiro vértice com a cor verde.
+				if (m.sourcePosition == verticeInicial) {
+					m.source.addClass('start-node');
+				} else {
+					m.source.addClass('highlighted');
+				}
+			}
+			else if (k == 1) {
+				//Pinta a aresta.
+				m.edge.addClass('highlighted');
+			}
+			else if (k == 2) {
+				//Pinta o último vértice com a cor vermelha.
+				if (m.targetPosition == verticeFinal) {
+					m.target.addClass('end-node');
+				} else {
+					m.target.addClass('highlighted');
+				}
+			}
+		});
 	}
 }
 
