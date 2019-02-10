@@ -1,34 +1,34 @@
 class Grafo {
 
 	constructor(containerId) {
-        this.containerId = containerId;
+		this.containerId = containerId;
 		this.uid = Date.now();
 		this.modo = 0;
 		this.velocidadeDaAnimacao = 500;
-        this.direcionado = false;
+		this.direcionado = false;
 		this.verticesSelecionadosParaConectar = [];
 		this.grafo = cytoscape({
-            container: document.getElementById(containerId),
-            style: [
+			container: document.getElementById(containerId),
+			style: [
 				{
-                    selector: ":selected",
-                    style: {
-                        'background-color': '#4426bb',
+					selector: ":selected",
+					style: {
+						'background-color': '#4426bb',
 						'line-color': '#4426bb'
 					}
 				},
-                {
-                    selector: "node",
-                    style: {
-                        label: function(ele) { return ele.data('label') }
-                    }
+				{
+					selector: "node",
+					style: {
+						label: function (ele) { return ele.data('label') }
+					}
 				},
 				{
 					selector: "edge",
 					style: {
 						"edge-text-rotation": "autorotate",
 						'curve-style': 'bezier',
-						'target-arrow-shape': function(ele) { return ele.data('direcionado') ? 'triangle' : 'none' },
+						'target-arrow-shape': function (ele) { return ele.data('direcionado') ? 'triangle' : 'none' },
 						'source-arrow-shape': 'none'
 					}
 				},
@@ -54,8 +54,8 @@ class Grafo {
 						'background-color': '#f44336'
 					}
 				}
-            ],
-            minZoom: 0.5,
+			],
+			minZoom: 0.5,
 			maxZoom: 4,
 			wheelSensitivity: 0.1
 		});
@@ -64,19 +64,19 @@ class Grafo {
 		this.grafo.on('tap', (event) => {
 			console.log(event.target);
 			//Modo Inserir.
-			if(this.modo == 1) {
+			if (this.modo == 1) {
 				//Evita sobrepor novos vertices e permite sua seleção.
-				if(!event.target || !event.target.length) {
+				if (!event.target || !event.target.length) {
 					this.onInserirNovoVertice(event);
 					this.atualizarRotuloDeTodosOsVertices();
 				}
 			}
 			//Modo Conectar.
-			else if(this.modo == 2) {
+			else if (this.modo == 2) {
 				//Um vertice foi selecionado.
-				if(event.target && event.target.length && event.target.isNode()) {
+				if (event.target && event.target.length && event.target.isNode()) {
 					//Já tem um vertice selecionado.
-					if(this.verticesSelecionadosParaConectar.length == 1) {
+					if (this.verticesSelecionadosParaConectar.length == 1) {
 						//Conectar os vertices.
 						this.onConectarDoisVertices(this.verticesSelecionadosParaConectar[0], event.target);
 						this.verticesSelecionadosParaConectar = [];
@@ -86,13 +86,13 @@ class Grafo {
 				}
 			}
 			//Modo Remover.
-			else if(this.modo == 3) {
+			else if (this.modo == 3) {
 				//Um vertice foi selecionado.
-				if(event.target && event.target.length) {
-					if(event.target.isNode()) {
+				if (event.target && event.target.length) {
+					if (event.target.isNode()) {
 						this.onRemoverVertice(event.target);
 						this.atualizarRotuloDeTodosOsVertices();
-					} else if(event.target.isEdge()) {
+					} else if (event.target.isEdge()) {
 						this.onRemoverAresta(event.target);
 						this.atualizarRotuloDeTodosOsVertices();
 					}
@@ -119,11 +119,11 @@ class Grafo {
 	}
 
 	toPng() {
-		return this.grafo.png({output: 'blob', full: true});
+		return this.grafo.png({ output: 'blob', full: true });
 	}
 
 	toJpg() {
-		return this.grafo.jpg({output: 'blob', full: true});
+		return this.grafo.jpg({ output: 'blob', full: true });
 	}
 
 	habilitarModoSelecionar() {
@@ -158,7 +158,7 @@ class Grafo {
 		data.data.id = this.uid.toString();
 		data.data.label = this.uid.toString();
 		//Adiciona o novo vértice.
-        this.grafo.add({
+		this.grafo.add({
 			group: "nodes",
 			data: data.data,
 			position: {
@@ -174,7 +174,7 @@ class Grafo {
 		//Define um id único para a aresta.
 		data.data.id = this.uid.toString();
 		//Adiciona a nova aresta.
-        this.grafo.add({
+		this.grafo.add({
 			group: "edges",
 			data: data.data
 		});
@@ -204,7 +204,7 @@ class Grafo {
 
 	obterMatrizDeAdjacencia() {
 		//criar uma lista de vértices.
-		let vertices = this.grafo.nodes().map( (node) => node.id() );
+		let vertices = this.grafo.nodes().map((node) => node.id());
 		//Cria a matriz.
 		const n = vertices.length;
 		let matriz = Array(n).fill(false).map(() => Array(n).fill(false));
@@ -216,7 +216,7 @@ class Grafo {
 			//Direcionado.
 			matriz[sourcePos][targetPos] = { edge: edge, source: edge.source(), target: edge.target(), sourcePosition: sourcePos, targetPosition: targetPos };
 			//Não Direcionado.
-			if(!this.direcionado) {
+			if (!this.direcionado) {
 				matriz[targetPos][sourcePos] = { edge: edge, source: edge.target(), target: edge.source(), sourcePosition: targetPos, targetPosition: sourcePos };
 			}
 		});
@@ -225,7 +225,7 @@ class Grafo {
 
 	obterListaDeAdjacencia() {
 		//criar uma lista de vértices.
-		let vertices = this.grafo.nodes().map( (node) => node.id() );
+		let vertices = this.grafo.nodes().map((node) => node.id());
 		//Cria a matriz.
 		const n = vertices.length;
 		let matriz = Array(n).fill(false).map(() => Array(0));
@@ -238,7 +238,7 @@ class Grafo {
 			matriz[sourcePos].push({ edge: edge, source: edge.source(), target: edge.target(), position: targetPos, sourcePosition: sourcePos, targetPosition: targetPos });
 			//matriz[sourcePos].sort();
 			//Não Direcionado.
-			if(!this.direcionado) {
+			if (!this.direcionado) {
 				matriz[targetPos].push({ edge: edge, source: edge.target(), target: edge.source(), position: sourcePos, sourcePosition: sourcePos, targetPosition: targetPos });
 				//matriz[targetPos].sort();
 			}
@@ -249,11 +249,11 @@ class Grafo {
 	obterMatrizDeAdjacenciaFormatada() {
 		let matriz = this.obterMatrizDeAdjacencia();
 		let res = '';
-		for(let y = 0; y < matriz.length; y++) {
-			if(y > 0) res += '\r\n';
+		for (let y = 0; y < matriz.length; y++) {
+			if (y > 0) res += '\r\n';
 
-			for(let x = 0; x < matriz[y].length; x++) {
-				if( x > 0) res += ', ';
+			for (let x = 0; x < matriz[y].length; x++) {
+				if (x > 0) res += ', ';
 				res += matriz[y][x] ? '1' : '0';
 			}
 		}
@@ -263,13 +263,13 @@ class Grafo {
 	obterListaDeAdjacenciaFormatada() {
 		let lista = this.obterListaDeAdjacencia();
 		let res = '';
-		for(let y = 0; y < lista.length; y++) {
-			if(y > 0) res += '\r\n';
+		for (let y = 0; y < lista.length; y++) {
+			if (y > 0) res += '\r\n';
 
 			res += y + ' ⟶ ';
 
-			for(let x = 0; x < lista[y].length; x++) {
-				if( x > 0) res += ' ⟶ ';
+			for (let x = 0; x < lista[y].length; x++) {
+				if (x > 0) res += ' ⟶ ';
 				res += lista[y][x].position;
 			}
 		}
@@ -305,7 +305,7 @@ class Dfs extends Grafo {
 	}
 
 	inserirNovoVertice(x, y) {
-        super.inserirNovoVertice({ data: {}, x: x, y: y})
+		super.inserirNovoVertice({ data: {}, x: x, y: y })
 	}
 
 	inserirNovaAresta(verticeId1, verticeId2, direcionado) {
@@ -318,18 +318,18 @@ class Dfs extends Grafo {
 
 	executar(verticeInicial, verticeFinal) {
 		//Matriz.
-		let matriz = this.obterMatrizDeAdjacencia();
+		const matriz = this.obterMatrizDeAdjacencia();
 		const n = matriz.length;
 		//Verificar os valores.
-		if(verticeInicial < 0 ||
+		if (verticeInicial < 0 ||
 			verticeInicial >= n ||
 			verticeFinal < 0 ||
 			verticeFinal >= n) {
-				return false;
+			return false;
 		}
 
-		let cor = Array(n).fill(0);
-		let caminho = [];
+		const cor = Array(n).fill(0);
+		const caminho = [];
 		let fim = false;
 
 		//Algoritmo DFS do notebook da maratona.
@@ -337,24 +337,24 @@ class Dfs extends Grafo {
 			cor[u] = 1; //grey.
 
 			//Não é o vértice raiz.
-			if(p >= 0) {
-				let m = matriz[p][u];
+			if (p >= 0) {
+				const m = matriz[p][u];
 				caminho.push(m);
 			}
 
 			//Vértice atual é o final.
 			fim = u == verticeFinal;
 
-			for(let v = 0; v < n; v++) {
+			for (let v = 0; v < n; v++) {
 				//novo vértice.
-				if(matriz[u][v] && v != p) {
+				if (matriz[u][v] && v != p) {
 					//forward edge.
-					if(cor[v] == 0) {
+					if (cor[v] == 0) {
 						dfs(v, u);
 					}
 				}
 				//back edge.
-				else if(cor[v] == 1) {
+				else if (cor[v] == 1) {
 					//nada.
 				}
 				//cross edge em grafos direcionados.
@@ -374,29 +374,106 @@ class Dfs extends Grafo {
 
 		console.log(caminho);
 
-		let stepper = new Stepper(caminho, 3, this.velocidadeDaAnimacao);
+		const stepper = new Stepper(caminho, 3, this.velocidadeDaAnimacao);
 		stepper.executar((m, i, k) => {
-			if(k == 0) {
+			if (k == 0) {
 				//Pinta o primeiro vértice com a cor verde.
-				if(m.sourcePosition == verticeInicial) {
+				if (m.sourcePosition == verticeInicial) {
 					m.source.addClass('start-node');
 				} else {
 					m.source.addClass('highlighted');
 				}
 			}
-			else if(k == 1) {
+			else if (k == 1) {
 				//Pinta a aresta.
 				m.edge.addClass('highlighted');
 			}
-			else if(k == 2) {
+			else if (k == 2) {
 				//Pinta o último vértice com a cor vermelha.
-				if(m.targetPosition == verticeFinal) {
+				if (m.targetPosition == verticeFinal) {
 					m.target.addClass('end-node');
 				} else {
 					m.target.addClass('highlighted');
 				}
 			}
 		});
+	}
+}
+
+// Busca em largura.
+class Bfs extends Grafo {
+
+	constructor(containerId) {
+		super(containerId);
+	}
+
+	onInserirNovoVertice(event) {
+		this.inserirNovoVertice(event.position.x, event.position.y);
+	}
+
+	onConectarDoisVertices(vertice1, vertice2) {
+		this.inserirNovaAresta(vertice1.id(), vertice2.id(), this.direcionado);
+	}
+
+	onRemoverVertice(vertice) {
+		this.removerVerticeOuAresta(vertice);
+	}
+
+	onRemoverAresta(aresta) {
+		this.removerVerticeOuAresta(aresta);
+	}
+
+	inserirNovoVertice(x, y) {
+		super.inserirNovoVertice({ data: {}, x: x, y: y })
+	}
+
+	inserirNovaAresta(verticeId1, verticeId2, direcionado) {
+		super.inserirNovaAresta({ data: { direcionado: direcionado, source: verticeId1, target: verticeId2 } })
+	}
+
+	removerVerticeOuAresta(verticeOuAresta) {
+		super.removerVerticeOuAresta(verticeOuAresta);
+	}
+
+	executar(verticeInicial, verticeFinal) {
+		//Matriz.
+		const matriz = this.obterMatrizDeAdjacencia();
+		const n = matriz.length;
+		//Verificar os valores.
+		if (verticeInicial < 0 ||
+			verticeInicial >= n ||
+			verticeFinal < 0 ||
+			verticeFinal >= n) {
+			return false;
+		}
+
+		const dist = Array(n).fill(false);
+		const q = [];
+		let fim = false;
+
+		//Algoritmo BFS do notebook da maratona.
+		function bfs(s) {
+			dist[s] = 0;
+			q.push(s);
+
+			while (q.length) {
+				const u = q.shift();
+				for (let v = 0; v < n; v++) {
+					if (dist[v] === false && matriz[u][v]) {
+						dist[v] = dist[u] + 1;
+						q.push(v);
+					}
+				}
+			}
+		}
+
+		//Limpa os estilos.
+		this.limparEstiloDoGrafo();
+
+		//Executa o BFS.
+		bfs(verticeInicial);
+
+		console.log(dist);
 	}
 }
 
@@ -412,10 +489,10 @@ class Stepper {
 		let etapa = 0;
 		let subetapa = 0;
 		let percorrerEtapas = () => {
-			if(etapa < this.etapas.length) {
+			if (etapa < this.etapas.length) {
 				action(this.etapas[etapa], etapa, subetapa);
 				subetapa++;
-				if((subetapa % this.quantidadeDeSubEtapas) == 0) {
+				if ((subetapa % this.quantidadeDeSubEtapas) == 0) {
 					subetapa = 0;
 					etapa++;
 				}
