@@ -14,7 +14,9 @@ class Grafo {
 					selector: ":selected",
 					style: {
 						'background-color': '#4426bb',
-						'line-color': '#4426bb'
+						'line-color': '#4426bb',
+						'target-arrow-color': '#4426bb',
+						'target-arrow-shape': function (ele) { return ele.data('direcionado') ? 'triangle' : 'none' },					
 					}
 				},
 				{

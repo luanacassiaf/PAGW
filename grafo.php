@@ -11,7 +11,7 @@
 				</label>
 				<!-- Switch Button -->
 				<small class="text">DIRECIONADO: </small>
-				<label class="switchbox">
+				<label id="switchbox-direcao" class="switchbox">
 					<input type="checkbox" onclick="grafo.aplicarDirecaoDasArestas(this.checked);">
 					<span class="slider round"></span>
 				</label>
@@ -35,3 +35,7 @@
 
 	</div>
 </div>
+
+<script>
+grafo.aplicarDirecaoDasArestas($("#switchbox-direcao > input").val());
+</script>
