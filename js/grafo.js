@@ -361,21 +361,23 @@ class Dfs extends Grafo {
 			//Vértice atual é o final.
 			fim = u == verticeFinal;
 
-			for (let v = 0; v < n; v++) {
-				//novo vértice.
-				if (matriz[u][v] && v != p) {
-					//forward edge.
-					if (cor[v] == 0) {
-						dfs(v, u);
+			if(!fim) {
+				for (let v = 0; v < n && !fim; v++) {
+					//novo vértice.
+					if (matriz[u][v] && v != p) {
+						//forward edge.
+						if (cor[v] == 0) {
+							dfs(v, u);
+						}
 					}
-				}
-				//back edge.
-				else if (cor[v] == 1) {
-					//nada.
-				}
-				//cross edge em grafos direcionados.
-				else {
-					//nada.
+					//back edge.
+					else if (cor[v] == 1) {
+						//nada.
+					}
+					//cross edge em grafos direcionados.
+					else {
+						//nada.
+					}
 				}
 			}
 
