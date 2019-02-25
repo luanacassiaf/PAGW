@@ -13,6 +13,12 @@ function isActive($alg) {
 if($algoritmo === "dfs") {
     $titulo = "Busca em Profundidade (DFS, Deep-First Search)";
     $descricao = "Na teoria dos grafos, busca em profundidade é um algoritmo usado para realizar uma busca ou travessia numa árvore, estrutura de árvore ou grafo. Intuitivamente, o algoritmo começa num nó raiz (selecionando algum nó como sendo o raiz, no caso de um grafo) e explora tanto quanto possível cada um dos seus ramos, antes de retroceder(backtracking).";
+} else if($algoritmo === "bfs") {
+	$titulo = "Busca em Largura (BFS, Breadth-First Search)";
+	$descricao = "É um algoritmo de busca em grafos utilizado para realizar uma busca ou travessia num grafo e estrutura de dados do tipo árvore. Intuitivamente, você começa pelo vértice raiz e explora todos os vértices vizinhos. Então, para cada um desses vértices mais próximos, exploramos os seus vértices vizinhos inexplorados e assim por diante, até que ele encontre o alvo da busca.";
+} else if($algoritmo === "dijkstra") {
+	$titulo = "Dijkstra";
+	$descricao = "O algoritmo de Dijkstra soluciona o problema do caminho mais curto num grafo dirigido ou não dirigido com arestas de peso não negativo, em tempo computacional O([m+n]log n) onde m é o número de arestas e n é o número de vértices.";
 } else {
     $exibir = true;
 }
