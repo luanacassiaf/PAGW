@@ -96,7 +96,7 @@ header.shadow {
 }
 
 .actionbar .actionbar-item[actionbar-group] {
-	color: #333;
+	color: #110909;
 }
 
 .actionbar .actionbar-item[actionbar-group].active {
@@ -244,7 +244,7 @@ header.shadow {
 
 .grafo-panel {
 	width: 100%;
-	height: calc(100% - 150px);
+	height: calc(100vh - 150px);
 	border: 1px solid var(--colorPrimary);
 	border-radius: 5px;
 }
