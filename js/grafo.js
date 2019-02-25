@@ -392,8 +392,6 @@ class Dfs extends Grafo {
 		//Executa o DFS.
 		dfs(verticeInicial, -1);
 
-		console.log(caminho);
-
 		const stepper = new Stepper(caminho, 3, this.velocidadeDaAnimacao);
 		stepper.executar((m, i, k) => {
 			if (k == 0) {
@@ -469,6 +467,7 @@ class Bfs extends Grafo {
 
 		const dist = Array(n).fill(false);
 		const q = [];
+		const caminho = [];
 		let fim = false;
 
 		//Algoritmo BFS do notebook da maratona.
@@ -478,12 +477,22 @@ class Bfs extends Grafo {
 
 			while (q.length) {
 				const u = q.shift();
-				for (let v = 0; v < n; v++) {
-					if (dist[v] === false && matriz[u][v]) {
+
+				let fim = false;
+
+				for (let v = 0; v < n && !fim; v++) {
+					const m = matriz[u][v];
+					if (dist[v] === false && m) {
 						dist[v] = dist[u] + 1;
 						q.push(v);
+						// Adiciona a aresta ao caminho.
+						caminho.push(m);
+						// Encontrou o vértice final.
+						fim = v == verticeFinal;
 					}
 				}
+
+				if (fim) break;
 			}
 		}
 
@@ -492,8 +501,31 @@ class Bfs extends Grafo {
 
 		//Executa o BFS.
 		bfs(verticeInicial);
+		console.log(caminho);
 
-		console.log(dist);
+		const stepper = new Stepper(caminho, 3, this.velocidadeDaAnimacao);
+		stepper.executar((m, i, k) => {
+			if (k == 0) {
+				//Pinta o primeiro vértice com a cor verde.
+				if (m.sourcePosition == verticeInicial) {
+					m.source.addClass('start-node');
+				} else {
+					m.source.addClass('highlighted');
+				}
+			}
+			else if (k == 1) {
+				//Pinta a aresta.
+				m.edge.addClass('highlighted');
+			}
+			else if (k == 2) {
+				//Pinta o último vértice com a cor vermelha.
+				if (m.targetPosition == verticeFinal) {
+					m.target.addClass('end-node');
+				} else {
+					m.target.addClass('highlighted');
+				}
+			}
+		});
 	}
 }
 
