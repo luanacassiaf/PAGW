@@ -541,7 +541,7 @@ class Dijkstra extends Grafo {
 				onClickFunction: function (event) {
 					const target = event.target || event.cyTarget;
 					const peso = parseInt(prompt("Insira o peso da aresta", target.data("peso")));
-					if (peso) {
+					if (peso && peso >= 0) {
 						target.data("peso", peso);
 					}
 				},
