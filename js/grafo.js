@@ -16,7 +16,7 @@ class Grafo {
 						'background-color': '#4426bb',
 						'line-color': '#4426bb',
 						'target-arrow-color': '#4426bb',
-						'target-arrow-shape': function (ele) { return ele.data('direcionado') ? 'triangle' : 'none' },					
+						'target-arrow-shape': function (ele) { return ele.data('direcionado') ? 'triangle' : 'none' },
 					}
 				},
 				{
@@ -363,7 +363,7 @@ class Dfs extends Grafo {
 			//Vértice atual é o final.
 			fim = u == verticeFinal;
 
-			if(!fim) {
+			if (!fim) {
 				for (let v = 0; v < n && !fim; v++) {
 					//novo vértice.
 					if (matriz[u][v] && v != p) {
@@ -530,6 +530,20 @@ class Dijkstra extends Grafo {
 
 	removerVerticeOuAresta(verticeOuAresta) {
 		super.removerVerticeOuAresta(verticeOuAresta);
+	}
+
+	incrementarPesoDasArestasSelecionadas() {
+		this.grafo.elements('edge:selected').forEach(function (edge) {
+			const peso = edge.data("peso") || 0;
+			edge.data("peso", peso + 1);
+		});
+	}
+
+	decrementarPesoDasArestasSelecionadas() {
+		this.grafo.elements('edge:selected').forEach(function (edge) {
+			const peso = edge.data("peso") || 0;
+			if (peso > 0) edge.data("peso", peso - 1);
+		});
 	}
 
 	obtainContextMenuItems() {

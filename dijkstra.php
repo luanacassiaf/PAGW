@@ -1,5 +1,6 @@
 <div>
-	<h6>1 - Escolha o vértice inicial e final e clique em executar!</h6>
+	<h6>1 - Defina o peso de cada aresta. Clique com o botão direito na aresta selecionada e em seguida clique em "Alterar o peso da aresta" ou pressione as teclas "+" e "-".</h6>
+	<h6>2 - Escolha o vértice inicial e final e clique em executar!</h6>
 </div>
 
 <div class="ml-1 d-flex justify-content-center align-items-center">
@@ -23,7 +24,7 @@
 </div>
 
 <script>
-var grafo = new Dijkstra('grafo');
+var grafo = new Dijkstra("grafo");
 
 function executarAlgoritmoDijkstra() {
 	let verticeInicial = $("#input-vertice-inicial").val();
@@ -31,4 +32,13 @@ function executarAlgoritmoDijkstra() {
 	//Executa o algoritmo.
 	grafo.executar(parseInt(verticeInicial), parseInt(verticeFinal));
 }
+
+document.addEventListener("keydown", (event) => {
+	const keyName = event.key;
+	if(keyName == "=" || keyName == "+") { // +
+		grafo.incrementarPesoDasArestasSelecionadas();
+	} else if(keyName == "-") {
+		grafo.decrementarPesoDasArestasSelecionadas();
+	}
+});
 </script>
