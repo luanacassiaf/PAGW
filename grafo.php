@@ -37,5 +37,6 @@
 </div>
 
 <script>
-grafo.aplicarDirecaoDasArestas($("#switchbox-direcao > input").val());
+// Define o valor inicial da direção ao carregar a página.
+grafo.aplicarDirecaoDasArestas($("#switchbox-direcao > input").is(":checked"));
 </script>
