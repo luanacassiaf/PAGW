@@ -611,11 +611,10 @@ class Dijkstra extends Grafo {
 		const dist = Array(n).fill(0xFFFFFFFF);
 		const visitado = Array(n).fill(false);
 		const caminho = [];
+		const antecessor = Array(n).fill(false);
 
 		function dijkstra(s, t) {
 			dist[s] = 0;
-
-			let noAnterior = false;
 
 			while (true) {
 				let no = false; // vértice com o caminho mais curto.
@@ -627,36 +626,37 @@ class Dijkstra extends Grafo {
 
 				if (no === false) break;
 
-				if (noAnterior !== false) {
-					caminho.push(matriz[noAnterior][no]);
-				}
-
-				noAnterior = no;
-
-				visitado[no] = true;
+				visitado[no] = true; // Elimina o nó.
 
 				for (let i = 0; i < n; i++) {
-					const aresta = matriz[no][i];
-					if (aresta) {
-						const peso = aresta.edge.data("peso");
+					const m = matriz[no][i];
+					if (m) {
+						const peso = m.edge.data("peso") || 0;
 						if ((dist[no] + peso) < dist[i]) {
 							dist[i] = dist[no] + peso;
+							antecessor[i] = no;
 						}
 					}
 				}
 
-				if (no === verticeFinal) {
-					break;
-				}
+				if (no === verticeFinal) break;
 			}
 
 			console.log(`distancia de ${s} até ${t}: ${dist[t]}`);
+		}
+
+		function percorrerAntecessores(v) {
+			if (antecessor[v] === false) return;
+			percorrerAntecessores(antecessor[v]);
+			const m = matriz[antecessor[v]][v];
+			caminho.push(m);
 		}
 
 		//Limpa os estilos.
 		this.limparEstiloDoGrafo();
 
 		dijkstra(verticeInicial, verticeFinal);
+		percorrerAntecessores(verticeFinal);
 
 		const stepper = new Stepper(caminho, 3, this.velocidadeDaAnimacao);
 		stepper.executar((m, i, k) => {
