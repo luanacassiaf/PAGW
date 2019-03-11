@@ -1,6 +1,6 @@
 class Grafo {
 
-	constructor(containerId) {
+	constructor(containerId, loadFromLocalStorage = true) {
 		this.containerId = containerId;
 		this.uid = Date.now();
 		this.modo = 0;
@@ -108,6 +108,14 @@ class Grafo {
 		this.grafo.contextMenus({
 			menuItems: this.obtainContextMenuItems()
 		});
+
+		if (loadFromLocalStorage && localStorage.grafo) {
+			this.fromJson(JSON.parse(localStorage.grafo));
+		}
+	}
+
+	salvarGrafoTemporariamente() {
+		localStorage.grafo = this.toJson();
 	}
 
 	onTap(event, target, isNode, isEdge) {
@@ -167,6 +175,7 @@ class Grafo {
 	limpar() {
 		this.grafo.edges().remove();
 		this.grafo.nodes().remove();
+		this.salvarGrafoTemporariamente();
 	}
 
 	tamanho() {
@@ -195,6 +204,9 @@ class Grafo {
 		});
 		//Gera um novo id.
 		this.uid++;
+		this.salvarGrafoTemporariamente();
+		this.grafo.nodes().removeListener("position");
+		this.grafo.nodes().on("dragfreeon", this.salvarGrafoTemporariamente);
 	}
 
 	inserirNovaAresta(data) {
@@ -207,10 +219,12 @@ class Grafo {
 		});
 		//Gerar um novo id.
 		this.uid++;
+		this.salvarGrafoTemporariamente();
 	}
 
 	removerVerticeOuAresta(verticeOuAresta) {
 		this.grafo.remove(verticeOuAresta);
+		this.salvarGrafoTemporariamente();
 	}
 
 	atualizarRotuloDeTodosOsVertices() {
@@ -227,6 +241,7 @@ class Grafo {
 	aplicarDirecaoDasArestas(direcionado) {
 		this.direcionado = direcionado;
 		this.grafo.edges().data('direcionado', direcionado);
+		this.salvarGrafoTemporariamente();
 	}
 
 	obterMatrizDeAdjacencia() {
