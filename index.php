@@ -88,7 +88,7 @@ if($algoritmo === "dfs") {
 
 						<span balloon="Abrir de um arquivo" balloon-pos="down" onclick="importarJsonComoGrafo(true)"><i class="actionbar-item mdi-folder-open ripple ripple-circle"></i></span>
 						<span balloon="Salvar para um arquivo" balloon-pos="down" onclick="salvarGrafoComoJson()"><i class="actionbar-item mdi-content-save ripple ripple-circle"></i></span>
-						<span balloon="Exportar como..." balloon-pos="down" data-toggle="modal" data-target="#exportarModal" onclick="exibirExportarModal()"><i class="actionbar-item mdi-matrix ripple ripple-circle"></i></span>
+						<span balloon="Exportar como Matriz ou Lista de Adjacência" balloon-pos="down" data-toggle="modal" data-target="#exportarModal" onclick="exibirExportarModal()"><i class="actionbar-item mdi-matrix ripple ripple-circle"></i></span>
 
 						<input type="file" id="file-input-json" accept="application/json" style="display: none" onchange="importarJsonComoGrafo(false)">
 
@@ -137,7 +137,7 @@ if($algoritmo === "dfs") {
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title">Exportar Como</h5>
+						<h5 class="modal-title">Matriz ou Lista de Adjacência</h5>
 						<button type="button" class="close" data-dismiss="modal">
 							<span aria-hidden="true">&times;</span>
 						</button>
