@@ -250,5 +250,12 @@ if($algoritmo === "dfs") {
 				$(this).addClass("active");
 			});
 		});
+
+		$("input[type=number][limit-to-graph-size]").on("change", function(e) {
+			let length = grafo.tamanho();
+			if($(this).val() >= length) {
+				$(this).val(Math.max(0, length - 1));
+			}
+		});
 	</script>
 </html>

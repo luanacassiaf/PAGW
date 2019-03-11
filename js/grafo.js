@@ -169,6 +169,10 @@ class Grafo {
 		this.grafo.nodes().remove();
 	}
 
+	tamanho() {
+		return this.grafo.nodes().size();
+	}
+
 	limparEstiloDoGrafo() {
 		this.grafo.edges().removeClass('highlighted');
 		this.grafo.nodes().removeClass('start-node');

@@ -7,14 +7,14 @@
         <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">Início</span>
         </div>
-        <input id="input-vertice-inicial" type="number" class="form-control" min="0" value="0"/>
+        <input limit-to-graph-size id="input-vertice-inicial" type="number" class="form-control" min="0" value="0"/>
 	</div>
 
     <div class="input-group ml-1 mr-1" style="width: 120px;">
         <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">Fim</span>
         </div>
-        <input id="input-vertice-final" type="number" class="form-control" min="-1" value="1"/>
+        <input limit-to-graph-size id="input-vertice-final" type="number" class="form-control" min="0" value="0"/>
 	</div>
 
     <div class="btn-group">
