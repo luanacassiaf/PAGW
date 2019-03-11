@@ -22,13 +22,13 @@ class Grafo {
 				{
 					selector: "node",
 					style: {
-						label: function (ele) { return ele.data('label') }
+						label: function (ele) { return ele.data('label') || "" }
 					}
 				},
 				{
 					selector: "edge",
 					style: {
-						label: function (ele) { return ele.data('peso') },
+						label: function (ele) { return ele.data('peso') || "" },
 						"edge-text-rotation": "autorotate",
 						'curve-style': 'bezier',
 						'target-arrow-shape': function (ele) { return ele.data('direcionado') ? 'triangle' : 'none' },
