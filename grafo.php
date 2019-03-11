@@ -26,7 +26,7 @@
 			<div class="card-panel">
 				<h2 class="title"><?= $titulo ?></h2>
 				<p id="description" class="collapse description"><?= $descricao ?></p>
-				<a data-toggle="collapse" href="#description" role="button" class="badge badge-light">DESCRIÇÃO...</a>
+				<a data-toggle="collapse" href="#description" role="button" style="color: #FFF; font-size: 10pt; text-decoration: none;">DESCRIÇÃO...</a>
 			</div>
 			<div class="algoritmo-panel mt-2">
 				<?php include_once "./$algoritmo.php"; ?>
