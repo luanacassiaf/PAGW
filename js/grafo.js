@@ -164,6 +164,11 @@ class Grafo {
 		this.velocidadeDaAnimacao = 1 + (1000 * velocidade / 100);
 	}
 
+	limpar() {
+		this.grafo.edges().remove();
+		this.grafo.nodes().remove();
+	}
+
 	limparEstiloDoGrafo() {
 		this.grafo.edges().removeClass('highlighted');
 		this.grafo.nodes().removeClass('start-node');

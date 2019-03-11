@@ -84,6 +84,7 @@ if($algoritmo === "dfs") {
 						<span balloon="Clique em um espaço vazio para adicionar um vértice" balloon-pos="down" onclick="grafo.habilitarModoInserir();"><i actionbar-group="grafo" class="actionbar-item mdi-plus ripple ripple-circle"></i></span>
 						<span balloon="Selecione dois vértices para criar uma aresta" balloon-pos="down" onclick="grafo.habilitarModoConectar();"><i actionbar-group="grafo" class="actionbar-item mdi-power-plug ripple ripple-circle"></i></span>
 						<span balloon="Clique sobre um vértice ou aresta para removê-los" balloon-pos="down" onclick="grafo.habilitarModoRemover();"><i actionbar-group="grafo" class="actionbar-item mdi-delete ripple ripple-circle"></i></span>
+						<span balloon="Limpar" balloon-pos="down" onclick="limparGrafo()"><i class="actionbar-item mdi-broom ripple ripple-circle"></i></span>
 
 						<span balloon="Abrir de um arquivo" balloon-pos="down" onclick="importarJsonComoGrafo(true)"><i class="actionbar-item mdi-folder-open ripple ripple-circle"></i></span>
 						<span balloon="Salvar para um arquivo" balloon-pos="down" onclick="salvarGrafoComoJson()"><i class="actionbar-item mdi-content-save ripple ripple-circle"></i></span>
@@ -187,6 +188,10 @@ if($algoritmo === "dfs") {
 		function exibirOuOcultarMenuLateral() {
 			let elm = $("#sidebar1");
 			elm.hasClass("reveal") && elm.removeClass("reveal") || elm.addClass("reveal");
+		}
+
+		function limparGrafo() {
+			grafo.limpar();
 		}
 
 		function exibirExportarModal() {
