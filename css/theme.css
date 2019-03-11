@@ -235,13 +235,6 @@ header.shadow {
 	font-size: small;
 }
 
-.card-panel .fas.fa-times {
-	color: #fff;
-	position: absolute;
-	right: 15px;
-	top: 15px;
-}
-
 .grafo-panel {
 	width: 100%;
 	height: calc(100vh - 150px);
@@ -362,4 +355,8 @@ header.shadow {
 .badge-img {
 	min-height: 20px;
     vertical-align: middle;
+}
+
+[class^="mdi-"], [class*=" mdi-"] {
+	font-size: 1.4rem;
 }

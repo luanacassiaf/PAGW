@@ -26,7 +26,6 @@
 			<div class="card-panel">
 				<h2 class="title"><?= $titulo ?></h2>
 				<p class="description"><?= $descricao ?></p>
-				<!-- <i class="fas fa-times"></i> -->
 			</div>
 			<div class="algoritmo-panel mt-2">
 				<?php include_once "./$algoritmo.php"; ?>

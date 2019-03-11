@@ -29,7 +29,7 @@ if($algoritmo === "dfs") {
 		<link rel="shortcut icon" type="image/png" href="img/favicon.png"/>
         <!-- CSS -->
         <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+        <link rel="stylesheet" href="css/mdi.css">
         <link rel="stylesheet" href="css/balloon.css">
         <link rel="stylesheet" href="css/cytoscape-context-menus.css">
         <link rel="stylesheet" href="css/theme.css">
@@ -66,7 +66,7 @@ if($algoritmo === "dfs") {
                 <nav class="navbar">
 					<!-- Botão do Menu Lateral -->
 					<div class="col-md-1 col-sm-1 col-2">
-						<i class="fas fa-bars btn-collapse ripple ripple-circle" onclick="exibirOuOcultarMenuLateral()"></i>
+						<i class="mdi-menu btn-collapse ripple ripple-circle" onclick="exibirOuOcultarMenuLateral()"></i>
 					</div>
                     <!-- Logo e Título -->
                     <div class="col-md-5 col-sm-11 col-10">
@@ -80,20 +80,20 @@ if($algoritmo === "dfs") {
 					</div>
 					<!-- Barra de Ações -->
 					<div class="col-md-6 actionbar">
-						<span balloon="Selecionar" balloon-pos="down" onclick="grafo.habilitarModoSelecionar();"><i actionbar-group="grafo" class="actionbar-item fas fa-mouse-pointer ripple ripple-circle active"></i></span>
-						<span balloon="Clique em um espaço vazio para adicionar um vértice" balloon-pos="down" onclick="grafo.habilitarModoInserir();"><i actionbar-group="grafo" class="actionbar-item fas fa-plus ripple ripple-circle"></i></span>
-						<span balloon="Selecione dois vértices para criar uma aresta" balloon-pos="down" onclick="grafo.habilitarModoConectar();"><i actionbar-group="grafo" class="actionbar-item fas fa-plug ripple ripple-circle"></i></span>
-						<span balloon="Clique sobre um vértice ou aresta para removê-los" balloon-pos="down" onclick="grafo.habilitarModoRemover();"><i actionbar-group="grafo" class="actionbar-item fas fa-trash ripple ripple-circle"></i></span>
+						<span balloon="Selecionar" balloon-pos="down" onclick="grafo.habilitarModoSelecionar();"><i actionbar-group="grafo" class="actionbar-item mdi-cursor-default ripple ripple-circle active"></i></span>
+						<span balloon="Clique em um espaço vazio para adicionar um vértice" balloon-pos="down" onclick="grafo.habilitarModoInserir();"><i actionbar-group="grafo" class="actionbar-item mdi-plus ripple ripple-circle"></i></span>
+						<span balloon="Selecione dois vértices para criar uma aresta" balloon-pos="down" onclick="grafo.habilitarModoConectar();"><i actionbar-group="grafo" class="actionbar-item mdi-power-plug ripple ripple-circle"></i></span>
+						<span balloon="Clique sobre um vértice ou aresta para removê-los" balloon-pos="down" onclick="grafo.habilitarModoRemover();"><i actionbar-group="grafo" class="actionbar-item mdi-delete ripple ripple-circle"></i></span>
 
-						<span balloon="Abrir de um arquivo" balloon-pos="down" onclick="importarJsonComoGrafo(true)"><i class="actionbar-item fas fa-folder ripple ripple-circle"></i></span>
-						<span balloon="Salvar para um arquivo" balloon-pos="down" onclick="salvarGrafoComoJson()"><i class="actionbar-item fas fa-save ripple ripple-circle"></i></span>
-						<span balloon="Exportar como..." balloon-pos="down" data-toggle="modal" data-target="#exportarModal" onclick="exibirExportarModal()"><i class="actionbar-item fas fa-download ripple ripple-circle"></i></span>
+						<span balloon="Abrir de um arquivo" balloon-pos="down" onclick="importarJsonComoGrafo(true)"><i class="actionbar-item mdi-folder-open ripple ripple-circle"></i></span>
+						<span balloon="Salvar para um arquivo" balloon-pos="down" onclick="salvarGrafoComoJson()"><i class="actionbar-item mdi-content-save ripple ripple-circle"></i></span>
+						<span balloon="Exportar como..." balloon-pos="down" data-toggle="modal" data-target="#exportarModal" onclick="exibirExportarModal()"><i class="actionbar-item mdi-matrix ripple ripple-circle"></i></span>
 
 						<input type="file" id="file-input-json" accept="application/json" style="display: none" onchange="importarJsonComoGrafo(false)">
 
 						<span>
 							<div class="dropdown">
-								<i class="actionbar-item fas fa-ellipsis-v ripple ripple-circle active" data-toggle="dropdown"></i>
+								<i class="actionbar-item mdi-dots-vertical ripple ripple-circle active" data-toggle="dropdown"></i>
 								<div class="dropdown-menu dropdown-menu-right">
 									<a class="dropdown-item" onclick="exportarComoImagem('png')">Exportar Como PNG</a>
 									<a class="dropdown-item" onclick="exportarComoImagem('jpg')">Exportar Como JPG</a>
