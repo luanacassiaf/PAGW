@@ -19,7 +19,7 @@
 	</div>
 
     <div class="btn-group">
-        <button id="btn-executar" class="btn btn-success" type="button" onclick="executarAlgoritmoDijkstra()"><i class="fa fa-play"></i> Executar</button>
+        <button id="btn-executar" class="btn btn-success" type="button" onclick="executarAlgoritmoDijkstra()"><i class="mdi-play"></i> Executar</button>
     </div>
 </div>
 

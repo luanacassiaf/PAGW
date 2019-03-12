@@ -20,6 +20,11 @@ body {
     pointer-events: none;
 }
 
+.btn {
+    display: flex;
+    align-items: center;
+}
+
 /* Ripple Effect */
 
 .ripple {
