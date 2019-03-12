@@ -593,6 +593,7 @@ class Dijkstra extends Grafo {
 			const peso = edge.data("peso") || 0;
 			edge.data("peso", peso + 1);
 		});
+		this.salvarGrafoTemporariamente();
 	}
 
 	decrementarPesoDasArestasSelecionadas() {
@@ -600,6 +601,7 @@ class Dijkstra extends Grafo {
 			const peso = edge.data("peso") || 0;
 			if (peso > 0) edge.data("peso", peso - 1);
 		});
+		this.salvarGrafoTemporariamente();
 	}
 
 	obtainContextMenuItems() {
@@ -608,11 +610,12 @@ class Dijkstra extends Grafo {
 				id: 'alterar-peso',
 				content: 'Alterar o peso da aresta',
 				selector: 'edge',
-				onClickFunction: function (event) {
+				onClickFunction: (event) => {
 					const target = event.target || event.cyTarget;
 					const peso = parseInt(prompt("Insira o peso da aresta", target.data("peso")));
 					if (peso && peso >= 0) {
 						target.data("peso", peso);
+						this.salvarGrafoTemporariamente();
 					}
 				},
 				hasTrailingDivider: false
