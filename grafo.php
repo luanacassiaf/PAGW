@@ -32,9 +32,12 @@
 				<?php include_once "./$algoritmo.php"; ?>
 
 				<div id="codeeditor-box">
-					<h6></h6>
+					<h6>IDE</h6>
 					<div id="codeeditor">
-
+						<button id="compilar-button" class="btn btn-primary" onclick="compilarCodigoDoEditor()"><i class="mdi-play"></i> COMPILAR</button>
+					</div>
+					<div id="outputOrError" class="alert alert-success" style="height: 70px; margin-top: 5px; overflow: auto; font-size: 12px">
+						
 					</div>
 				</div>
 			</div>
@@ -60,8 +63,46 @@ const editor = CodeMirror(document.getElementById("codeeditor"), {
 	mode:  "clike",
 	lineNumbers: true,
 	theme: "pastel-on-dark",
-	indentWithTabs: true
+	indentWithTabs: true,
+	lineWrapping: true,
+	scrollbarStyle: null
 });
 
+// Salvar código do editor automaticamente a cada 5s.
+setInterval(() => localStorage.codeEditorValue = editor.getValue(), 5000);
+
+function compilarCodigoDoEditor() {
+	compilar(editor.getValue(), "");
+}
+
+async function compilar(code, input) {
+	try {
+		$("#compilar-button").prop("disabled", true);
+
+		const response = await axios({
+			method: 'post',
+			url: 'api.php?m=compiler',
+			data: {
+				"input": input,
+				"code": code
+			}
+		});
+		const status = response.status;
+		const data = response.data;
+		
+		$("#outputOrError").removeClass("alert-success");
+		$("#outputOrError").removeClass("alert-danger");
+		
+		if(data.error) {
+			$("#outputOrError").addClass("alert-danger");
+			$("#outputOrError").html(data.error.replace("\n", "<br/>"));
+		} else {
+			$("#outputOrError").addClass("alert-success");
+			$("#outputOrError").html(data.output.replace("\n", "<br/>"));
+		}
+	} finally {
+		$("#compilar-button").prop("disabled", false);
+	}
+}
 
 </script>

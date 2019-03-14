@@ -21,7 +21,7 @@ body {
 }
 
 .btn {
-    display: flex;
+    display: inline-flex;
     align-items: center;
 }
 
@@ -367,7 +367,19 @@ header.shadow {
 }
 
 .CodeMirror {
-    height: calc(100vh - 307px);
+    height: calc(100vh - 400px);
     margin-top: 10px;
     border-radius: 5px;
+}
+
+#codeeditor {
+    position: relative;
+}
+
+#compilar-button {
+    position: absolute;
+    z-index: 5;
+    right: 3px;
+    top: 2px;
+    cursor: pointer;
 }

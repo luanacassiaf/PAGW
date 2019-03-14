@@ -38,6 +38,7 @@ if($algoritmo === "dfs") {
         <link rel="stylesheet" href="css/theme.css">
         <!-- JS -->
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
     	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.5.0/cytoscape.min.js"></script>
     	<script type="text/javascript" src="js/cytoscape-context-menus.js"></script>
