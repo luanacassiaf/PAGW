@@ -365,3 +365,9 @@ header.shadow {
 [class^="mdi-"], [class*=" mdi-"] {
 	font-size: 1.4rem;
 }
+
+.CodeMirror {
+    height: calc(100vh - 307px);
+    margin-top: 10px;
+    border-radius: 5px;
+}

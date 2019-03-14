@@ -30,6 +30,13 @@
 			</div>
 			<div class="algoritmo-panel mt-2">
 				<?php include_once "./$algoritmo.php"; ?>
+
+				<div id="codeeditor-box">
+					<h6></h6>
+					<div id="codeeditor">
+
+					</div>
+				</div>
 			</div>
 		</div>
 
@@ -39,4 +46,22 @@
 <script>
 // Define o valor inicial da direção ao carregar a página.
 grafo.aplicarDirecaoDasArestas($("#switchbox-direcao > input").is(":checked"));
+
+const defaultCPlusPlusCode = `#include <iostream>
+
+int main() 
+{
+    std::cout << "Hello, World!";
+    return 0;
+}`;
+
+const editor = CodeMirror(document.getElementById("codeeditor"), {
+	value: localStorage.codeEditorValue || defaultCPlusPlusCode,
+	mode:  "clike",
+	lineNumbers: true,
+	theme: "pastel-on-dark",
+	indentWithTabs: true
+});
+
+
 </script>
