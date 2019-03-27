@@ -7,6 +7,7 @@ class Grafo {
 		this.velocidadeDaAnimacao = 500;
 		this.direcionado = false;
 		this.verticesSelecionadosParaConectar = [];
+		this.interceptadoresDeAcao = [];
 		this.grafo = cytoscape({
 			container: document.getElementById(containerId),
 			style: [
@@ -111,6 +112,28 @@ class Grafo {
 
 		if (loadFromLocalStorage && localStorage.grafo) {
 			this.fromJson(JSON.parse(localStorage.grafo));
+		}
+	}
+
+	adicionarInteceptadorDeAcao(action) {
+		this.interceptadoresDeAcao.push(action);
+	}
+
+	executarAcao(action) {
+		if(action === "selecionar") {
+			this.habilitarModoSelecionar();
+		} else if(action === "adicionar") {
+			this.habilitarModoInserir();
+		} else if(action === "conectar") {
+			this.habilitarModoConectar();
+		} else if(action === "remover") {
+			this.habilitarModoRemover();
+		} else if(action === "limpar") {
+			this.limpar();
+		}
+
+		for(const actionHandler of this.interceptadoresDeAcao) {
+			actionHandler(action);
 		}
 	}
 
@@ -745,6 +768,7 @@ class Cavalo {
 		this.fim = false;
 		this.inicio = false;
 		this.modo = 0; // 0 = proibido, 1 = inicio, 2 = fim.
+		this.interceptadoresDeAcao = [];
 
 		try {
 			if (loadFromLocalStorage && localStorage.cavalo) {
@@ -755,6 +779,26 @@ class Cavalo {
 		}
 
 		this.gerarTabuleiro();
+	}
+
+	adicionarInteceptadorDeAcao(action) {
+		this.interceptadoresDeAcao.push(action);
+	}
+
+	executarAcao(action) {
+		if(action === "definir-inicio") {
+			this.definirModo(1);
+		} else if(action === "definir-fim") {
+			this.definirModo(2);
+		} else if(action === "definir-proibido") {
+			this.definirModo(0);
+		} else if(action === "limpar") {
+			this.limpar();
+		}
+
+		for(const actionHandler of this.interceptadoresDeAcao) {
+			actionHandler(action);
+		}
 	}
 
 	definirModo(modo) {
@@ -890,11 +934,11 @@ class Cavalo {
 			// Posição inicial do cavalo.
 			q.push({ x: inicio.x, y: inicio.y });
 			// Matriz de posições e distancias visitadas.
-			const visitado = Array(8).fill(Array(8).fill(false));
-			const dist = Array(8).fill(Array(8).fill(0));
+			const visitado = Array(8).fill(false).map(x => Array(8).fill(false));
+			const dist = Array(8).fill(0).map(x => Array(8).fill(0));
 			visitado[inicio.y][inicio.x] = true;
-			const antecessores = Array(8).fill(Array(8).fill(false));
-			const antecessores2 = Array(8).fill(Array(8).fill(false));
+			const antecessores = Array(8).fill(false).map(x => Array(8).fill(false));
+			const antecessores2 = Array(8).fill(false).map(x => Array(8).fill(false));
 
 			function posicaoValida(x, y) {
 				return x >= 0 && x < 8 && y >= 0 && y < 8;
@@ -950,10 +994,7 @@ class Cavalo {
 
 			function gerarAntecessores(x, y) {
 				if (antecessores[y][x]) {
-					const dx = antecessores[y][x].dx;
-					const dy = antecessores[y][x].dy;
-
-					console.log(`x: ${x} y: ${y} dx: ${dx} dy: ${dy}`);
+					const { cx, cy, ax, ay, dx, dy } = antecessores[y][x];
 
 					if (Math.abs(dy) > Math.abs(dx)) {
 						gerarAntecessoresBC(x, y, dx, dy);
@@ -961,7 +1002,7 @@ class Cavalo {
 						gerarAntecessoresED(x, y, dx, dy);
 					}
 
-					// gerarAntecessores(antecessores[y][x].x, antecessores[y][x].y);
+					gerarAntecessores(ax, ay);
 				}
 			}
 
@@ -984,8 +1025,7 @@ class Cavalo {
 						visitado[y][x] = true;
 						q.push({ x: x, y: y });
 						dist[y][x] = dist[u.y][u.x] + 1;
-						// antecessores[y][x] = { x: u.x, y: u.y, dx: dx[i], dy: dy[i] };
-						antecessores[y][x] = { x: u.x, y: u.y, dx: dx[i], dy: dy[i] };
+						antecessores[y][x] = { ax: u.x, ay: u.y, dx: dx[i], dy: dy[i], cx: x, cy: y };
 						fim = chegouAoFim(x, y);
 					}
 				}
