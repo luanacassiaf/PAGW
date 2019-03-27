@@ -938,7 +938,7 @@ class Cavalo {
 			const dist = Array(8).fill(0).map(x => Array(8).fill(0));
 			visitado[inicio.y][inicio.x] = true;
 			const antecessores = Array(8).fill(false).map(x => Array(8).fill(false));
-			const antecessores2 = Array(8).fill(false).map(x => Array(8).fill(false));
+			const antecessores2 = [];
 
 			function posicaoValida(x, y) {
 				return x >= 0 && x < 8 && y >= 0 && y < 8;
@@ -957,15 +957,13 @@ class Cavalo {
 				let px = x;
 				let py = y;
 				while (true) {
-					antecessores2[py][px] = { x: px + ix, y: py, dir: dirx };
-					// antecessores2[py][px] = `${px + ix} ${py} ${dirx}`;
+					antecessores2.push({ x: px + ix, y: py, dir: dirx });
 					px += ix;
 					dx += ix;
 					if (dx === 0) break;
 				}
 				while (true) {
-					antecessores2[py][px] = { x: px, y: py + iy, dir: diry };
-					// antecessores2[py][px] = `${px} ${py + iy} ${diry}`;
+					antecessores2.push({ x: px, y: py + iy, dir: diry });
 					py += iy;
 					dy += iy;
 					if (dy === 0) break;
@@ -981,15 +979,13 @@ class Cavalo {
 				let px = x;
 				let py = y;
 				while (true) {
-					antecessores2[py][px] = { x: px, y: py + iy, dir: diry };
-					// antecessores2[py][px] = `${px} ${py + iy} ${diry}`;
+					antecessores2.push({ x: px, y: py + iy, dir: diry });
 					py += iy;
 					dy += iy;
 					if (dy === 0) break;
 				}
 				while (true) {
-					antecessores2[py][px] = { x: px + ix, y: py, dir: dirx };
-					// antecessores2[py][px] = `${px + ix} ${py} ${dirx}`;
+					antecessores2.push({ x: px + ix, y: py, dir: dirx });
 					px += ix;
 					dx += ix;
 					if (dx === 0) break;
@@ -1054,20 +1050,21 @@ class Cavalo {
 			return dir;
 		}
 
-		function gerarCaminho(x, y) {
-			if (antecessores[y][x]) {
-				const { x: ax, y: ay, dir } = antecessores[y][x];
-				const a = gerarCaminho(ax, ay);
+		function gerarCaminho(i, x, y) {
+			if (antecessores[i]) {
+				const { x: ax, y: ay, dir } = antecessores[i];
+				const a = gerarCaminho(i + 1, ax, ay);
 				const cell = $(`#cavalo-tabuleiro td[px=${ax}][py=${ay}]`);
-				cell.attr("dira", dir);
-				cell.attr("dirb", inverterDirecaoDoCaminho(a.dir));
+				cell.addClass(dir);
+				if (a) cell.addClass(inverterDirecaoDoCaminho(a.dir));
 			}
 
-			return antecessores[y][x];
+			return antecessores[i];
 		}
 
-		const a = gerarCaminho(this.fim.x, this.fim.y);
+		// Fim.
+		const a = gerarCaminho(0, this.fim.x, this.fim.y);
 		const cell = $(`#cavalo-tabuleiro td[px=${this.fim.x}][py=${this.fim.y}]`);
-		cell.attr("dirb", inverterDirecaoDoCaminho(a.dir));
+		cell.addClass(inverterDirecaoDoCaminho(a.dir));
 	}
 }

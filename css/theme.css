@@ -381,26 +381,26 @@ header.shadow {
 	cursor: pointer;
 }
 
-#cavalo-tabuleiro td[dira=b],
-#cavalo-tabuleiro td[dirb=b] {
+#cavalo-tabuleiro td.b,
+#cavalo-tabuleiro td.b {
 	border-bottom: none;
 	background: orange;
 }
 
-#cavalo-tabuleiro td[dira=c],
-#cavalo-tabuleiro td[dirb=c] {
+#cavalo-tabuleiro td.c,
+#cavalo-tabuleiro td.c {
 	border-top: none;
 	background: orange;
 }
 
-#cavalo-tabuleiro td[dira=e],
-#cavalo-tabuleiro td[dirb=e] {
+#cavalo-tabuleiro td.e,
+#cavalo-tabuleiro td.e {
 	border-left: none;
 	background: orange;
 }
 
-#cavalo-tabuleiro td[dira=d],
-#cavalo-tabuleiro td[dirb=d] {
+#cavalo-tabuleiro td.d,
+#cavalo-tabuleiro td.d {
 	border-right: none;
 	background: orange;
 }
