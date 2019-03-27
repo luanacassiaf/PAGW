@@ -4,6 +4,7 @@ $algoritmo = isset($_GET['algo']) ? $_GET['algo'] : 'dfs';
 $titulo = null;
 $descricao = null;
 $exibir = true;
+$isGrafo = true;
 
 function isActive($alg) {
 	global $algoritmo;
@@ -19,8 +20,10 @@ if($algoritmo === "dfs") {
 } else if($algoritmo === "dijkstra") {
 	$titulo = "Dijkstra";
 	$descricao = "O algoritmo de Dijkstra soluciona o problema do caminho mais curto num grafo dirigido ou não dirigido com arestas de peso não negativo, em tempo computacional O([m+n]log n) onde m é o número de arestas e n é o número de vértices.";
-} else {
-    $exibir = true;
+} else if($algoritmo === "cavalo") {
+	$titulo = "Busca em Largura (BFS, Breadth-First Search)";
+	$descricao = "É um algoritmo de busca em grafos utilizado para realizar uma busca ou travessia num grafo e estrutura de dados do tipo árvore. Intuitivamente, você começa pelo vértice raiz e explora todos os vértices vizinhos. Então, para cada um desses vértices mais próximos, exploramos os seus vértices vizinhos inexplorados e assim por diante, até que ele encontre o alvo da busca.";
+	$isGrafo = false;
 }
 
 ?>
@@ -56,6 +59,17 @@ if($algoritmo === "dfs") {
 		</script>
 		<?php endif; ?>
 
+		<script>
+			function criarAcao(action, tooltip, group, icon, active = false) {
+				let actionButton = `<span action="${action}" balloon="${tooltip}" balloon-pos="down" onclick="grafo.executarAcao('${action}')"><i ${group ? `actionbar-group=${group}` : ''} class="actionbar-item mdi-${icon} ripple ripple-circle ${active ? 'active' : ''}"></i></span>`;
+				$("#actionbar").prepend(actionButton);
+			}
+
+			function ocultarAcao(action) {
+				$(`span[action=${action}]`).hide();
+			}
+		</script>
+
         <title>PAGW - Plataforma de Aprendizagem de Grafos via Web</title>
     </head>
     <body>
@@ -80,20 +94,10 @@ if($algoritmo === "dfs") {
 						</a>
 					</div>
 					<!-- Barra de Ações -->
-					<div class="col-md-6 actionbar">
-						<span balloon="Selecionar" balloon-pos="down" onclick="grafo.habilitarModoSelecionar();"><i actionbar-group="grafo" class="actionbar-item mdi-cursor-default ripple ripple-circle active"></i></span>
-						<span balloon="Clique em um espaço vazio para adicionar um vértice" balloon-pos="down" onclick="grafo.habilitarModoInserir();"><i actionbar-group="grafo" class="actionbar-item mdi-plus ripple ripple-circle"></i></span>
-						<span balloon="Selecione dois vértices para criar uma aresta" balloon-pos="down" onclick="grafo.habilitarModoConectar();"><i actionbar-group="grafo" class="actionbar-item mdi-power-plug ripple ripple-circle"></i></span>
-						<span balloon="Clique sobre um vértice ou aresta para removê-los" balloon-pos="down" onclick="grafo.habilitarModoRemover();"><i actionbar-group="grafo" class="actionbar-item mdi-delete ripple ripple-circle"></i></span>
-						<span balloon="Limpar" balloon-pos="down" onclick="limparGrafo()"><i class="actionbar-item mdi-broom ripple ripple-circle"></i></span>
-
-						<span balloon="Abrir de um arquivo" balloon-pos="down" onclick="importarJsonComoGrafo(true)"><i class="actionbar-item mdi-folder-open ripple ripple-circle"></i></span>
-						<span balloon="Salvar para um arquivo" balloon-pos="down" onclick="salvarGrafoComoJson()"><i class="actionbar-item mdi-content-save ripple ripple-circle"></i></span>
-						<span balloon="Exportar como Matriz ou Lista de Adjacência" balloon-pos="down" data-toggle="modal" data-target="#exportarModal" onclick="exibirExportarModal()"><i class="actionbar-item mdi-matrix ripple ripple-circle"></i></span>
-
+					<div id="actionbar" class="col-md-6 actionbar">
 						<input type="file" id="file-input-json" accept="application/json" style="display: none" onchange="importarJsonComoGrafo(false)">
 
-						<span>
+						<span action="exportar-imagem">
 							<div class="dropdown">
 								<i class="actionbar-item mdi-dots-vertical ripple ripple-circle active" data-toggle="dropdown"></i>
 								<div class="dropdown-menu dropdown-menu-right">
@@ -123,13 +127,36 @@ if($algoritmo === "dfs") {
 						<li class="sidebar-item <?= isActive('dijkstra'); ?>">
                         	<a href="?algo=dijkstra">Dijkstra</a>
                         </li>
+						<li class="sidebar-header">
+                            APLICAÇÕES
+                        </li>
+						<li class="sidebar-item <?= isActive('cavalo'); ?>">
+                        	<a href="?algo=cavalo">Cavalo (BFS)</a>
+                        </li>
 					</ul>
 					<p class="text-center"><img class="badge-img" src="https://img.shields.io/github/release/tiagohm/PAGW.svg?label=versão"></p>
-                </div>
+				</div>
 
-                <?php if($exibir): ?>
-                <?php include_once "./grafo.php"; ?>
-                <?php endif; ?>
+				<script>
+					criarAcao("exportar-matriz", "Exportar como Matriz ou Lista de Adjacência", "", "matrix");
+					criarAcao("salvar", "Salvar para um arquivo", "", "content-save");
+					criarAcao("abrir", "Abrir de um arquivo", "", "folder-open");
+					criarAcao("limpar", "Limpar", "", "broom");
+					criarAcao("remover", "Clique sobre um vértice ou aresta para removê-los", "grafo", "delete");
+					criarAcao("conectar", "Selecione dois vértices para criar uma aresta", "grafo", "power-plug");
+					criarAcao("adicionar", "Clique em um espaço vazio para adicionar um vértice", "grafo", "plus");
+					criarAcao("selecionar", "Selecionar", "grafo", "cursor-default", true);
+				</script>
+
+				<?php
+					if($exibir) {
+						if($isGrafo) {
+							include_once "./grafo.php";
+						} else {
+							include_once "./$algoritmo.php";
+						}
+					}
+				?>
             </section>
 		</div>
 
@@ -191,13 +218,10 @@ if($algoritmo === "dfs") {
 			elm.hasClass("reveal") && elm.removeClass("reveal") || elm.addClass("reveal");
 		}
 
-		function limparGrafo() {
-			grafo.limpar();
-		}
-
 		function exibirExportarModal() {
 			$("#text-matriz-adjacencia").text(grafo.obterMatrizDeAdjacenciaFormatada());
 			$("#text-lista-adjacencia").text(grafo.obterListaDeAdjacenciaFormatada());
+			$("#exportarModal").modal("show");
 		}
 
 		function salvarGrafoComoJson() {
@@ -245,10 +269,21 @@ if($algoritmo === "dfs") {
 			//Ativar/Desativar itens de um determinado grupo.
 			$("i[actionbar-group]").click(function() {
 				let group = $(this).attr("actionbar-group");
+				if(!group) return;
 				$(`i[actionbar-group=${group}]`).each(function(i) {
 					$(this).removeClass("active");
 				});
 				$(this).addClass("active");
+			});
+
+			grafo.adicionarInteceptadorDeAcao((action) => {
+				if(action === "abrir") {
+					importarJsonComoGrafo(true);
+				} else if(action === "salvar") {
+					salvarGrafoComoJson();
+				} else if(action === "exportar-matriz") {
+					exibirExportarModal();
+				}
 			});
 		});
 
