@@ -4,6 +4,7 @@ $algoritmo = isset($_GET['algo']) ? $_GET['algo'] : 'dfs';
 $titulo = null;
 $descricao = null;
 $exibir = true;
+$isGrafo = true;
 
 function isActive($alg) {
 	global $algoritmo;
@@ -19,8 +20,10 @@ if($algoritmo === "dfs") {
 } else if($algoritmo === "dijkstra") {
 	$titulo = "Dijkstra";
 	$descricao = "O algoritmo de Dijkstra soluciona o problema do caminho mais curto num grafo dirigido ou não dirigido com arestas de peso não negativo, em tempo computacional O([m+n]log n) onde m é o número de arestas e n é o número de vértices.";
-} else {
-    $exibir = true;
+} else if($algoritmo === "cavalo") {
+	$titulo = "Busca em Largura (BFS, Breadth-First Search)";
+	$descricao = "É um algoritmo de busca em grafos utilizado para realizar uma busca ou travessia num grafo e estrutura de dados do tipo árvore. Intuitivamente, você começa pelo vértice raiz e explora todos os vértices vizinhos. Então, para cada um desses vértices mais próximos, exploramos os seus vértices vizinhos inexplorados e assim por diante, até que ele encontre o alvo da busca.";
+	$isGrafo = false;
 }
 
 ?>
@@ -81,19 +84,19 @@ if($algoritmo === "dfs") {
 					</div>
 					<!-- Barra de Ações -->
 					<div class="col-md-6 actionbar">
-						<span balloon="Selecionar" balloon-pos="down" onclick="grafo.habilitarModoSelecionar();"><i actionbar-group="grafo" class="actionbar-item mdi-cursor-default ripple ripple-circle active"></i></span>
-						<span balloon="Clique em um espaço vazio para adicionar um vértice" balloon-pos="down" onclick="grafo.habilitarModoInserir();"><i actionbar-group="grafo" class="actionbar-item mdi-plus ripple ripple-circle"></i></span>
-						<span balloon="Selecione dois vértices para criar uma aresta" balloon-pos="down" onclick="grafo.habilitarModoConectar();"><i actionbar-group="grafo" class="actionbar-item mdi-power-plug ripple ripple-circle"></i></span>
-						<span balloon="Clique sobre um vértice ou aresta para removê-los" balloon-pos="down" onclick="grafo.habilitarModoRemover();"><i actionbar-group="grafo" class="actionbar-item mdi-delete ripple ripple-circle"></i></span>
-						<span balloon="Limpar" balloon-pos="down" onclick="limparGrafo()"><i class="actionbar-item mdi-broom ripple ripple-circle"></i></span>
+						<span id="selecionar-menu-item" balloon="Selecionar" balloon-pos="down" onclick="grafo.habilitarModoSelecionar();"><i actionbar-group="grafo" class="actionbar-item mdi-cursor-default ripple ripple-circle active"></i></span>
+						<span id="adicionar-menu-item" balloon="Clique em um espaço vazio para adicionar um vértice" balloon-pos="down" onclick="grafo.habilitarModoInserir();"><i actionbar-group="grafo" class="actionbar-item mdi-plus ripple ripple-circle"></i></span>
+						<span id="conectar-menu-item" balloon="Selecione dois vértices para criar uma aresta" balloon-pos="down" onclick="grafo.habilitarModoConectar();"><i actionbar-group="grafo" class="actionbar-item mdi-power-plug ripple ripple-circle"></i></span>
+						<span id="remover-menu-item" balloon="Clique sobre um vértice ou aresta para removê-los" balloon-pos="down" onclick="grafo.habilitarModoRemover();"><i actionbar-group="grafo" class="actionbar-item mdi-delete ripple ripple-circle"></i></span>
+						<span id="limpar-menu-item" balloon="Limpar" balloon-pos="down" onclick="limparGrafo()"><i class="actionbar-item mdi-broom ripple ripple-circle"></i></span>
 
-						<span balloon="Abrir de um arquivo" balloon-pos="down" onclick="importarJsonComoGrafo(true)"><i class="actionbar-item mdi-folder-open ripple ripple-circle"></i></span>
-						<span balloon="Salvar para um arquivo" balloon-pos="down" onclick="salvarGrafoComoJson()"><i class="actionbar-item mdi-content-save ripple ripple-circle"></i></span>
-						<span balloon="Exportar como Matriz ou Lista de Adjacência" balloon-pos="down" data-toggle="modal" data-target="#exportarModal" onclick="exibirExportarModal()"><i class="actionbar-item mdi-matrix ripple ripple-circle"></i></span>
+						<span id="abrir-menu-item" balloon="Abrir de um arquivo" balloon-pos="down" onclick="importarJsonComoGrafo(true)"><i class="actionbar-item mdi-folder-open ripple ripple-circle"></i></span>
+						<span id="salvar-menu-item" balloon="Salvar para um arquivo" balloon-pos="down" onclick="salvarGrafoComoJson()"><i class="actionbar-item mdi-content-save ripple ripple-circle"></i></span>
+						<span id="exportar-matriz-menu-item" balloon="Exportar como Matriz ou Lista de Adjacência" balloon-pos="down" data-toggle="modal" data-target="#exportarModal" onclick="exibirExportarModal()"><i class="actionbar-item mdi-matrix ripple ripple-circle"></i></span>
 
 						<input type="file" id="file-input-json" accept="application/json" style="display: none" onchange="importarJsonComoGrafo(false)">
 
-						<span>
+						<span id="exportar-imagem-menu-item">
 							<div class="dropdown">
 								<i class="actionbar-item mdi-dots-vertical ripple ripple-circle active" data-toggle="dropdown"></i>
 								<div class="dropdown-menu dropdown-menu-right">
@@ -123,13 +126,25 @@ if($algoritmo === "dfs") {
 						<li class="sidebar-item <?= isActive('dijkstra'); ?>">
                         	<a href="?algo=dijkstra">Dijkstra</a>
                         </li>
+						<li class="sidebar-header">
+                            APLICAÇÕES
+                        </li>
+						<li class="sidebar-item <?= isActive('cavalo'); ?>">
+                        	<a href="?algo=cavalo">Cavalo</a>
+                        </li>
 					</ul>
 					<p class="text-center"><img class="badge-img" src="https://img.shields.io/github/release/tiagohm/PAGW.svg?label=versão"></p>
                 </div>
 
-                <?php if($exibir): ?>
-                <?php include_once "./grafo.php"; ?>
-                <?php endif; ?>
+				<?php
+					if($exibir) {
+						if($isGrafo) {
+							include_once "./grafo.php";
+						} else {
+							include_once "./$algoritmo.php";
+						}
+					}
+				?>
             </section>
 		</div>
 

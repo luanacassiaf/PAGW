@@ -365,3 +365,53 @@ header.shadow {
 [class^="mdi-"], [class*=" mdi-"] {
 	font-size: 1.4rem;
 }
+
+#cavalo-tabuleiro-box {
+	padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#cavalo-tabuleiro td {
+	width: calc((100vmin - 160px) / 8);
+    background: #FFF;
+    height: calc((100vmin - 160px) / 8);
+	border: 2px solid #333;
+	cursor: pointer;
+}
+
+#cavalo-tabuleiro td.proibido::before,
+#cavalo-tabuleiro td.inicio::before,
+#cavalo-tabuleiro td.fim::before {
+	text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 200%;
+    font-weight: bold;
+}
+
+#cavalo-tabuleiro td.proibido::before {
+	content: 'X';
+}
+
+#cavalo-tabuleiro td.inicio::before {
+	content: 'I';
+	color: green;
+}
+
+#cavalo-tabuleiro td.fim::before {
+	content: 'F';
+	color: red;
+}
+
+#cavalo-comando-box {
+	display: flex;
+	justify-content: center;
+	align-content: center;
+}
+
+#cavalo-comando-box > * {
+	margin: 1px;
+}

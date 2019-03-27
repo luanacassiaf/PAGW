@@ -492,7 +492,6 @@ class Bfs extends Grafo {
 		const dist = Array(n).fill(false);
 		const q = [];
 		const caminho = [];
-		let fim = false;
 
 		//Algoritmo BFS do notebook da maratona.
 		function bfs(s) {
@@ -735,5 +734,272 @@ class Stepper {
 		};
 
 		setTimeout(percorrerEtapas, startDelay || this.delay);
+	}
+}
+
+class Cavalo {
+
+	constructor(tabuleiroId, loadFromLocalStorage = true) {
+		this.tabuleiroId = tabuleiroId;
+		this.matriz = Array(8).fill(false).map(() => Array(8).fill(false));
+		this.fim = false;
+		this.inicio = false;
+		this.modo = 0; // 0 = proibido, 1 = inicio, 2 = fim.
+
+		try {
+			if (loadFromLocalStorage && localStorage.cavalo) {
+				this.fromJson(JSON.parse(localStorage.cavalo));
+			}
+		} catch (e) {
+			// nada.
+		}
+
+		this.gerarTabuleiro();
+	}
+
+	definirModo(modo) {
+		this.modo = modo;
+	}
+
+	definirInicio(x, y) {
+		this.inicio = { x: x, y: y };
+		this.matriz[y][x] = false;
+		this.gerarTabuleiro();
+		this.salvarGrafoTemporariamente();
+	}
+
+	removerInicio(x, y) {
+		this.inicio = false;
+		this.gerarTabuleiro();
+		this.salvarGrafoTemporariamente();
+	}
+
+	definirFim(x, y) {
+		this.fim = { x: x, y: y };
+		this.matriz[y][x] = false;
+		this.gerarTabuleiro();
+		this.salvarGrafoTemporariamente();
+	}
+
+	removerFim(x, y) {
+		this.fim = false;
+		this.gerarTabuleiro();
+		this.salvarGrafoTemporariamente();
+	}
+
+	definirProibido(x, y) {
+		this.matriz[y][x] = true;
+		if (this.inicio && this.inicio.x == x && this.inicio.y == y) this.inicio = false;
+		if (this.fim && this.fim.x == x && this.fim.y == y) this.fim = false;
+		this.gerarTabuleiro();
+		this.salvarGrafoTemporariamente();
+	}
+
+	removerProibido(x, y) {
+		this.matriz[y][x] = false;
+		this.gerarTabuleiro();
+		this.salvarGrafoTemporariamente();
+	}
+
+	definir(x, y) {
+		// Proibido.
+		if (this.modo === 0) {
+			if (this.matriz[y][x]) {
+				this.removerProibido(x, y);
+			} else {
+				this.definirProibido(x, y);
+			}
+		}
+		else if (this.modo === 1) {
+			this.definirInicio(x, y);
+			this.removerProibido(x, y);
+		}
+		else if (this.modo === 2) {
+			this.definirFim(x, y);
+			this.removerProibido(x, y);
+		}
+	}
+
+	limpar() {
+		this.matriz = Array(8).fill(false).map(() => Array(8).fill(false));
+		this.inicio = false;
+		this.fim = false;
+		this.gerarTabuleiro();
+		this.salvarGrafoTemporariamente();
+	}
+
+	gerarTabuleiro() {
+		let res = "";
+		for (let y = 0; y < 8; y++) {
+			res += "<tr>";
+			for (let x = 0; x < 8; x++) {
+				// Marcado com proibido.
+				if (this.inicio &&
+					this.inicio.x == x &&
+					this.inicio.y == y) {
+					res += `<td onclick='grafo.definir(${x}, ${y})' class='inicio'></td>`;
+				}
+				else if (this.fim &&
+					this.fim.x == x &&
+					this.fim.y == y) {
+					res += `<td onclick='grafo.definir(${x}, ${y})' class='fim'></td>`;
+				}
+				else if (this.matriz[y][x]) {
+					res += `<td onclick='grafo.definir(${x}, ${y})' class='proibido'></td>`;
+				} else {
+					res += `<td onclick='grafo.definir(${x}, ${y})' class='livre'></td>`;
+				}
+			}
+			res += "</tr>\n";
+		}
+
+		$(this.tabuleiroId).html(res);
+	}
+
+	toJson() {
+		return JSON.stringify({
+			inicio: this.inicio,
+			fim: this.fim,
+			matriz: this.matriz
+		});
+	}
+
+	fromJson(data) {
+		this.inicio = data.inicio;
+		this.fim = data.fim;
+		this.matriz = data.matriz;
+	}
+
+	salvarGrafoTemporariamente() {
+		localStorage.cavalo = this.toJson();
+	}
+
+	executar() {
+		// Verifica se tem início e fim definidos.
+		if (this.inicio == false || this.fim == false) {
+			return;
+		}
+
+		// https://www.geeksforgeeks.org/minimum-steps-reach-target-knight/
+		function cavaloBFS(inicio, fim) {
+			// Posições válidas do cavalo.
+			const dx = [-2, -1, 1, 2, -2, -1, 1, 2];
+			const dy = [-1, -2, -2, -1, 1, 2, 2, 1];
+			// Fila para armazenar as posições do cavalo no tabuleiro.
+			const q = [];
+			// Posição inicial do cavalo.
+			q.push({ x: inicio.x, y: inicio.y });
+			// Matriz de posições e distancias visitadas.
+			const visitado = Array(8).fill(Array(8).fill(false));
+			const dist = Array(8).fill(Array(8).fill(0));
+			visitado[inicio.y][inicio.x] = true;
+			const antecessores = Array(8).fill(Array(8).fill(false));
+			const antecessores2 = Array(8).fill(Array(8).fill(false));
+
+			function posicaoValida(x, y) {
+				return x >= 0 && x < 8 && y >= 0 && y < 8;
+			}
+
+			function chegouAoFim(x, y) {
+				return x === fim.x && y === fim.y;
+			}
+
+			// Pra baixo ou pra cima.
+			function gerarAntecessoresBC(x, y, dx, dy) {
+				const ix = dx > 0 ? -1 : 1;
+				const iy = dy > 0 ? -1 : 1;
+				let px = x;
+				let py = y;
+				while (true) {
+					//antecessores2[py][px] = { x: px + ix, y: py };
+					antecessores2[py][px] = `x: ${px + ix} y: ${py}`;
+					px += ix;
+					dx += ix;
+					if (dx === 0) break;
+				}
+				while (true) {
+					//antecessores2[py][px] = { x: px, y: py + iy };
+					antecessores2[py][px] = `x: ${px} y: ${py + iy}`;
+					py += iy;
+					dy += iy;
+					if (dy === 0) break;
+				}
+			}
+
+			// Pra esquerda ou direita.
+			function gerarAntecessoresED(x, y, dx, dy) {
+				const ix = dx > 0 ? -1 : 1;
+				const iy = dy > 0 ? -1 : 1;
+				let px = x;
+				let py = y;
+				while (true) {
+					//antecessores2[py][px] = { x: px, y: py + iy };
+					antecessores2[py][px] = `x: ${px} y: ${py + iy}`;
+					py += iy;
+					dy += iy;
+					if (dy === 0) break;
+				}
+				while (true) {
+					//antecessores2[py][px] = { x: px + ix, y: py };
+					antecessores2[py][px] = `x: ${px + ix} y: ${py}`;
+					px += ix;
+					dx += ix;
+					if (dx === 0) break;
+				}
+			}
+
+			function gerarAntecessores(x, y) {
+				if (antecessores[y][x]) {
+					const dx = antecessores[y][x].dx;
+					const dy = antecessores[y][x].dy;
+
+					console.log(`x: ${x} y: ${y} dx: ${dx} dy: ${dy}`);
+
+					if (Math.abs(dy) > Math.abs(dx)) {
+						gerarAntecessoresBC(x, y, dx, dy);
+					} else {
+						gerarAntecessoresED(x, y, dx, dy);
+					}
+
+					// gerarAntecessores(antecessores[y][x].x, antecessores[y][x].y);
+				}
+			}
+
+			while (q.length) {
+				const u = q.shift();
+
+				// Chegou ao fim.
+				if (chegouAoFim(u.x, u.y)) {
+					break;
+				}
+
+				let fim = false;
+
+				for (let i = 0; i < 8 && !fim; i++) {
+					const x = u.x + dx[i];
+					const y = u.y + dy[i];
+
+					// TODO: NÃO TO VERIFICANDO POSIÇÃO PROIBIDA.
+					if (posicaoValida(x, y) && !visitado[y][x]) {
+						visitado[y][x] = true;
+						q.push({ x: x, y: y });
+						dist[y][x] = dist[u.y][u.x] + 1;
+						// antecessores[y][x] = { x: u.x, y: u.y, dx: dx[i], dy: dy[i] };
+						antecessores[y][x] = { x: u.x, y: u.y, dx: dx[i], dy: dy[i] };
+						fim = chegouAoFim(x, y);
+					}
+				}
+
+				if (fim) break;
+			}
+
+			gerarAntecessores(fim.x, fim.y);
+
+			return antecessores2;
+		}
+
+		const antecessores = cavaloBFS(this.inicio, this.fim);
+
+		console.log(antecessores);
 	}
 }
