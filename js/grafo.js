@@ -120,19 +120,19 @@ class Grafo {
 	}
 
 	executarAcao(action) {
-		if(action === "selecionar") {
+		if (action === "selecionar") {
 			this.habilitarModoSelecionar();
-		} else if(action === "adicionar") {
+		} else if (action === "adicionar") {
 			this.habilitarModoInserir();
-		} else if(action === "conectar") {
+		} else if (action === "conectar") {
 			this.habilitarModoConectar();
-		} else if(action === "remover") {
+		} else if (action === "remover") {
 			this.habilitarModoRemover();
-		} else if(action === "limpar") {
+		} else if (action === "limpar") {
 			this.limpar();
 		}
 
-		for(const actionHandler of this.interceptadoresDeAcao) {
+		for (const actionHandler of this.interceptadoresDeAcao) {
 			actionHandler(action);
 		}
 	}
@@ -786,17 +786,17 @@ class Cavalo {
 	}
 
 	executarAcao(action) {
-		if(action === "definir-inicio") {
+		if (action === "definir-inicio") {
 			this.definirModo(1);
-		} else if(action === "definir-fim") {
+		} else if (action === "definir-fim") {
 			this.definirModo(2);
-		} else if(action === "definir-proibido") {
+		} else if (action === "definir-proibido") {
 			this.definirModo(0);
-		} else if(action === "limpar") {
+		} else if (action === "limpar") {
 			this.limpar();
 		}
 
-		for(const actionHandler of this.interceptadoresDeAcao) {
+		for (const actionHandler of this.interceptadoresDeAcao) {
 			actionHandler(action);
 		}
 	}
@@ -881,17 +881,17 @@ class Cavalo {
 				if (this.inicio &&
 					this.inicio.x == x &&
 					this.inicio.y == y) {
-					res += `<td onclick='grafo.definir(${x}, ${y})' class='inicio'></td>`;
+					res += `<td onclick='grafo.definir(${x}, ${y})' px='${x}' py='${y}' dir='none' class='inicio'></td>`;
 				}
 				else if (this.fim &&
 					this.fim.x == x &&
 					this.fim.y == y) {
-					res += `<td onclick='grafo.definir(${x}, ${y})' class='fim'></td>`;
+					res += `<td onclick='grafo.definir(${x}, ${y})' px='${x}' py='${y}' dir='none' class='fim'></td>`;
 				}
 				else if (this.matriz[y][x]) {
-					res += `<td onclick='grafo.definir(${x}, ${y})' class='proibido'></td>`;
+					res += `<td onclick='grafo.definir(${x}, ${y})' px='${x}' py='${y}' dir='none' class='proibido'></td>`;
 				} else {
-					res += `<td onclick='grafo.definir(${x}, ${y})' class='livre'></td>`;
+					res += `<td onclick='grafo.definir(${x}, ${y})' px='${x}' py='${y}' dir='none' class='livre'></td>`;
 				}
 			}
 			res += "</tr>\n";
@@ -952,18 +952,20 @@ class Cavalo {
 			function gerarAntecessoresBC(x, y, dx, dy) {
 				const ix = dx > 0 ? -1 : 1;
 				const iy = dy > 0 ? -1 : 1;
+				const dirx = dx > 0 ? "d" : "e";
+				const diry = dy > 0 ? "b" : "c";
 				let px = x;
 				let py = y;
 				while (true) {
-					//antecessores2[py][px] = { x: px + ix, y: py };
-					antecessores2[py][px] = `x: ${px + ix} y: ${py}`;
+					antecessores2[py][px] = { x: px + ix, y: py, dir: dirx };
+					// antecessores2[py][px] = `${px + ix} ${py} ${dirx}`;
 					px += ix;
 					dx += ix;
 					if (dx === 0) break;
 				}
 				while (true) {
-					//antecessores2[py][px] = { x: px, y: py + iy };
-					antecessores2[py][px] = `x: ${px} y: ${py + iy}`;
+					antecessores2[py][px] = { x: px, y: py + iy, dir: diry };
+					// antecessores2[py][px] = `${px} ${py + iy} ${diry}`;
 					py += iy;
 					dy += iy;
 					if (dy === 0) break;
@@ -974,18 +976,20 @@ class Cavalo {
 			function gerarAntecessoresED(x, y, dx, dy) {
 				const ix = dx > 0 ? -1 : 1;
 				const iy = dy > 0 ? -1 : 1;
+				const dirx = dx > 0 ? "d" : "e";
+				const diry = dy > 0 ? "b" : "c";
 				let px = x;
 				let py = y;
 				while (true) {
-					//antecessores2[py][px] = { x: px, y: py + iy };
-					antecessores2[py][px] = `x: ${px} y: ${py + iy}`;
+					antecessores2[py][px] = { x: px, y: py + iy, dir: diry };
+					// antecessores2[py][px] = `${px} ${py + iy} ${diry}`;
 					py += iy;
 					dy += iy;
 					if (dy === 0) break;
 				}
 				while (true) {
-					//antecessores2[py][px] = { x: px + ix, y: py };
-					antecessores2[py][px] = `x: ${px + ix} y: ${py}`;
+					antecessores2[py][px] = { x: px + ix, y: py, dir: dirx };
+					// antecessores2[py][px] = `${px + ix} ${py} ${dirx}`;
 					px += ix;
 					dx += ix;
 					if (dx === 0) break;
@@ -1040,6 +1044,30 @@ class Cavalo {
 
 		const antecessores = cavaloBFS(this.inicio, this.fim);
 
-		console.log(antecessores);
+		// console.log(antecessores);
+
+		function inverterDirecaoDoCaminho(dir) {
+			if (dir == "e") return "d";
+			if (dir == "d") return "e";
+			if (dir == "b") return "c";
+			if (dir == "c") return "b";
+			return dir;
+		}
+
+		function gerarCaminho(x, y) {
+			if (antecessores[y][x]) {
+				const { x: ax, y: ay, dir } = antecessores[y][x];
+				const a = gerarCaminho(ax, ay);
+				const cell = $(`#cavalo-tabuleiro td[px=${ax}][py=${ay}]`);
+				cell.attr("dira", dir);
+				cell.attr("dirb", inverterDirecaoDoCaminho(a.dir));
+			}
+
+			return antecessores[y][x];
+		}
+
+		const a = gerarCaminho(this.fim.x, this.fim.y);
+		const cell = $(`#cavalo-tabuleiro td[px=${this.fim.x}][py=${this.fim.y}]`);
+		cell.attr("dirb", inverterDirecaoDoCaminho(a.dir));
 	}
 }

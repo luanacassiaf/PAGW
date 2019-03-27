@@ -19,9 +19,6 @@ ocultarAcao("exportar-imagem");
 			<div id="cavalo-tabuleiro-box">
 				<table id="cavalo-tabuleiro">
 				</table>
-				<div id="cavalo-canvas">
-
-				</div>
 			</div>
 		</div>
 

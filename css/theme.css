@@ -376,9 +376,33 @@ header.shadow {
 #cavalo-tabuleiro td {
 	width: calc((100vmin - 160px) / 8);
     background: #FFF;
-    height: calc((100vmin - 160px) / 8);
+	height: calc((100vmin - 160px) / 8);
 	border: 2px solid #333;
 	cursor: pointer;
+}
+
+#cavalo-tabuleiro td[dira=b],
+#cavalo-tabuleiro td[dirb=b] {
+	border-bottom: none;
+	background: orange;
+}
+
+#cavalo-tabuleiro td[dira=c],
+#cavalo-tabuleiro td[dirb=c] {
+	border-top: none;
+	background: orange;
+}
+
+#cavalo-tabuleiro td[dira=e],
+#cavalo-tabuleiro td[dirb=e] {
+	border-left: none;
+	background: orange;
+}
+
+#cavalo-tabuleiro td[dira=d],
+#cavalo-tabuleiro td[dirb=d] {
+	border-right: none;
+	background: orange;
 }
 
 #cavalo-tabuleiro td.proibido::before,
