@@ -21,8 +21,8 @@ if($algoritmo === "dfs") {
 	$titulo = "Dijkstra";
 	$descricao = "O algoritmo de Dijkstra soluciona o problema do caminho mais curto num grafo dirigido ou não dirigido com arestas de peso não negativo, em tempo computacional O([m+n]log n) onde m é o número de arestas e n é o número de vértices.";
 } else if($algoritmo === "cavalo") {
-	$titulo = "Busca em Largura (BFS, Breadth-First Search)";
-	$descricao = "É um algoritmo de busca em grafos utilizado para realizar uma busca ou travessia num grafo e estrutura de dados do tipo árvore. Intuitivamente, você começa pelo vértice raiz e explora todos os vértices vizinhos. Então, para cada um desses vértices mais próximos, exploramos os seus vértices vizinhos inexplorados e assim por diante, até que ele encontre o alvo da busca.";
+	$titulo = "Cavalo (BFS)";
+	$descricao = "Usando os movimentos do cavalo, você deve	determinar qual o número mínimo de movimentos do cavalo para ir de uma casa Início (I) até uma casa Final (F), sendo proibido que o cavalo ‘pare’ sobre algumas casas especificadas (X) durante a sequência de movimentos.";
 	$isGrafo = false;
 }
 

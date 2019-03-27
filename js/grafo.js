@@ -920,7 +920,12 @@ class Cavalo {
 
 	executar() {
 		// Verifica se tem início e fim definidos.
-		if (this.inicio == false || this.fim == false) {
+		if (this.inicio == false) {
+			alert("Você não selecionou uma Casa Início");
+			return;
+		}
+		if (this.fim == false) {
+			alert("Você não selecionou uma Casa Final");
 			return;
 		}
 

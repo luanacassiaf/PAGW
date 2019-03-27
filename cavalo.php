@@ -30,9 +30,9 @@ ocultarAcao("exportar-imagem");
 			</div>
 			<div class="algoritmo-panel mt-2">
 				<div>
-					<h6>1 - Escolha o ponto de início. Clique em <i actionbar-group="grafo" class="mdi-alpha-i-box"></i> e selecione um ponto no tabuleiro. </h6>
-					<h6>2 - Escolha o ponto de fim. Clique em <i actionbar-group="grafo" class="mdi-alpha-f-box"></i> e selecione um ponto no tabuleiro.</h6>
-					<h6>3 - Escolha os pontos proibidos. Clique em <i actionbar-group="grafo" class="mdi-alpha-p-box"></i> e selecione os pontos no tabuleiro.</h6>
+					<h6>1 - Escolher a Casa Início. Clique em <i class="mdi-alpha-i-box"></i> e selecione uma casa no tabuleiro. </h6>
+					<h6>2 - Escolher a Casa Final. Clique em <i class="mdi-alpha-f-box"></i> e selecione uma casa no tabuleiro.</h6>
+					<h6>3 - Escolher as Casas Proibidas. Clique em <i class="mdi-alpha-p-box"></i> e selecione as casas no tabuleiro.</h6>
 					<h6>4 - Clique em executar!</h6>
 				</div>
 				<button class="btn btn-success" onclick="grafo.executar()"><i class="mdi-play"></i> Executar</button>
