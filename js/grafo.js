@@ -912,6 +912,7 @@ class Cavalo {
 		this.inicio = data.inicio;
 		this.fim = data.fim;
 		this.matriz = data.matriz;
+		this.gerarTabuleiro();
 	}
 
 	salvarGrafoTemporariamente() {
