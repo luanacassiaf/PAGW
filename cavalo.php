@@ -1,7 +1,7 @@
 <script>
-criarAcao("definir-proibido", "Definir Proibido", "cavalo", "alpha-p-box", true);
-criarAcao("definir-fim", "Definir Fim", "cavalo", "alpha-f-box");
-criarAcao("definir-inicio", "Definir Início", "cavalo", "alpha-i-box");
+criarAcao("definir-proibido", "Definir Casa Proibida", "cavalo", "alpha-p-box", true);
+criarAcao("definir-fim", "Definir Casa Fim", "cavalo", "alpha-f-box");
+criarAcao("definir-inicio", "Definir Casa Início", "cavalo", "alpha-i-box");
 ocultarAcao("selecionar");
 ocultarAcao("adicionar");
 ocultarAcao("remover");
