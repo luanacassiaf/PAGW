@@ -379,6 +379,7 @@ header.shadow {
 	height: calc((100vmin - 160px) / 8);
 	border: 2px solid #333;
 	cursor: pointer;
+	position: relative;
 }
 
 #cavalo-tabuleiro td.b,
@@ -403,6 +404,16 @@ header.shadow {
 #cavalo-tabuleiro td.d {
 	border-right: none;
 	background: orange;
+}
+
+#cavalo-tabuleiro td[m]::after {
+    content: attr(m);
+    font-size: 12px;
+    position: absolute;
+    top: 2px;
+	right: 2px;
+	color: blue;
+    font-weight: bold;
 }
 
 #cavalo-tabuleiro td.proibido::before,

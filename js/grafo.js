@@ -925,7 +925,7 @@ class Cavalo {
 		}
 
 		// https://www.geeksforgeeks.org/minimum-steps-reach-target-knight/
-		function cavaloBFS(inicio, fim) {
+		function cavaloBFS(matriz, inicio, fim) {
 			// Posições válidas do cavalo.
 			const dx = [-2, -1, 1, 2, -2, -1, 1, 2];
 			const dy = [-1, -2, -2, -1, 1, 2, 2, 1];
@@ -1002,6 +1002,11 @@ class Cavalo {
 						gerarAntecessoresED(x, y, dx, dy);
 					}
 
+					const ultimo = antecessores2[antecessores2.length - 4];
+					if (ultimo) {
+						ultimo.m = true;
+					}
+
 					gerarAntecessores(ax, ay);
 				}
 			}
@@ -1020,12 +1025,11 @@ class Cavalo {
 					const x = u.x + dx[i];
 					const y = u.y + dy[i];
 
-					// TODO: NÃO TO VERIFICANDO POSIÇÃO PROIBIDA.
-					if (posicaoValida(x, y) && !visitado[y][x]) {
+					if (posicaoValida(x, y) && !visitado[y][x] && !matriz[y][x]) {
 						visitado[y][x] = true;
 						q.push({ x: x, y: y });
 						dist[y][x] = dist[u.y][u.x] + 1;
-						antecessores[y][x] = { ax: u.x, ay: u.y, dx: dx[i], dy: dy[i], cx: x, cy: y };
+						antecessores[y][x] = { ax: u.x, ay: u.y, dx: dx[i], dy: dy[i], cx: x, cy: y, d: dist[y][x] };
 						fim = chegouAoFim(x, y);
 					}
 				}
@@ -1035,10 +1039,13 @@ class Cavalo {
 
 			gerarAntecessores(fim.x, fim.y);
 
-			return antecessores2;
+			return {
+				antecessores: antecessores2,
+				dist: dist
+			};
 		}
 
-		const antecessores = cavaloBFS(this.inicio, this.fim);
+		const { antecessores, dist } = cavaloBFS(this.matriz, this.inicio, this.fim);
 
 		// console.log(antecessores);
 
@@ -1052,11 +1059,12 @@ class Cavalo {
 
 		function gerarCaminho(i, x, y) {
 			if (antecessores[i]) {
-				const { x: ax, y: ay, dir } = antecessores[i];
+				const { x: ax, y: ay, dir, m } = antecessores[i];
 				const a = gerarCaminho(i + 1, ax, ay);
 				const cell = $(`#cavalo-tabuleiro td[px=${ax}][py=${ay}]`);
 				cell.addClass(dir);
 				if (a) cell.addClass(inverterDirecaoDoCaminho(a.dir));
+				if (m) cell.attr("m", dist[ay][ax]);
 			}
 
 			return antecessores[i];
@@ -1065,6 +1073,11 @@ class Cavalo {
 		// Fim.
 		const a = gerarCaminho(0, this.fim.x, this.fim.y);
 		const cell = $(`#cavalo-tabuleiro td[px=${this.fim.x}][py=${this.fim.y}]`);
-		cell.addClass(inverterDirecaoDoCaminho(a.dir));
+		if (a) {
+			cell.addClass(inverterDirecaoDoCaminho(a.dir));
+			cell.attr("m", dist[this.fim.y][this.fim.x]);
+		} else {
+			alert("Não existe um caminho!");
+		}
 	}
 }
