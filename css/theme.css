@@ -373,11 +373,16 @@ header.shadow {
     justify-content: center;
 }
 
+#cavalo-tabuleiro {
+	border-collapse: collapse;
+	border-spacing: 0;
+	table-layout: fixed;
+}
+
 #cavalo-tabuleiro td {
 	width: calc((100vmin - 160px) / 8);
-    background: #FFF;
-	height: calc((100vmin - 160px) / 8);
-	border: 2px solid #607D8B;
+    height: calc((100vmin - 160px) / 8);
+	border: 1px solid #607D8B;
 	cursor: pointer;
 	position: relative;
 }
