@@ -6,6 +6,8 @@
 
 ![](1.png)
 
+![](2.png)
+
 ### Features
 
 * Crie seus grafos com rapidez e praticidade;
