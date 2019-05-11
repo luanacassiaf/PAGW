@@ -138,7 +138,9 @@ class Grafo {
 	}
 
 	salvarGrafoTemporariamente() {
-		localStorage.grafo = this.toJson();
+		if (this.toJson) {
+			localStorage.grafo = this.toJson();
+		}
 	}
 
 	onTap(event, target, isNode, isEdge) {
@@ -916,7 +918,9 @@ class Cavalo {
 	}
 
 	salvarGrafoTemporariamente() {
-		localStorage.cavalo = this.toJson();
+		if (this.toJson) {
+			localStorage.cavalo = this.toJson();
+		}
 	}
 
 	executar() {
