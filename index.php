@@ -1,76 +1,54 @@
 <?php
 
-$algoritmo = isset($_GET['algo']) ? $_GET['algo'] : 'dfs';
-$titulo = null;
-$descricao = null;
-$exibir = true;
-$isGrafo = true;
+$isAlgoritmo = isset($_GET["algoritmo"]) && !empty($_GET["algoritmo"]);
+$isApp = isset($_GET["app"]) && !empty($_GET["app"]);
+$nomeDoAlgoritmo = $isAlgoritmo ? $_GET["algoritmo"] : "";
+$nomeDaAplicacao = $isApp ? $_GET["app"] : "";
 
-function isActive($alg) {
-	global $algoritmo;
-	return $algoritmo == $alg ? "active" : "";
-}
-
-if($algoritmo === "dfs") {
-    $titulo = "Busca em Profundidade (DFS, Deep-First Search)";
-    $descricao = "Na teoria dos grafos, busca em profundidade é um algoritmo usado para realizar uma busca ou travessia numa árvore, estrutura de árvore ou grafo. Intuitivamente, o algoritmo começa num nó raiz (selecionando algum nó como sendo o raiz, no caso de um grafo) e explora tanto quanto possível cada um dos seus ramos, antes de retroceder(backtracking).";
-} else if($algoritmo === "bfs") {
-	$titulo = "Busca em Largura (BFS, Breadth-First Search)";
-	$descricao = "É um algoritmo de busca em grafos utilizado para realizar uma busca ou travessia num grafo e estrutura de dados do tipo árvore. Intuitivamente, você começa pelo vértice raiz e explora todos os vértices vizinhos. Então, para cada um desses vértices mais próximos, exploramos os seus vértices vizinhos inexplorados e assim por diante, até que ele encontre o alvo da busca.";
-} else if($algoritmo === "dijkstra") {
-	$titulo = "Dijkstra";
-	$descricao = "O algoritmo de Dijkstra soluciona o problema do caminho mais curto num grafo dirigido ou não dirigido com arestas de peso não negativo, em tempo computacional O([m+n]log n) onde m é o número de arestas e n é o número de vértices.";
-} else if($algoritmo === "cavalo") {
-	$titulo = "Cavalo (BFS)";
-	$descricao = "Usando os movimentos do cavalo, você deve	determinar qual o número mínimo de movimentos do cavalo para ir de uma casa Início (I) até uma casa Final (F), sendo proibido que o cavalo ‘pare’ sobre algumas casas especificadas (X) durante a sequência de movimentos.";
-	$isGrafo = false;
-}
+// if($algoritmo === "cavalo") {
+// 	$titulo = "Cavalo (BFS)";
+// 	$descricao = "Usando os movimentos do cavalo, você deve	determinar qual o número mínimo de movimentos do cavalo para ir de uma casa Início (I) até uma casa Final (F), sendo proibido que o cavalo ‘pare’ sobre algumas casas especificadas (X) durante a sequência de movimentos.";
+// 	$isAlgoritmo = false;
+// }
 
 ?>
 <html>
     <head>
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link rel="shortcut icon" type="image/png" href="img/favicon.png"/>
-        <!-- CSS -->
+		
+		<!-- CSS Global -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" href="css/mdi.css">
         <link rel="stylesheet" href="css/balloon.css">
         <link rel="stylesheet" href="css/cytoscape-context-menus.css">
-        <link rel="stylesheet" href="css/theme.css">
-        <!-- JS -->
+		<link rel="stylesheet" href="css/theme.css">
+		<!-- CSS da aplicação ou de um algoritmo em grafo -->
+		<?php if($isAlgoritmo): ?>
+			<link rel="stylesheet" href="algoritmos/index.css">
+			<link rel="stylesheet" href="algoritmos/<?= $nomeDoAlgoritmo ?>/index.css">
+		<?php endif; ?>
+		<?php if($isApp): ?>
+			<link rel="stylesheet" href="aplicacoes/<?= $nomeDaAplicacao ?>/index.css">
+		<?php endif; ?>		
+		<!-- JS Global -->
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
     	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.5.0/cytoscape.min.js"></script>
     	<script type="text/javascript" src="js/cytoscape-context-menus.js"></script>
     	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-		<script type="text/javascript" src="js/grafo.js"></script>
-
-		<?php if(strtolower($_SERVER['SERVER_NAME']) != "localhost"): ?>
-		<!-- Global site tag (gtag.js) - Google Analytics -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-102583596-4"></script>
-		<script>
-			if(window.location.hostname.toLowerCase() != "localhost") {
-				window.dataLayer = window.dataLayer || [];
-				function gtag(){ dataLayer.push(arguments); }
-				gtag('js', new Date());
-				gtag('config', 'UA-102583596-4');
-			}
-		</script>
+		<script type="text/javascript" src="public/js/common.js"></script>
+		<!-- JS da aplicação e dos algoritmos -->
+		<?php if($isAlgoritmo): ?>
+			<script type="text/javascript" src="algoritmos/index.js"></script> 
+			<script type="text/javascript" src="algoritmos/<?= $nomeDoAlgoritmo ?>/index.js"></script>
+		<?php endif; ?>
+		<?php if($isApp): ?>
+			<script type="text/javascript" src="aplicacoes/<?= $nomeDaAplicacao ?>/index.js"></script> 
 		<?php endif; ?>
 
-		<script>
-			function criarAcao(action, tooltip, group, icon, active = false) {
-				let actionButton = `<span action="${action}" balloon="${tooltip}" balloon-pos="down" onclick="grafo.executarAcao('${action}')"><i ${group ? `actionbar-group=${group}` : ''} class="actionbar-item mdi-${icon} ripple ripple-circle ${active ? 'active' : ''}"></i></span>`;
-				$("#actionbar").prepend(actionButton);
-			}
-
-			function ocultarAcao(action) {
-				$(`span[action=${action}]`).hide();
-			}
-		</script>
-
-        <title>PAGW - Plataforma de Aprendizagem de Grafos via Web</title>
+        <title>Algoritmos em Grafos e Aplicações</title>
     </head>
     <body>
         <!-- Corpo -->
@@ -88,117 +66,62 @@ if($algoritmo === "dfs") {
 						<a class="navbar-brand" href="#">
 							<img class="logo" src="img/pagw-logo.png">
 							<span>
-								<div class="title">PAGW</div>
-								<div class="subtitle">Plataforma de Aprendizagem de Grafos via Web</div>
+								<div class="title">Algoritmos em Grafos e Aplicações</div>
 							</span>
 						</a>
 					</div>
 					<!-- Barra de Ações -->
 					<div id="actionbar" class="col-md-6 actionbar">
-						<input type="file" id="file-input-json" accept="application/json" style="display: none" onchange="importarJsonComoGrafo(false)">
-
-						<span action="exportar-imagem">
-							<div class="dropdown">
-								<i class="actionbar-item mdi-dots-vertical ripple ripple-circle active" data-toggle="dropdown"></i>
-								<div class="dropdown-menu dropdown-menu-right">
-									<a class="dropdown-item" onclick="exportarComoImagem('png')">Exportar Como PNG</a>
-									<a class="dropdown-item" onclick="exportarComoImagem('jpg')">Exportar Como JPG</a>
-								</div>
-							</div>
-						</span>
+						<?php 
+							if($isAlgoritmo) {
+								readfile(__DIR__ . "/algoritmos/toolbar.html");
+							} else if($isApp) {
+								readfile(__DIR__ . "/aplicacoes/$nomeDaAplicacao/toolbar.html");
+							}
+						?>
 					</div>
                 </nav>
             </header>
 			<!-- Main -->
             <section id="main">
 				<!-- Menu Lateral -->
-                <div id="sidebar1" class="sidebar shadow col-md-3">
+                <div id="sidebar" class="sidebar shadow col-md-3">
 					<!-- Itens do Menu -->
                     <ul class="sidebar-nav">
 						<li class="sidebar-header">
                             ALGORITMOS
                         </li>
-                        <li class="sidebar-item <?= isActive('dfs'); ?>">
-                            <a href="?algo=dfs">Busca em Profundidade</a>
+                        <li class="sidebar-item">
+                            <a href="?algoritmo=dfs">Busca em Profundidade</a>
                         </li>
-                        <li class="sidebar-item <?= isActive('bfs'); ?>">
-                        	<a href="?algo=bfs">Busca em Largura</a>
+                        <li class="sidebar-item">
+                        	<a href="?algoritmo=bfs">Busca em Largura</a>
                         </li>
-						<li class="sidebar-item <?= isActive('dijkstra'); ?>">
-                        	<a href="?algo=dijkstra">Dijkstra</a>
+						<li class="sidebar-item">
+                        	<a href="?algoritmo=dijkstra">Dijkstra</a>
                         </li>
 						<li class="sidebar-header">
                             APLICAÇÕES
                         </li>
-						<li class="sidebar-item <?= isActive('cavalo'); ?>">
-                        	<a href="?algo=cavalo">Cavalo (BFS)</a>
+						<li class="sidebar-item">
+                        	<a href="?app=cavalo">Cavalo (BFS)</a>
+						</li>
+						<!-- 8 Damas by tiagohm -->
+						<li class="sidebar-item">
+                        	<a href="?app=oitodamas">8 Damas (DFS)</a>
                         </li>
 					</ul>
-					<p class="text-center"><img class="badge-img" src="https://img.shields.io/github/release/tiagohm/PAGW.svg?label=versão"></p>
 				</div>
 
-				<script>
-					criarAcao("exportar-matriz", "Exportar como Matriz ou Lista de Adjacência", "", "matrix");
-					criarAcao("salvar", "Salvar para um arquivo", "", "content-save");
-					criarAcao("abrir", "Abrir de um arquivo", "", "folder-open");
-					criarAcao("limpar", "Limpar", "", "broom");
-					criarAcao("remover", "Clique sobre um vértice ou aresta para removê-los", "grafo", "delete");
-					criarAcao("conectar", "Selecione dois vértices para criar uma aresta", "grafo", "power-plug");
-					criarAcao("adicionar", "Clique em um espaço vazio para adicionar um vértice", "grafo", "plus");
-					criarAcao("selecionar", "Selecionar", "grafo", "cursor-default", true);
-				</script>
-
 				<?php
-					if($exibir) {
-						if($isGrafo) {
-							include_once "./grafo.php";
-						} else {
-							include_once "./$algoritmo.php";
-						}
+					// Exibir o grafo dos algoritmos.
+					if($isAlgoritmo) {
+						include_once "./algoritmos/index.php";
+					} else if($isApp) {
+						readfile(__DIR__ . "/aplicacoes/$nomeDaAplicacao/index.html");
 					}
 				?>
             </section>
-		</div>
-
-		<!-- Modal -->
-		<div class="modal fade" id="exportarModal" tabindex="-1" role="dialog">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title">Matriz ou Lista de Adjacência</h5>
-						<button type="button" class="close" data-dismiss="modal">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<nav>
-							<div class="nav nav-tabs" id="nav-tab" role="tablist">
-								<a class="nav-item nav-link active" id="nav-matriz-adjacencia-tab" data-toggle="tab" href="#nav-matriz-adjacencia" role="tab">Matriz de Adjacência</a>
-								<a class="nav-item nav-link" id="nav-lista-adjacencia-tab" data-toggle="tab" href="#nav-lista-adjacencia" role="tab">Lista de Adjacência</a>
-							</div>
-						</nav>
-						<div class="tab-content">
-							<div class="tab-pane fade show active" id="nav-matriz-adjacencia" role="tabpanel">
-								<pre id="text-matriz-adjacencia">
-
-
-
-								</pre>
-							</div>
-							<div class="tab-pane fade" id="nav-lista-adjacencia" role="tabpanel">
-								<pre id="text-lista-adjacencia">
-
-
-
-								</pre>
-							</div>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
-					</div>
-				</div>
-			</div>
 		</div>
 
 		<!-- Github Corner -->
@@ -211,87 +134,4 @@ if($algoritmo === "dfs") {
 		</a>
 
 	</body>
-
-	<script>
-		function exibirOuOcultarMenuLateral() {
-			let elm = $("#sidebar1");
-			elm.hasClass("reveal") && elm.removeClass("reveal") || elm.addClass("reveal");
-		}
-
-		function exibirExportarModal() {
-			$("#text-matriz-adjacencia").text(grafo.obterMatrizDeAdjacenciaFormatada());
-			$("#text-lista-adjacencia").text(grafo.obterListaDeAdjacenciaFormatada());
-			$("#exportarModal").modal("show");
-		}
-
-		function salvarGrafoComoJson() {
-			let file = new File([grafo.toJson()], "<?= $algoritmo ?>.json", {type: "application/json;charset=utf-8"});
-			saveAs(file);
-		}
-
-		function importarJsonComoGrafo(performClick) {
-			if(performClick) {
-				$("#file-input-json").click();
-			} else {
-				let file = $("#file-input-json")[0].files[0];
-				if(file) {
-					let reader = new FileReader();
-					reader.onload = (e) => {
-						let content = e.target.result;
-						grafo.fromJson(JSON.parse(content));
-					};
-					reader.readAsText(file, "UTF-8");
-				}
-			}
-		}
-
-		function exportarComoImagem(type) {
-			if(type == 'png') {
-				exportarComoImagemPng(grafo.toPng());
-			} else {
-				exportarComoImagemJpg(grafo.toJpg());
-			}
-		}
-
-		function exportarComoImagemPng(blob) {
-			if(!blob || blob.size == 0) return;
-			let file = new File([blob], "<?= $algoritmo ?>.png", {type: "image/png"});
-			saveAs(file);
-		}
-
-		function exportarComoImagemJpg(blob) {
-			if(!blob || blob.size == 0) return;
-			let file = new File([blob], "<?= $algoritmo ?>.jpg", {type: "image/jpeg"});
-			saveAs(file);
-		}
-
-		$(document).ready(function() {
-			//Ativar/Desativar itens de um determinado grupo.
-			$("i[actionbar-group]").click(function() {
-				let group = $(this).attr("actionbar-group");
-				if(!group) return;
-				$(`i[actionbar-group=${group}]`).each(function(i) {
-					$(this).removeClass("active");
-				});
-				$(this).addClass("active");
-			});
-
-			grafo.adicionarInteceptadorDeAcao((action) => {
-				if(action === "abrir") {
-					importarJsonComoGrafo(true);
-				} else if(action === "salvar") {
-					salvarGrafoComoJson();
-				} else if(action === "exportar-matriz") {
-					exibirExportarModal();
-				}
-			});
-		});
-
-		$("input[type=number][limit-to-graph-size]").on("change", function(e) {
-			let length = grafo.tamanho();
-			if($(this).val() >= length) {
-				$(this).val(Math.max(0, length - 1));
-			}
-		});
-	</script>
 </html>

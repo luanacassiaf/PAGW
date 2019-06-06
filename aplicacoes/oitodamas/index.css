@@ -1,0 +1,42 @@
+#tabuleiro-box {
+	padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#tabuleiro {
+	border-collapse: collapse;
+	border-spacing: 0;
+	table-layout: fixed;
+}
+
+#tabuleiro td {
+	width: calc((100vmin - 160px) / 8);
+    height: calc((100vmin - 160px) / 8);
+	border: 1px solid #607D8B;
+	cursor: pointer;
+	position: relative;
+}
+
+#tabuleiro td.dama {
+    background: #FF9800;
+}
+
+#tabuleiro td.inicio {
+	background: #4CAF50;
+}
+
+#tabuleiro td.dama::before {
+    font-family: 'Mdi' !important;
+	content: "\eca2";
+	font-size: 22px;
+    position: absolute;
+    left: 50%;
+	right: auto;
+    color: #FFF;
+    font-weight: normal;
+    transform: translate(-50%, -50%);
+    border-radius: 3px;
+	top: 50%;
+}

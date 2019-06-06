@@ -160,7 +160,7 @@ header.shadow {
 	transition: 300ms ease;
 }
 
-#sidebar1 {
+#sidebar {
 	display: flex;
     flex-flow: column;
     height: calc(100vh - 86px);
@@ -238,20 +238,6 @@ header.shadow {
 	color: #fff7;
 	text-align: justify;
 	font-size: small;
-}
-
-.grafo-panel {
-	width: 100%;
-	height: calc(100vh - 150px);
-	border: 1px solid var(--colorPrimary);
-	border-radius: 5px;
-}
-
-.grafo-toolbar {
-	padding: 10px 0px;
-	display: flex;
-	justify-content: flex-end;
-	align-items: center;
 }
 
 /* Switch Button */

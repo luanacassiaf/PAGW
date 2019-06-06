@@ -1,0 +1,13 @@
+.grafo-panel {
+	width: 100%;
+	height: calc(100vh - 150px);
+	border: 1px solid var(--colorPrimary);
+	border-radius: 5px;
+}
+
+.grafo-toolbar {
+	padding: 10px 0px;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
