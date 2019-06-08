@@ -52,6 +52,7 @@
 
 
 						</pre>
+						<span style="display: inline-block; cursor: pointer" class="btn btn-primary" onclick="salvarElementoComoImagem('#matriz-adjacencia-texto', 'matriz')">Salvar como Imagem</span>
 					</div>
 					<div class="tab-pane fade" id="nav-lista-adjacencia" role="tabpanel">
 						<pre id="lista-adjacencia-texto">
@@ -59,6 +60,7 @@
 
 
 						</pre>
+						<span style="display: inline-block; cursor: pointer" class="btn btn-primary" onclick="salvarElementoComoImagem('#lista-adjacencia-texto', 'lista')">Salvar como Imagem</span>
 					</div>
 				</div>
 			</div>

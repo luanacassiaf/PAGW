@@ -11,6 +11,17 @@ function exibirOuOcultarMenuLateral() {
     elm.hasClass("reveal") && elm.removeClass("reveal") || elm.addClass("reveal");
 }
 
+function salvarElementoComoImagem(elm, name) {
+    html2canvas($(elm)[0]).then(canvas => {
+        const data = canvas.toDataURL("png");
+        console.log(data);
+        const a = document.createElement('a');
+        a.download = `${name}.png`;
+        a.href = data.replace("png", "octet-stream");
+        a.click();
+    });
+}
+
 $(document).ready(function () {
     //Ativar/Desativar itens de um determinado grupo.
     $("i[actionbar-group]").click(function () {
