@@ -1,17 +1,10 @@
 <?php
-
 $isAlgoritmo = isset($_GET["algoritmo"]) && !empty($_GET["algoritmo"]);
 $isApp = isset($_GET["app"]) && !empty($_GET["app"]);
 $nomeDoAlgoritmo = $isAlgoritmo ? $_GET["algoritmo"] : "";
 $nomeDaAplicacao = $isApp ? $_GET["app"] : "";
-
-// if($algoritmo === "cavalo") {
-// 	$titulo = "Cavalo (BFS)";
-// 	$descricao = "Usando os movimentos do cavalo, você deve	determinar qual o número mínimo de movimentos do cavalo para ir de uma casa Início (I) até uma casa Final (F), sendo proibido que o cavalo ‘pare’ sobre algumas casas especificadas (X) durante a sequência de movimentos.";
-// 	$isAlgoritmo = false;
-// }
-
 ?>
+
 <html>
     <head>
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -38,7 +31,7 @@ $nomeDaAplicacao = $isApp ? $_GET["app"] : "";
     	<script type="text/javascript" src="js/cytoscape-context-menus.js"></script>
     	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-		<script type="text/javascript" src="public/js/common.js"></script>
+		<script type="text/javascript" src="js/common.js"></script>
 		<!-- JS da aplicação e dos algoritmos -->
 		<?php if($isAlgoritmo): ?>
 			<script type="text/javascript" src="algoritmos/index.js"></script> 

@@ -1,0 +1,38 @@
+<div class="col-md-12 h-100" style="position: relative;">
+    <div class="row">
+        <div class="col-md-8 p-2">
+            <div class="toolbar">
+            </div>
+
+            <div id="tabuleiro-box">
+                <table id="tabuleiro">
+                </table>
+            </div>
+        </div>
+
+        <div class="col-md-4 p-2">
+            <div class="card-panel">
+                <h2 class="title">Cavalo (BFS)</h2>
+                <p id="description" class="collapse description">Usando os movimentos do cavalo, você deve determinar
+                    qual o número mínimo de movimentos do cavalo para ir de uma casa
+                    Início (I) até uma casa Final (F), sendo proibido que o cavalo ‘pare’ sobre algumas casas
+                    especificadas (X) durante a
+                    sequência de movimentos.</p>
+                <a data-toggle="collapse" href="#description" role="button"
+                    style="color: #FFF; font-size: 10pt; text-decoration: none;">DESCRIÇÃO...</a>
+            </div>
+            <div class="algoritmo-panel mt-2">
+                <div>
+                    <h6>1 - Escolher a Casa Início. Clique em <i class="mdi-alpha-i-box"></i> e selecione uma casa no
+                        tabuleiro. </h6>
+                    <h6>2 - Escolher a Casa Final. Clique em <i class="mdi-alpha-f-box"></i> e selecione uma casa no
+                        tabuleiro.</h6>
+                    <h6>3 - Escolher as Casas Proibidas. Clique em <i class="mdi-alpha-p-box"></i> e selecione as casas
+                        no tabuleiro.</h6>
+                    <h6>4 - Clique em executar!</h6>
+                </div>
+                <button class="btn btn-success" onclick="executarCavalo()"><i class="mdi-play"></i> Executar</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,106 @@
+#tabuleiro-box {
+	padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#tabuleiro {
+	border-collapse: collapse;
+	border-spacing: 0;
+	table-layout: fixed;
+}
+
+#tabuleiro td {
+	width: calc((100vmin - 160px) / 8);
+    height: calc((100vmin - 160px) / 8);
+	border: 1px solid #607D8B;
+	cursor: pointer;
+	position: relative;
+}
+
+#tabuleiro td.b,
+#tabuleiro td.b {
+	border-bottom: none;
+	background: #FF9800;
+}
+
+#tabuleiro td.c,
+#tabuleiro td.c {
+	border-top: none;
+	background: #FF9800;
+}
+
+#tabuleiro td.e,
+#tabuleiro td.e {
+	border-left: none;
+	background: #FF9800;
+}
+
+#tabuleiro td.d,
+#tabuleiro td.d {
+	border-right: none;
+	background: #FF9800;
+}
+
+#tabuleiro td.proibido::after,
+#tabuleiro td.inicio::after,
+#tabuleiro td.fim::after {
+	text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+/* Posição xy no tabuleiro */
+#tabuleiro td::before {
+	content: attr(px) 'x' attr(py);
+	font-size: 10px;
+    position: absolute;
+    bottom: 3px;
+	left: 50%;
+	right: auto;
+    color: #666;
+    font-weight: normal;
+    transform: translate(-50%, 0%);
+    background: #EEE;
+    padding: 1px 5px;
+	border-radius: 3px;
+	opacity: 0.7;
+	top: auto;
+}
+
+/* Posição do movimento */
+#tabuleiro td[m]::after {
+    content: attr(m);
+    font-size: 12px;
+    position: absolute;
+    top: 5px;
+	right: 5px;
+	color: #FFF;
+	font-weight: bold;
+}
+
+#tabuleiro td.proibido::after {
+	content: 'X';
+}
+
+#tabuleiro td.inicio {
+	background: #4CAF50;
+}
+
+#tabuleiro td.fim {
+	background: #FF5722;
+}
+
+#comando-box {
+	display: flex;
+	justify-content: center;
+	align-content: center;
+}
+
+#comando-box > * {
+	margin: 1px;
+}

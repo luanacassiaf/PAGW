@@ -1,0 +1,20 @@
+<span balloon="Selecionar" balloon-pos="down" onclick="definirModoCasaInicio()">
+    <i actionbar-group="cavalo" class="actionbar-item mdi-alpha-i-box ripple ripple-circle active"></i>
+</span>
+<span balloon="Clique em um espaço vazio para adicionar um vértice" balloon-pos="down" onclick="definirModoCasaFim()">
+    <i actionbar-group="cavalo" class="actionbar-item mdi-alpha-f-box ripple ripple-circle "></i>
+</span>
+<span balloon="Selecione dois vértices para criar uma aresta" balloon-pos="down" onclick="definirModoCasaProibida()">
+    <i actionbar-group="cavalo" class="actionbar-item mdi-alpha-p-box ripple ripple-circle "></i>
+</span>
+<span balloon="Limpar" balloon-pos="down" onclick="limparTabuleiro()">
+    <i class="actionbar-item mdi-broom ripple ripple-circle "></i>
+</span>
+<span balloon="Abrir de um arquivo" balloon-pos="down" onclick="importarDeUmArquivo(true)"><i
+        class="actionbar-item mdi-folder-open ripple ripple-circle "></i>
+</span>
+<span balloon="Salvar para um arquivo" balloon-pos="down" onclick="exportarComoArquivo()"><i
+        class="actionbar-item mdi-content-save ripple ripple-circle "></i>
+</span>
+<input type="file" id="file-input-json" accept="application/json" style="display: none"
+    onchange="importarDeUmArquivo(false)">

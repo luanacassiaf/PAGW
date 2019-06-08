@@ -5,6 +5,8 @@ class Dijkstra extends Grafo {
         super(containerId);
     }
 
+    // Eventos.
+
     onInserirNovoVertice(event) {
         this.inserirNovoVertice(event.position.x, event.position.y);
     }
@@ -20,6 +22,8 @@ class Dijkstra extends Grafo {
     onRemoverAresta(aresta) {
         this.removerVerticeOuAresta(aresta);
     }
+
+    // Ações.
 
     inserirNovoVertice(x, y) {
         super.inserirNovoVertice({ data: {}, x: x, y: y })
@@ -130,7 +134,7 @@ class Dijkstra extends Grafo {
         dijkstra(verticeInicial, verticeFinal);
         percorrerAntecessores(verticeFinal);
 
-        const stepper = new Stepper(caminho, 3, this.velocidadeDaAnimacao);
+        const stepper = new Stepper(caminho, 3, () => this.velocidadeDaAnimacao);
         stepper.executar((m, i, k) => {
             if (k == 0) {
                 //Pinta o primeiro vértice com a cor verde.

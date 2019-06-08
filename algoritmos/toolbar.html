@@ -1,41 +1,40 @@
-<span action="selecionar" balloon="Selecionar" balloon-pos="down" onclick="grafo.executarAcao('selecionar')">
+<span balloon="Selecionar" balloon-pos="down" onclick="grafo.executarAcao('selecionar')">
     <i actionbar-group="grafo" class="actionbar-item mdi-cursor-default ripple ripple-circle active"></i>
 </span>
-<span action="adicionar" balloon="Clique em um espaço vazio para adicionar um vértice" balloon-pos="down"
+<span balloon="Clique em um espaço vazio para adicionar um vértice" balloon-pos="down"
     onclick="grafo.executarAcao('adicionar')">
     <i actionbar-group="grafo" class="actionbar-item mdi-plus ripple ripple-circle "></i>
 </span>
-<span action="conectar" balloon="Selecione dois vértices para criar uma aresta" balloon-pos="down"
+<span balloon="Selecione dois vértices para criar uma aresta" balloon-pos="down"
     onclick="grafo.executarAcao('conectar')">
     <i actionbar-group="grafo" class="actionbar-item mdi-power-plug ripple ripple-circle "></i>
 </span>
-<span action="remover" balloon="Clique sobre um vértice ou aresta para removê-los" balloon-pos="down"
+<span balloon="Clique sobre um vértice ou aresta para removê-los" balloon-pos="down"
     onclick="grafo.executarAcao('remover')">
     <i actionbar-group="grafo" class="actionbar-item mdi-delete ripple ripple-circle "></i>
 </span>
-<span action="limpar" balloon="Limpar" balloon-pos="down" onclick="grafo.executarAcao('limpar')">
+<span balloon="Limpar" balloon-pos="down" onclick="grafo.executarAcao('limpar')">
     <i class="actionbar-item mdi-broom ripple ripple-circle "></i>
 </span>
-<span action="abrir" balloon="Abrir de um arquivo" balloon-pos="down" onclick="importarJsonComoGrafo(true)"><i
+<span balloon="Abrir de um arquivo" balloon-pos="down" onclick="importarDeUmArquivo(true)"><i
         class="actionbar-item mdi-folder-open ripple ripple-circle "></i>
 </span>
-<span action="salvar" balloon="Salvar para um arquivo" balloon-pos="down" onclick="salvarGrafoComoJson()"><i
+<span balloon="Salvar para um arquivo" balloon-pos="down" onclick="exportarParaArquivo()"><i
         class="actionbar-item mdi-content-save ripple ripple-circle "></i>
 </span>
-<span action="exportar-matriz" balloon="Exportar como Matriz ou Lista de Adjacência" balloon-pos="down"
-    onclick="exibirExportarModal()">
+<span balloon="Exportar como Matriz ou Lista de Adjacência" balloon-pos="down" onclick="exibirExportarModal()">
     <i class="actionbar-item mdi-matrix ripple ripple-circle "></i>
 </span>
 
 <input type="file" id="file-input-json" accept="application/json" style="display: none"
-    onchange="importarJsonComoGrafo(false)">
+    onchange="importarDeUmArquivo(false)">
 
 <span action="exportar-imagem">
     <div class="dropdown">
         <i class="actionbar-item mdi-dots-vertical ripple ripple-circle active" data-toggle="dropdown"></i>
         <div class="dropdown-menu dropdown-menu-right">
-            <a class="dropdown-item" onclick="exportarComoImagem('grafo', 'png')">Exportar Como PNG</a>
-            <a class="dropdown-item" onclick="exportarComoImagem('grafo', 'jpg')">Exportar Como JPG</a>
+            <a class="dropdown-item" onclick="exportarComoImagem('png')">Exportar Como PNG</a>
+            <a class="dropdown-item" onclick="exportarComoImagem('jpg')">Exportar Como JPG</a>
         </div>
     </div>
 </span>
