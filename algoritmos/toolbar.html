@@ -1,19 +1,19 @@
-<span balloon="Selecionar" balloon-pos="down" onclick="grafo.executarAcao('selecionar')">
+<span balloon="Selecionar" balloon-pos="down" onclick="grafo.habilitarModoSelecionar()">
     <i actionbar-group="grafo" class="actionbar-item mdi-cursor-default ripple ripple-circle active"></i>
 </span>
 <span balloon="Clique em um espaço vazio para adicionar um vértice" balloon-pos="down"
-    onclick="grafo.executarAcao('adicionar')">
+    onclick="grafo.habilitarModoInserir()">
     <i actionbar-group="grafo" class="actionbar-item mdi-plus ripple ripple-circle "></i>
 </span>
 <span balloon="Selecione dois vértices para criar uma aresta" balloon-pos="down"
-    onclick="grafo.executarAcao('conectar')">
+    onclick="grafo.habilitarModoConectar()">
     <i actionbar-group="grafo" class="actionbar-item mdi-power-plug ripple ripple-circle "></i>
 </span>
 <span balloon="Clique sobre um vértice ou aresta para removê-los" balloon-pos="down"
-    onclick="grafo.executarAcao('remover')">
+    onclick="grafo.habilitarModoRemover()">
     <i actionbar-group="grafo" class="actionbar-item mdi-delete ripple ripple-circle "></i>
 </span>
-<span balloon="Limpar" balloon-pos="down" onclick="grafo.executarAcao('limpar')">
+<span balloon="Limpar" balloon-pos="down" onclick="grafo.limpar()">
     <i class="actionbar-item mdi-broom ripple ripple-circle "></i>
 </span>
 <span balloon="Abrir de um arquivo" balloon-pos="down" onclick="importarDeUmArquivo(true)"><i

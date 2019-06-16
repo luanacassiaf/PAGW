@@ -9,7 +9,6 @@ $nomeDaAplicacao = $isApp ? $_GET["app"] : "";
     <head>
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link rel="shortcut icon" type="image/png" href="img/favicon.png"/>
-		
 		<!-- CSS Global -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" href="css/mdi.css">
@@ -60,7 +59,7 @@ $nomeDaAplicacao = $isApp ? $_GET["app"] : "";
 						<a class="navbar-brand" href="#">
 							<img class="logo" src="img/pagw-logo.png">
 							<span>
-								<div class="title">Algoritmos em Grafos e Aplicações</div>
+								<div class="title">Algoritmos e Aplicações em Grafos</div>
 							</span>
 						</a>
 					</div>
@@ -84,26 +83,33 @@ $nomeDaAplicacao = $isApp ? $_GET["app"] : "";
                     <ul class="sidebar-nav">
 						<li class="sidebar-header">
                             ALGORITMOS
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="?algoritmo=dfs">Busca em Profundidade</a>
-                        </li>
-                        <li class="sidebar-item">
-                        	<a href="?algoritmo=bfs">Busca em Largura</a>
-                        </li>
-						<li class="sidebar-item">
-                        	<a href="?algoritmo=dijkstra">Dijkstra</a>
-                        </li>
+						</li>
+						<?php
+							$caminho = __DIR__ . "/algoritmos/";
+							foreach(array_diff(scandir($caminho), ['..', '.']) as $dir) {
+								$meta = json_decode(file_get_contents($caminho . $dir . "/meta.json"), true);
+								if(is_dir($caminho . $dir)) {
+									echo '<li class="sidebar-item">';
+									echo "<a href='?algoritmo=$dir'>{$meta['nome']}</a>";
+									echo '</li>';
+								}
+							}
+						?>
+
 						<li class="sidebar-header">
                             APLICAÇÕES
                         </li>
-						<li class="sidebar-item">
-                        	<a href="?app=cavalo">Cavalo (BFS)</a>
-						</li>
-						<!-- 8 Damas by tiagohm -->
-						<li class="sidebar-item">
-                        	<a href="?app=oitodamas">8 Damas (DFS)</a>
-                        </li>
+						<?php
+							$caminho = __DIR__ . "/aplicacoes/";
+							foreach(array_diff(scandir($caminho), ['..', '.']) as $dir) {
+								$meta = json_decode(file_get_contents($caminho . $dir . "/meta.json"), true);
+								if(is_dir($caminho . $dir)) {
+									echo '<li class="sidebar-item">';
+									echo "<a href='?app=$dir'>{$meta['nome']}</a>";
+									echo '</li>';
+								}
+							}
+						?>
 					</ul>
 				</div>
 
