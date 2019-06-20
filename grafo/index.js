@@ -166,6 +166,8 @@ class Grafo {
         if (loadFromLocalStorage && localStorage.grafo) {
             this.fromJson(JSON.parse(localStorage.grafo));
         }
+
+        this.aplicarDirecaoDasArestas($("#switchbox-direcao > input").is(":checked"));
     }
 
     salvarGrafoTemporariamente() {

@@ -1,8 +1,21 @@
 <?php
-$isApp = isset($_GET["app"]) && !empty($_GET["app"]);
-$isAlgoritmo = !$isApp;
-$nomeDoAlgoritmo = $isAlgoritmo && isset($_GET["algoritmo"]) && !empty($_GET["algoritmo"]) ? $_GET["algoritmo"] : "dfs";
-$nomeDaAplicacao = $isApp ? $_GET["app"] : "";
+$app = isset($_GET["app"]) && !empty($_GET["app"]) ? $_GET["app"] : "dfs";
+$pastaApp = __DIR__ . "/app/";
+$pastaGrafo = __DIR__ . "/grafo/";
+$listaDeAplicativos = [];
+$aplicativo = null;
+
+foreach(array_diff(scandir($pastaApp), ['..', '.']) as $dir) {
+	$metaCaminho = $pastaApp . $dir . "/meta.json";
+	if(file_exists($metaCaminho)) {
+		$meta = json_decode(file_get_contents($metaCaminho), true);
+		$listaDeAplicativos[$dir] = $meta;
+		if($dir == $app) {
+			$aplicativo = $meta;
+		}
+	}
+}
+
 ?>
 
 <html>
@@ -16,13 +29,10 @@ $nomeDaAplicacao = $isApp ? $_GET["app"] : "";
         <link rel="stylesheet" href="css/cytoscape-context-menus.css">
 		<link rel="stylesheet" href="css/theme.css">
 		<!-- CSS da aplicação ou de um algoritmo em grafo -->
-		<?php if($isAlgoritmo): ?>
-			<link rel="stylesheet" href="algoritmos/index.css">
-			<link rel="stylesheet" href="algoritmos/<?= $nomeDoAlgoritmo ?>/index.css">
+		<?php if($aplicativo["grafo"]): ?>
+			<link rel="stylesheet" href="grafo/index.css">
 		<?php endif; ?>
-		<?php if($isApp): ?>
-			<link rel="stylesheet" href="aplicacoes/<?= $nomeDaAplicacao ?>/index.css">
-		<?php endif; ?>		
+		<link rel="stylesheet" href="app/<?= $app ?>/index.css">
 		<!-- JS Global -->
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
@@ -33,14 +43,10 @@ $nomeDaAplicacao = $isApp ? $_GET["app"] : "";
 		<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 		<script src="js/common.js"></script>
 		<!-- JS da aplicação e dos algoritmos -->
-		<?php if($isAlgoritmo): ?>
-			<script src="algoritmos/index.js"></script> 
-			<script src="algoritmos/<?= $nomeDoAlgoritmo ?>/index.js"></script>
+		<?php if($aplicativo["grafo"]): ?>
+			<script src="grafo/index.js"></script>
 		<?php endif; ?>
-		<?php if($isApp): ?>
-			<script src="aplicacoes/<?= $nomeDaAplicacao ?>/index.js"></script> 
-		<?php endif; ?>
-
+		<script src="app/<?= $app ?>/index.js"></script> 
         <title>Algoritmos em Grafos e Aplicações</title>
     </head>
     <body>
@@ -66,10 +72,12 @@ $nomeDaAplicacao = $isApp ? $_GET["app"] : "";
 					<!-- Barra de Ações -->
 					<div id="actionbar" class="col-md-6 actionbar">
 						<?php 
-							if($isAlgoritmo) {
-								readfile(__DIR__ . "/algoritmos/toolbar.html");
-							} else if($isApp) {
-								readfile(__DIR__ . "/aplicacoes/$nomeDaAplicacao/toolbar.html");
+							if($aplicativo["grafo"]) {
+								readfile($pastaGrafo . "toolbar.html");
+							} else if(file_exists($pastaApp . "$app/toolbar.html")) {
+								readfile($pastaApp . "$app/toolbar.html");
+							} else {
+								echo "toolbar.html não encontrado!";
 							}
 						?>
 					</div>
@@ -82,32 +90,13 @@ $nomeDaAplicacao = $isApp ? $_GET["app"] : "";
 					<!-- Itens do Menu -->
                     <ul class="sidebar-nav">
 						<li class="sidebar-header">
-                            ALGORITMOS
+                            ALGORITMOS E APLICAÇÕES
 						</li>
 						<?php
-							$caminho = __DIR__ . "/algoritmos/";
-							foreach(array_diff(scandir($caminho), ['..', '.']) as $dir) {
-								$meta = json_decode(file_get_contents($caminho . $dir . "/meta.json"), true);
-								if(is_dir($caminho . $dir)) {
-									echo '<li class="sidebar-item">';
-									echo "<a href='?algoritmo=$dir'>{$meta['nome']}</a>";
-									echo '</li>';
-								}
-							}
-						?>
-
-						<li class="sidebar-header">
-                            APLICAÇÕES
-                        </li>
-						<?php
-							$caminho = __DIR__ . "/aplicacoes/";
-							foreach(array_diff(scandir($caminho), ['..', '.']) as $dir) {
-								$meta = json_decode(file_get_contents($caminho . $dir . "/meta.json"), true);
-								if(is_dir($caminho . $dir)) {
-									echo '<li class="sidebar-item">';
-									echo "<a href='?app=$dir'>{$meta['nome']}</a>";
-									echo '</li>';
-								}
+							foreach($listaDeAplicativos as $nome => $meta) {
+								echo '<li class="sidebar-item" tipo>';
+								echo "<a href='?app=$nome'>{$meta['nome']}</a>";
+								echo '</li>';
 							}
 						?>
 					</ul>
@@ -115,10 +104,12 @@ $nomeDaAplicacao = $isApp ? $_GET["app"] : "";
 
 				<?php
 					// Exibir o grafo dos algoritmos.
-					if($isAlgoritmo) {
-						include_once "./algoritmos/index.php";
-					} else if($isApp) {
-						readfile(__DIR__ . "/aplicacoes/$nomeDaAplicacao/index.html");
+					if($aplicativo["grafo"]) {
+						include_once "./grafo/index.php";
+					} else if(file_exists($pastaApp . "$app/index.html")) {
+						readfile($pastaApp . "$app/index.html");
+					} else {
+						echo "index.html não encontrado!";
 					}
 				?>
             </section>

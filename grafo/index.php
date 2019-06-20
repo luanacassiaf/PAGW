@@ -22,7 +22,7 @@
 		</div>
 
 		<div class="col-md-4 p-2">
-			<?php readfile(__DIR__ . "/$nomeDoAlgoritmo/index.html"); ?>
+			<?php readfile($pastaApp . "$app/index.html"); ?>
 		</div>
 
 	</div>
@@ -70,8 +70,3 @@
 		</div>
 	</div>
 </div>
-
-<script>
-// Define o valor inicial da direção ao carregar a página.
-grafo.aplicarDirecaoDasArestas($("#switchbox-direcao > input").is(":checked"));
-</script>
