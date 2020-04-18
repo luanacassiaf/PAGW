@@ -1,18 +1,32 @@
 <?php
+
+
+//echo "PHP VERSION: ".phpversion();
+
 $app = isset($_GET["app"]) && !empty($_GET["app"]) ? $_GET["app"] : "dfs";
+
 $pastaApp = __DIR__ . "/app/";
 $pastaGrafo = __DIR__ . "/grafo/";
-$listaDeAplicativos = [];
+$listaDeAplicativos = array();
 $aplicativo = null;
 
-foreach(array_diff(scandir($pastaApp), ['..', '.']) as $dir) {
+
+
+$array1 = array("..", ".");
+
+foreach(array_diff(scandir($pastaApp), $array1) as $dir) {
 	$metaCaminho = $pastaApp . $dir . "/meta.json";
+
 	if(file_exists($metaCaminho)) {
 		$meta = json_decode(file_get_contents($metaCaminho), true);
+	
+
 		$listaDeAplicativos[$dir] = $meta;
 		if($dir == $app) {
 			$aplicativo = $meta;
-		}
+		} 
+		//echo("<script>console.log('PHP: ". var_dump($aplicativo) ."');</script>");	
+		//echo $aplicativo["grafo"]; die;		
 	}
 }
 
@@ -20,6 +34,7 @@ foreach(array_diff(scandir($pastaApp), ['..', '.']) as $dir) {
 
 <html>
     <head>
+                <meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link rel="shortcut icon" type="image/png" href="img/favicon.png"/>
 		<!-- CSS Global -->
@@ -32,7 +47,7 @@ foreach(array_diff(scandir($pastaApp), ['..', '.']) as $dir) {
 		<?php if($aplicativo["grafo"]): ?>
 			<link rel="stylesheet" href="grafo/index.css">
 		<?php endif; ?>
-		<link rel="stylesheet" href="app/<?= $app ?>/index.css">
+		<link rel="stylesheet" href="app/<?php echo $app ?>/index.css">
 		<!-- JS Global -->
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
@@ -46,7 +61,7 @@ foreach(array_diff(scandir($pastaApp), ['..', '.']) as $dir) {
 		<?php if($aplicativo["grafo"]): ?>
 			<script src="grafo/index.js"></script>
 		<?php endif; ?>
-		<script src="app/<?= $app ?>/index.js"></script> 
+		<script src="app/<?php echo $app ?>/index.js"></script> 
         <title>Algoritmos em Grafos e Aplicações</title>
     </head>
     <body>
@@ -71,7 +86,8 @@ foreach(array_diff(scandir($pastaApp), ['..', '.']) as $dir) {
 					</div>
 					<!-- Barra de Ações -->
 					<div id="actionbar" class="col-md-6 actionbar">
-						<?php 
+						<?php
+						
 							if($aplicativo["grafo"]) {
 								readfile($pastaGrafo . "toolbar.html");
 							} else if(file_exists($pastaApp . "$app/toolbar.html")) {
@@ -92,18 +108,23 @@ foreach(array_diff(scandir($pastaApp), ['..', '.']) as $dir) {
 						<li class="sidebar-header">
                             ALGORITMOS E APLICAÇÕES
 						</li>
-						<?php
-							foreach($listaDeAplicativos as $nome => $meta) {
-								echo '<li class="sidebar-item" tipo>';
-								echo "<a href='?app=$nome'>{$meta['nome']}</a>";
-								echo '</li>';
-							}
-						?>
+
+						<?php foreach($listaDeAplicativos as $algoritmo => $dados): ?>
+							<li class="sidebar-item" tipo>
+								<a href='?app=<?php echo $algoritmo; ?>'><?php echo $dados["nome"]; ?></a>
+							</li>
+						<?php endforeach; ?>
 					</ul>
 				</div>
 
-				<?php
+				<?php 
 					// Exibir o grafo dos algoritmos.
+
+					echo ("<script>console.log('Pasta: ".$pastaApp."$app/index.html"."')</script>");
+					echo ("<script>console.log('Grafo: ".$aplicativo["grafo"]."')</script>");
+					
+					
+
 					if($aplicativo["grafo"]) {
 						include_once "./grafo/index.php";
 					} else if(file_exists($pastaApp . "$app/index.html")) {

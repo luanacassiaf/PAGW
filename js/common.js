@@ -12,6 +12,7 @@ function exibirOuOcultarMenuLateral() {
 }
 
 function salvarElementoComoImagem(elm, name) {
+    window.scrollTo(0,0);  
     html2canvas($(elm)[0]).then(canvas => {
         const data = canvas.toDataURL("png");
         console.log(data);
@@ -20,6 +21,24 @@ function salvarElementoComoImagem(elm, name) {
         a.href = data.replace("png", "octet-stream");
         a.click();
     });
+}
+
+var imported = document.createElement('script');
+imported.src = 'js/jspdf.min.js';
+document.head.appendChild(imported); 
+
+function salvarElementoComoPDF(elm, name){
+    var doc = new jsPDF('r', 'pt', 'a4');
+    html2canvas($(elm)[0]).then(canvas => {
+        var width = canvas.width;
+        var height = canvas.height;
+        const data = canvas.toDataURL("png");
+        console.log(data);
+        //X, Y, LARGURA, ALTURA
+        doc.addImage(data, 'png', 1, 1, width, height);
+        doc.save(`${name}.pdf`);
+    });
+
 }
 
 $(document).ready(function () {

@@ -1,3 +1,5 @@
+.html2canvas-container { width: 1200px !important; height: 1200px !important; }
+
 .grafo-panel {
 	width: 100%;
 	height: calc(100vh - 150px);
@@ -10,4 +12,16 @@
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
+}
+
+.botao {
+	display: inline-block;
+	cursor: pointer;
+	justify-content: center;
+	align-items: center;
+}
+
+.modal-dialog{
+	max-width: none!important;
+	margin: 2% 5% 2% 5%;
 }
