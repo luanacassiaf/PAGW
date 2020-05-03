@@ -32,21 +32,19 @@ function salvarElementoComoPDF(elm, name){
     html2canvas($(elm)[0]).then(canvas => {
         var width = canvas.width;
         var height = canvas.height;
-        console.log(width);
-        console.log(height);
-        if(width > 584 && name == `matriz`){
-                alert("As dimensões da imagem no PDF serão ajustadas para se adequar ao tamanho A4.")
-                var dimx = width/584; //Limite horizontal do A4: coluna com 25 vértices (584px)
-                var dimy = height/525; //Proporção vertical: linha com 25 vértices (525px)
+        if(width > 584){
+            alert("As dimensões da imagem no PDF serão ajustadas para se adequar ao tamanho A4.")
+           //Limite horizontal do A4: coluna com 25 vértices (584px)
+            var dim = 584/width;
+            var prop = (100*(width*dim)/width)/100;
         }else{
-            var dimx = 1;
-            var dimy = 1;
+            var dim = 1;
+            var prop = 1;
         }
-        
         const data = canvas.toDataURL("png");
         console.log(data);
         //X, Y, LARGURA, ALTURA
-        doc.addImage(data, 'png', 5, 5, width/dimx, height/dimy);
+        doc.addImage(data, 'png', 5, 5, width*dim, height*prop);
         doc.save(`${name}.pdf`);
     });
 
