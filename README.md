@@ -1,4 +1,4 @@
-# PAGW ![](https://img.shields.io/github/release/tiagohm/PAGW.svg?label=versão)
+# PAGW
 
 >  Plataforma de Aprendizagem de Grafos via Web
 
@@ -30,7 +30,7 @@
 ```bash 
 $ sudo docker-compose up --build
 ```
-* Para subir o container da aplicação e executar projeto, execute o comando:
+* Para subir o container da aplicação e executar o projeto, execute o comando:
 
 ```bash
 $ sudo docker-compose up
