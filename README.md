@@ -23,10 +23,9 @@
 * Docker-Compose
 * Ctop
 
-### Primeiros passos
+### Execução em Linux
 
 * Para criar o container da aplicação, execute o comando:
-
 ```bash 
 $ sudo docker-compose up --build
 ```
