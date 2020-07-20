@@ -1,4 +1,4 @@
-# PAGW ![](https://img.shields.io/github/release/tiagohm/PAGW.svg?label=versão)
+# PAGW
 
 >  Plataforma de Aprendizagem de Grafos via Web
 
@@ -16,3 +16,26 @@
 * Exporte seus grafos como imagem PNG ou JPG;
 * Escolha se seu grafo será um grafo direcionado ou não;
 * Execute os algoritmos e veja seu passo-a-passo;
+
+### Pré-requisitos
+
+* Docker
+* Docker-Compose
+* Ctop
+
+### Execução em Linux
+
+* Para criar o container da aplicação, execute o comando:
+```bash 
+$ sudo docker-compose up --build
+```
+* Para subir o container da aplicação e executar o projeto, execute o comando:
+
+```bash
+$ sudo docker-compose up
+```
+* Para monitorar o container em execução, execute o comando:
+
+```bash 
+$ sudo ctop
+```
