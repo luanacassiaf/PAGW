@@ -24,11 +24,16 @@
 * Ctop
 
 ### Execução em Linux
+#### Configuração
 
-* Para criar o container da aplicação, execute o comando:
+* Na primeira execução do projeto, deverá ser criado o container da aplicação a partir do comando:
 ```bash 
 $ sudo docker-compose up --build
 ```
+#### Executar o projeto
+
+Há duas formas de executar o container da aplicação do projeto, uma delas é utilizando o Docker-Compose e a outra é utilizando o Ctop.
+
 * Para subir o container da aplicação e executar o projeto, execute o comando:
 
 ```bash
