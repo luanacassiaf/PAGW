@@ -13,9 +13,9 @@ function exibirOuOcultarMenuLateral() {
 
 function salvarElementoComoImagem(elm, name) {
     window.scrollTo(0,0);  
-    html2canvas($(elm)[0]).then(canvas => {
+    console.log($(elm)[0]);
+    html2canvas($(elm)[0],).then(canvas => {
         const data = canvas.toDataURL("png");
-        console.log(data);
         const a = document.createElement('a');
         a.download = `${name}.png`;
         a.href = data.replace("png", "octet-stream");
@@ -30,6 +30,7 @@ document.head.appendChild(imported);
 function salvarElementoComoPDF(elm, name){
     var doc = new jsPDF('r', 'pt', 'a4');
     html2canvas($(elm)[0]).then(canvas => {
+
         var width = canvas.width;
         var height = canvas.height;
         if(width > 584){
@@ -41,10 +42,9 @@ function salvarElementoComoPDF(elm, name){
             var dim = 1;
             var prop = 1;
         }
+
         const data = canvas.toDataURL("png");
-        console.log(data);
-        //X, Y, LARGURA, ALTURA
-        doc.addImage(data, 'png', 5, 5, width*dim, height*prop);
+        doc.addImage(data, 'png', 5, 5, width*dim, height*prop); //X, Y, LARGURA, ALTURA
         doc.save(`${name}.pdf`);
     });
 

@@ -1,4 +1,7 @@
-.html2canvas-container { width: 1200px !important; height: 1200px !important; }
+.html2canvas-container { 
+	width: none !important; 
+	height: none !important;
+}
 
 .grafo-panel {
 	width: 100%;
@@ -14,14 +17,23 @@
 	align-items: center;
 }
 
+.modal-dialog{
+	max-width: none!important;
+	max-height: none!important;
+	margin: 0 0 0 0 !important; /* TOP RIGHT BOTTOM LEFT */
+}
+
+.tab-content {
+	display: flex!important;
+}
+
+.modal-footer { 
+	justify-content: left;
+}
+
 .botao {
 	display: inline-block;
 	cursor: pointer;
 	justify-content: center;
 	align-items: center;
-}
-
-.modal-dialog{
-	max-width: none!important;
-	margin: 2% 5% 2% 5%;
 }

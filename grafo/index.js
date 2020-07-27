@@ -357,6 +357,7 @@ class Grafo {
                 res += matriz[y][x] ? '1' : '0';
             }
         }
+        console.log(res);
         return res;
     }
 
