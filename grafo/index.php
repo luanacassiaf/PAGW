@@ -45,29 +45,23 @@
 						<a class="nav-item nav-link" id="nav-lista-adjacencia-tab" data-toggle="tab" href="#nav-lista-adjacencia" role="tab">Lista de Adjacência</a>
 					</div>
 				</nav>
-				<div class="tab-content">
+				<div style="display: flex; justify-content: center;" class="tab-content">
 					<div class="tab-pane fade show active" id="nav-matriz-adjacencia" role="tabpanel">
 						<pre id="matriz-adjacencia-texto"></pre>
-					
-						<div class="modal-footer">
-							<span class="btn btn-primary botao" onclick="salvarElementoComoImagem('#matriz-adjacencia-texto', 'matriz')">Salvar como Imagem</span>
-							<span class="btn btn-primary botao" onclick="salvarElementoComoPDF('#matriz-adjacencia-texto', 'matriz')">Salvar como PDF</span>
 
-							<button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
-						</div>
-					</div>
-					
+						<span class="btn btn-primary botao" onclick="salvarElementoComoImagem('#matriz-adjacencia-texto', 'matriz')">Salvar como Imagem</span>
+                        <span class="btn btn-primary botao" onclick="salvarElementoComoPDF('#matriz-adjacencia-texto', 'matriz')">Salvar como PDF</span>
+                    </div>
 					<div class="tab-pane fade" id="nav-lista-adjacencia" role="tabpanel">
 						<pre id="lista-adjacencia-texto"></pre>
 
-						<div class="modal-footer">
-							<span class="btn btn-primary botao" onclick="salvarElementoComoImagem('#lista-adjacencia-texto', 'lista')">Salvar como Imagem</span>
-							<span class="btn btn-primary botao" onclick="salvarElementoComoPDF('#lista-adjacencia-texto', 'lista')">Salvar como PDF</span>
-
-							<button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
-						</div>
+						<span class="btn btn-primary botao" onclick="salvarElementoComoImagem('#lista-adjacencia-texto', 'lista')">Salvar como Imagem</span>
+						<span class="btn btn-primary botao" onclick="salvarElementoComoPDF('#lista-adjacencia-texto', 'lista')">Salvar como PDF</span>
 					</div>
 				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
 			</div>
 		</div>
 	</div>

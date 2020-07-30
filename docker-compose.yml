@@ -4,7 +4,7 @@ services:
     image: 'php:5.3-apache'
     restart: always
     ports:
-      - '90:80'
+      - '92:80'
     volumes:
       - .:/var/www/html
     depends_on:
