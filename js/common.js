@@ -13,7 +13,8 @@ function exibirOuOcultarMenuLateral() {
 
 function salvarElementoComoImagem(elm, name) {
     window.scrollTo(0,0);  
-    console.log($(elm)[0]);
+    //Conteúdo da imagem
+    //console.log($(elm)[0]);
     html2canvas($(elm)[0],).then(canvas => {
         var width = canvas.width;
         var height = canvas.height;

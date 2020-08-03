@@ -357,7 +357,8 @@ class Grafo {
                 res += matriz[y][x] ? '1' : '0';
             }
         }
-        console.log(res);
+        //Conteúdo da imagem em formato de texto (ex.: 0, 0, 1, 0)
+        //console.log(res);
         return res;
     }
 
@@ -367,10 +368,10 @@ class Grafo {
         for (let y = 0; y < lista.length; y++) {
             if (y > 0) res += '\r\n';
 
-            res += y + ' ⟶ ';
+            res += y + ' ⟶  ';
 
             for (let x = 0; x < lista[y].length; x++) {
-                if (x > 0) res += ' ⟶ ';
+                if (x > 0) res += ' ⟶  ';
                 res += lista[y][x].position;
             }
         }

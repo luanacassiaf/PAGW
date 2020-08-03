@@ -1,4 +1,8 @@
-.html2canvas-container { width: 1200px !important; height: 1200px !important; }
+/* Permite melhor resolução de imagens geradas */
+.html2canvas-container {
+	width: 1200px !important; 
+	height: 1200px !important; 
+}
 
 .grafo-panel {
 	width: 100%;
@@ -14,14 +18,14 @@
 	align-items: center;
 }
 
-.botao {
-	display: inline-block;
-	cursor: pointer;
-	justify-content: center;
-	align-items: center;
+.modal-footer{
+	justify-content: flex-start!important;
+}
+
+.botao-ok {
+	margin-left: auto!important;
 }
 
 .modal-dialog{
 	max-width: 1200px!important;
-	/*margin: 2% 5% 2% 5%;*/
 }
