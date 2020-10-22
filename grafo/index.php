@@ -70,7 +70,7 @@
 	</div>
 </div>
 
-<!-- <script>
+<script>
 	var btnImg = document.getElementById("btnSaveImg");
 	var btnPDF = document.getElementById("btnSavePDF");
 	var aba = document.getElementsByClassName("aba");
@@ -116,4 +116,4 @@
 			return;
 		}
 	}
-</script> -->
+</script>
