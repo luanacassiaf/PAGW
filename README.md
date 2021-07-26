@@ -39,7 +39,7 @@ Há duas formas de executar o container da aplicação do projeto, uma delas é 
 ```bash
 $ sudo docker-compose up
 ```
-* Para monitorar o container em execução, execute o comando:
+* Para monitorar o container, execute o comando:
 
 ```bash 
 $ sudo ctop
