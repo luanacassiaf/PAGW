@@ -2,13 +2,17 @@
 
 >  Plataforma de Aprendizagem de Grafos via Web
 
+### Objetivo
 
+Atividade realizada no site pré-existente Algoritmos e Aplicações em Grafos. Nesse projeto foram detectadas algumas funcionalidades que apresentavam problemas e outras a serem implementadas; além disso, o site desenvolvido em PHP na versão 7.0 foi hospedado em servidor que utiliza PHP 5.3. Durante o projeto, o site se tornou funcional em PHP 5.3 e pode ser acessado de forma adequada na hospedagem oferecida. 
+
+O trabalho também se propôs a buscar soluções para problemas como a geração de imagens de matrizes e listas de adjacência. A partir do ajuste na geração de imagens, foram implementadas funções para geração de PDF. Aperfeiçoamentos visuais foram realizados na plataforma para uma melhor usabilidade.
 
 ![](1.png)
 
 ![](2.png)
 
-### Features
+### Recursos
 
 * Crie seus grafos com rapidez e praticidade;
 * Salve seus grafos em JSON para poder reusá-los;
@@ -17,13 +21,13 @@
 * Escolha se seu grafo será um grafo direcionado ou não;
 * Execute os algoritmos e veja seu passo-a-passo;
 
-### Pré-requisitos
+### Execução em Linux
 
+#### Pré-requisitos
 * Docker
 * Docker-Compose
 * Ctop
 
-### Execução em Linux
 #### Configuração
 
 * Na primeira execução do projeto, deverá ser criado o container da aplicação a partir do comando:
