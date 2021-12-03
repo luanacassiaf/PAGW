@@ -4,9 +4,9 @@
 
 ### Objetivo
 
-Atividade realizada no site pré-existente Algoritmos e Aplicações em Grafos. Nesse projeto foram detectadas algumas funcionalidades que apresentavam problemas e outras a serem implementadas; além disso, o site desenvolvido em PHP na versão 7.0 foi hospedado em servidor que utiliza PHP 5.3. Durante o projeto, o site se tornou funcional em PHP 5.3 e pode ser acessado de forma adequada na hospedagem oferecida. 
+Projeto do Programa Institucional Voluntário de Iniciação Científica (PIVIC), realizado no site pré-existente Algoritmos e Aplicações em Grafos. Nesse projeto foram detectadas algumas funcionalidades que poderiam ser melhoradas e outras a serem implementadas; além disso, o site desenvolvido em PHP na versão 7.0 foi hospedado em servidor que utiliza PHP 5.3. Durante o projeto, o site se tornou funcional em PHP 5.3 e pode ser acessado de forma adequada na hospedagem oferecida. 
 
-O trabalho também se propôs a buscar soluções para problemas como a geração de imagens de matrizes e listas de adjacência. A partir do ajuste na geração de imagens, foram implementadas funções para geração de PDF. Aperfeiçoamentos visuais foram realizados na plataforma para uma melhor usabilidade.
+O trabalho também se propôs a buscar soluções para melhorar a geração de imagens de matrizes e listas de adjacência. A partir do ajuste na geração de imagens, foram implementadas funções para geração de PDF. Aperfeiçoamentos visuais foram realizados na plataforma para uma melhor usabilidade.
 
 ![](1.png)
 
