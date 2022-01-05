@@ -21,7 +21,7 @@ O trabalho também se propôs a buscar soluções para melhorar a geração de i
 * Escolha se seu grafo será um grafo direcionado ou não;
 * Execute os algoritmos e veja seu passo-a-passo;
 
-### Execução em Linux
+### Execução em Linux via Docker
 
 #### Pré-requisitos
 * Docker
