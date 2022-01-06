@@ -23,7 +23,7 @@ Ademais, aperfeiçoamentos visuais foram realizados na plataforma para melhor us
 * Crie seus grafos com rapidez e praticidade;
 * Salve seus grafos em JSON para poder reusá-los;
 * Exporte seus grafos como matriz de adjacência ou lista de adjacência;
-* Exporte seus grafos como imagem PNG ou JPG;
+* Exporte seus grafos como imagem ou PDF;
 * Escolha se seu grafo será um grafo direcionado ou não;
 * Execute os algoritmos e veja seu passo-a-passo.
 
