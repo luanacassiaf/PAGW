@@ -4,7 +4,7 @@
 
 ### Objetivo
 
-Trabalho realizado no site pré-existente Algoritmos e Aplicações em Grafos, por meio do Programa Institucional Voluntário de Iniciação Científica (PIVIC). 
+Trabalho realizado no site pré-existente Algoritmos e Aplicações em Grafos, através do Programa Institucional Voluntário de Iniciação Científica (PIVIC). 
 
 Nesse projeto, foram detectadas algumas funcionalidades que poderiam ser melhoradas e outras a serem implementadas. Assim, o trabalho se propôs a buscar soluções para melhorar a geração de imagens de matrizes e listas de adjacência; a partir do ajuste na geração de imagens, foram implementadas funções para geração de PDF. 
 
