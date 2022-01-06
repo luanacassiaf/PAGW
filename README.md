@@ -14,7 +14,7 @@ O trabalho também se propôs a buscar soluções para melhorar a geração de i
 
 ![](2.png)
 
-### Recursos
+#### Recursos
 
 * Crie seus grafos com rapidez e praticidade;
 * Salve seus grafos em JSON para poder reusá-los;
