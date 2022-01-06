@@ -8,6 +8,8 @@ Projeto realizado no site pré-existente Algoritmos e Aplicações em Grafos, po
 
 O trabalho também se propôs a buscar soluções para melhorar a geração de imagens de matrizes e listas de adjacência. A partir do ajuste na geração de imagens, foram implementadas funções para geração de PDF. Aperfeiçoamentos visuais foram realizados na plataforma para uma melhor usabilidade.
 
+### A Plataforma
+
 ![](1.png)
 
 ![](2.png)
@@ -19,7 +21,7 @@ O trabalho também se propôs a buscar soluções para melhorar a geração de i
 * Exporte seus grafos como matriz de adjacência ou lista de adjacência;
 * Exporte seus grafos como imagem PNG ou JPG;
 * Escolha se seu grafo será um grafo direcionado ou não;
-* Execute os algoritmos e veja seu passo-a-passo;
+* Execute os algoritmos e veja seu passo-a-passo.
 
 ### Execução em Linux via Docker
 
