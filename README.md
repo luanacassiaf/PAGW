@@ -2,7 +2,7 @@
 
 >  Plataforma de Aprendizagem de Grafos via Web
 
-### Objetivo
+### Descrição do Projeto
 
 Trabalho realizado no site pré-existente Algoritmos e Aplicações em Grafos, através do Programa Institucional Voluntário de Iniciação Científica (PIVIC). 
 
