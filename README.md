@@ -12,27 +12,11 @@ Além disso, o site desenvolvido em PHP na versão 7 foi hospedado em servidor q
 
 Ademais, aperfeiçoamentos visuais foram realizados na plataforma para melhor usabilidade.
 
-### A Plataforma
-
-![](1.png)
-
-![](2.png)
-
-#### Recursos
-
-* Crie seus grafos com rapidez e praticidade;
-* Salve seus grafos em JSON para poder reusá-los;
-* Exporte seus grafos como matriz de adjacência ou lista de adjacência;
-* Exporte seus grafos como imagem PNG ou JPG;
-* Escolha se seu grafo será um grafo direcionado ou não;
-* Execute os algoritmos e veja seu passo-a-passo;
-
 ### Execução em Linux via Docker
 
 #### Pré-requisitos
 * Docker
 * Docker-Compose
-* Ctop
 
 #### Configuração
 
@@ -48,9 +32,3 @@ Há duas formas de executar o container da aplicação do projeto, uma delas é 
 
 ```bash
 $ sudo docker-compose up
-```
-* Para monitorar o container, execute o comando:
-
-```bash 
-$ sudo ctop
-```
