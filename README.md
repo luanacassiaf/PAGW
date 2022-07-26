@@ -26,9 +26,7 @@ $ sudo docker-compose up --build
 ```
 #### Executar o projeto
 
-Há duas formas de executar o container da aplicação do projeto, uma delas é utilizando o Docker-Compose e a outra é utilizando o Ctop.
-
-* Para subir o container da aplicação e executar o projeto, execute o comando:
+* Para subir o container da aplicação e executar o projeto, utilize o comando:
 
 ```bash
 $ sudo docker-compose up
