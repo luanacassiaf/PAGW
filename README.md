@@ -1,4 +1,4 @@
-# PAGW-Improvements
+# pagw-improvements
 
 > Aperfeiçoamentos na Plataforma de Aprendizagem de Grafos via Web
 
